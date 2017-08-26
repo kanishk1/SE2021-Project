@@ -3,7 +3,6 @@ import logo from '../img/logo.svg';
 import reactjs from '../img/reactjs.jpg'
 import '../css/App.css';
 
-import Backend from '../../backend/backendAPI'
 class App extends Component {
 
   state = {
@@ -23,15 +22,16 @@ class App extends Component {
         name: "",
       });
     } else {
-      Backend.search(value, data => {
-        this.setState({
-          name: data.name
-        });
-      });
+      this.apiCall(value)
     }
   };
 
+  async apiCall(query) {
+    const response = await fetch('hello?q='+query)
+    const message  = await response.json()
 
+    this.setState({name: message.name})
+  }
 
   render() {
     return (

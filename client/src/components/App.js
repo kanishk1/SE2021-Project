@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Housing from '../components/Housing.js'
 import Search from '../components/Search.js'
+import Home from '../components/Home.js'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 const About = () => (
@@ -65,10 +67,13 @@ class App extends Component {
         </ul>
   
         <hr/>
-        <Route path="/housing" component={Housing}/>
-        <Route path="/search" component={Search}/>
-        <Route path="/about" component={About}/>
-        <Route path="/topics" component={Topics}/>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <Route path="/housing" component={Housing}/>
+          <Route path="/search" component={Search}/>
+          <Route path="/about" component={About}/>
+          <Route path="/topics" component={Topics}/>
+        </Switch>
       </div>
       </Router>        
     </div>

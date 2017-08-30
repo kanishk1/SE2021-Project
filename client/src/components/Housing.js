@@ -13,16 +13,14 @@ class Housing extends Component {
 
   render() {
     return (
-      <Router>
         <div>
           <div>
             <h2>Housing stuff goes here</h2>
           </div>         
           <div>
-            <Link to="/">Go back to home (broken)</Link>
+            <Link to="/">Go back to home</Link>
           </div>
         </div>
-        </Router>
     );
   }
 }

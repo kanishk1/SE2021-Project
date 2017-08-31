@@ -16,6 +16,7 @@ class Housing extends Component {
         <div>
           <div>
             <h2>Housing stuff goes here</h2>
+            <iframe src="https://www.realestate.com.au/" width="800px" height="800px"></iframe> 
           </div>         
           <div>
             <Link to="/">Go back to home</Link>

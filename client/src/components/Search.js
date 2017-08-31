@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
+import logo from '../img/suburber.png';
 import reactjs from '../img/reactjs.jpg'
+import home from '../components/Home.js'
 import '../css/App.css';
 import {
   BrowserRouter as Router,
@@ -48,33 +49,40 @@ class Search extends Component {
   }
 
 
+
   render() {
     var link = 'http://www.google.com/search?q=' + this.state.suburb;
 
     return (
+
       <div className="App">
+
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to Surburber {this.state.name}</h2>
+        <h2>Search for a Suburb {this.state.name}</h2>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-      <img src={reactjs} className="App-logo" alt="reactjs memes" />
 
-      <input
+      <p className="Search">
+       <form action={link} target="_blank">
+        <input
           type="text"
           placeholder="Type in your name..."
           value={this.state.searchValue}
           onChange={this.handleNameChange}
-        />
+        ></input>
+        <br></br>
+        <br></br>
         <input
           type="text"
-          placeholder="Type in your name..."
+          placeholder="Search Suburb..."
           value={this.state.suburb}
-          onChange={this.handleSearchChange}
-        />
-        <a href={link}>GO!</a>
+          onChange={this.handleSearchChange}  
+        ></input>
+        <br></br>
+        <br></br>
+        <input type="submit" value="Submit"></input>
+       </form> 
+      </p>
 
     </div>
     );

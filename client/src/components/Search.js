@@ -12,10 +12,19 @@ import {
 class Search extends Component {
   state = {
     name: "",
+    suburb: "",
     searchValue: ""
   };
 
   handleSearchChange = e => {
+    const value = e.target.value;
+
+    this.setState({
+      suburb: value
+    });
+  };
+
+  handleNameChange = e => {
     const value = e.target.value;
 
     this.setState({
@@ -38,7 +47,10 @@ class Search extends Component {
     this.setState({name: message.name})
   }
 
+
   render() {
+    var link = 'http://www.google.com/search?q=' + this.state.suburb;
+
     return (
       <div className="App">
       <div className="App-header">
@@ -54,8 +66,15 @@ class Search extends Component {
           type="text"
           placeholder="Type in your name..."
           value={this.state.searchValue}
+          onChange={this.handleNameChange}
+        />
+        <input
+          type="text"
+          placeholder="Type in your name..."
+          value={this.state.suburb}
           onChange={this.handleSearchChange}
         />
+        <a href={link}>GO!</a>
 
     </div>
     );

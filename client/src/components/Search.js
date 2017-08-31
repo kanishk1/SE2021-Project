@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 import logo from '../img/logo.svg';
 import reactjs from '../img/reactjs.jpg'
 import '../css/App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
 
 
 class Search extends Component {
   state = {
     name: "",
-    searchValue: ""
+    searchValue: "",
   };
 
   handleSearchChange = e => {

@@ -52,34 +52,28 @@ class Search extends Component {
     return (
 
       <div className="App">
-
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Search for a Suburb {this.state.name}</h2>
       </div>
 
       <div className="Search">
-       <form action={link} target="_blank">
-        <input
+       <input
           type="text"
           placeholder="Type in your name..."
           value={this.state.searchValue}
           onChange={this.handleNameChange}
-        ></input>
-        <br></br>
-        <br></br>
+        />
+        <p></p>
         <input
           type="text"
-          placeholder="Search Suburb..."
+          placeholder="Search for a Suburb..."
           value={this.state.suburb}
-          onChange={this.handleSearchChange}  
-        ></input>
-        <br></br>
-        <br></br>
-        <input type="submit" value="Submit"></input>
-       </form> 
+          onChange={this.handleSearchChange}
+        />
+        <p></p>
+        <a href={link} target="_blank"><button className="searchButton">GO!</button></a>
       </div>
-
     </div>
     );
   }

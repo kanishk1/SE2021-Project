@@ -21,8 +21,13 @@
   font-size: large;
 }
 .Search{
-  padding-top: 10%;
+  padding-top: 12%;
 }
+.searchButton:hover {
+    background-color: red; 
+    color: white;
+    border-radius: 8px;
+  }
 
 
 @keyframes App-logo-spin {
@@ -57,4 +62,9 @@
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.scrollTab section{
+  padding-top:50px;height:500px;
+  color: red;
 }

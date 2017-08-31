@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import logo from '../img/suburber.png';
-import reactjs from '../img/reactjs.jpg'
-import home from '../components/Home.js'
 import '../css/App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
 
 
 class Search extends Component {
-  state = {
-    name: "",
-    suburb: "",
-    searchValue: ""
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      name: "",
+      searchValue: "",
+      suburb: ""
+    };
+  }
+
 
   handleSearchChange = e => {
     const value = e.target.value;
-
     this.setState({
       suburb: value
     });
@@ -52,7 +49,6 @@ class Search extends Component {
 
   render() {
     var link = 'http://www.google.com/search?q=' + this.state.suburb;
-
     return (
 
       <div className="App">
@@ -62,7 +58,7 @@ class Search extends Component {
         <h2>Search for a Suburb {this.state.name}</h2>
       </div>
 
-      <p className="Search">
+      <div className="Search">
        <form action={link} target="_blank">
         <input
           type="text"
@@ -82,7 +78,7 @@ class Search extends Component {
         <br></br>
         <input type="submit" value="Submit"></input>
        </form> 
-      </p>
+      </div>
 
     </div>
     );

@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
+import wiki from 'wikijs';
 const app = express()
 
 app.use(bodyParser.json())
@@ -19,6 +20,27 @@ router.get('/hello', (req, res) => {
     });
     return;
   }
+})
+
+router.get('/wiki', (req, res) => {
+
+  wiki().page(req.query.sub)
+        .then(function(response) {
+          return Promise.all([
+            response.info(),
+            response.content(),
+            response.summary()
+          ])
+        }).then(function(response) {
+          res.json({
+            info: response[0],
+            content: response[1],
+            summary: response[2]
+          })
+        }).catch(function(err) {
+          console.log(err);
+        });
+  return;
 })
 
 app.use(router)

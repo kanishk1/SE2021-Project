@@ -12,9 +12,14 @@
     "react": "^15.6.1",
     "react-map-gl": "^3.0.4",
     "react-router-dom": "^4.2.2",
+<<<<<<< HEAD
     "react-scrollspy": "^3.3.3",
     "react-tabs": "^1.1.0",
     "rimraf": "^2.5.4"
+=======
+    "rimraf": "^2.5.4",
+    "wikijs": "^4.1.0"
+>>>>>>> d439fda1033764355960b21d68eb87af564efa73
   },
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",

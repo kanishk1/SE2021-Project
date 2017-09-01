@@ -4,6 +4,7 @@ import '../css/App.css';
 
 
 class Search extends Component {
+<<<<<<< HEAD
   constructor() {
     super();
 
@@ -14,6 +15,12 @@ class Search extends Component {
     };
   }
 
+=======
+  state = {
+    name: "",
+    searchValue: "",
+  };
+>>>>>>> d439fda1033764355960b21d68eb87af564efa73
 
   handleSearchChange = e => {
     const value = e.target.value;

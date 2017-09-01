@@ -8,10 +8,11 @@ class Home extends Component {
 
   render () {
     return (
+    
       <div>
       	<h2>Home</h2>
   	  </div>
-  	  
+  
 		 /* <div>
 		    <section id="section-1">section 1</section>
 		    <section id="section-2">section 2</section>
@@ -22,9 +23,9 @@ class Home extends Component {
 		    <li><a href="#section-2">section 2</a></li>
 		    <li><a href="#section-3">section 3</a></li>
 		  </Scrollspy>
-		*/
-
-      /*<ReactMapGL
+		
+	<div className="map">
+      <ReactMapGL
         width={400}
         height={400}
         latitude={37.7577}
@@ -34,7 +35,9 @@ class Home extends Component {
           const {width, height, latitude, longitude, zoom} = viewport;
           // Optionally call `setState` and use the state to update the map.
         }}
-      />*/
+      />
+     </div>
+    */
     );
   }
 

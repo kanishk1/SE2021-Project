@@ -1,11 +1,17 @@
 # SE2021-Project: Suburber
 ---
 
-## Setup 
-To setup the repo clone it and run 
+## Setup
+To setup the repo clone it and run, first install MongoDB (look it up). Then
+do
+
 ```
 yarn install
 yarn start
+```
 
-make sure you have fresh noooooots
+To set up some test data for the database, run
+
+```
+mongo _create_test_data.js
 ```

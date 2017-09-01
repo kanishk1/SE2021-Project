@@ -1,6 +1,8 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
+import * as db from './db'
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -21,12 +23,29 @@ router.get('/hello', (req, res) => {
   }
 })
 
+router.get('/testdb', (req, res) => {
+  const collection = db.get().collection('test');
+  collection.find().toArray((err, docs) => {
+    res.json({ docs });
+  });
+})
+
 app.use(router)
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)
 
 app.set('port', (process.env.PORT || 3001))
-app.listen(app.get('port'), () => {
-  console.log(`Listening on ${app.get('port')}`)
-})
+app.set('dburl', (process.env.DBURL || 'mongodb://localhost:27017/suburber'))
+
+// connect to database
+db.connect(app.get('dburl'), (err) => {
+  if (err) {
+    console.log('Unable to connect to database')
+    process.exit(1)
+  } else {
+    app.listen(app.get('port'), () => {
+      console.log(`Listening on ${app.get('port')}`)
+    })
+  }
+});

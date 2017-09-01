@@ -11,15 +11,26 @@ const router = express.Router()
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 app.use(staticFiles)
 
+var request = require('request')
+router.get('/users', function(req,res) {
+  request('https://jsonplaceholder.typicode.com/users', function(error, response, body) {
+    res.json(body)
+  });
+});
+
 router.get('/hello', (req, res) => {
   const param = req.query.q;
   if (param) {
     res.json({
-      name: param
+      name: param 
     });
     return;
   }
-})
+});
+
+app.get('/test', function(req, res){
+    res.send('hello world');
+});
 
 app.use(router)
 

@@ -13,5 +13,6 @@ yarn start
 To set up some test data for the database, run
 
 ```
-mongo _create_test_data.js
+mongo scripts/create_test_data.js
+scripts/get_suburb_list.sh
 ```

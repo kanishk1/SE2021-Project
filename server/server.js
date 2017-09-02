@@ -6,6 +6,14 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
+// Google Places
+// Key: AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q
+
+// Google Maps
+// Key: AIzaSyAGYGaI7RcITTzVzSyxxUc-I-q5E4NZ0R8
+
+
+
 const router = express.Router()
 
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
@@ -13,12 +21,38 @@ app.use(staticFiles)
 
 var request = require('request')
 
-app.get('/api', function(req, res, next) {
+var places = {
+    api_key : "AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
+    keyword : "thai",
+    location: "-33.8670522,151.1957362",
+    radius: "500",
+    type: "restaurant",
+}
+
+
+app.get('/placesapi', function(req, res, next) {
     request(
-    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + places.location + "&radius=" + places.radius + "&type=" + places.type + "&keyword=" + places.keyword + "&key="+ places.api_key,
     function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            // res.jsonp(body);
+            // res.json(body);
+            res.set('Content-Type', 'text/json');
+            // console.log(body);
+            res.send(body);
+        }
+        else {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        }
+    });
+});
+
+app.get('/wikiapi', function(req, res, next) {
+    request(
+    "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json",
+    function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            // res.json(body);
             res.set('Content-Type', 'text/json');
             // console.log(body);
             res.send(body);

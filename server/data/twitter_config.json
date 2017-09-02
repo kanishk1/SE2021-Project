@@ -1,0 +1,7 @@
+{
+"consumerKey": "CJHLqwToLpMfPZSnMokQi6L71",
+"consumerSecret": "PNPSAysdM40ffR0cago5v5p6o13wqBtInihEudeb72IMyWkfIO",
+"accessToken": "836055204583747584-FZ6dlSMeBqK6OvHuNTQoJA1O7LCCv6Q",
+"accessTokenSecret": "lWm9f6blYLd8RQuJgAWLa5TiuO2ds4Zhxxh8CNdtSoIv4",
+"callBackUrl": "localhost:3001/test"
+}

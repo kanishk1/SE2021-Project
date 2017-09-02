@@ -38,6 +38,26 @@ app.get('/test', function(req, res){
     res.send('hello world');
 });
 
+// TWITTER API CALL
+// Right now just searches #hurstville, can easily make it into any inputted suburb
+// It refuses to print nicely and Idk hwo to iterate through it so I give up im going to go watch netflix
+//Callback functions
+var error = function (err, response, body) {
+    console.log('ERROR [%s]', err);
+};
+var success = function (data) {
+    router.get('/twitter/search', (req, res) => {
+    res.send(data)
+    });
+}
+
+var Twitter = require('twitter-node-client').Twitter;
+var fs = require('fs');
+var config = JSON.parse(fs.readFileSync('./data/twitter_config.json'));
+var twitter = new Twitter(config);
+twitter.getSearch({'q': '#hurstville','count': 10}, error, success);
+
+
 app.use(router)
 
 // any routes not picked up by the server api will be handled by the react router

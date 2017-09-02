@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
-import getDomainToken from './domain_cred'
+import domain from './domain_cred'
 const app = express()
 
 app.use(bodyParser.json())
@@ -19,10 +19,19 @@ router.get('/hello', (req, res) => {
   }
 });
 
-router.get('/auth/domain', (req, res) => {
-  getDomainToken()
-    .then(token => res.end(token))
-    .catch(err => res.end(err));
+// test for GET requests
+router.get('/domain/get/:id', (req, res) => {
+  domain('https://api.domain.com.au/v1/listings/' + req.params.id)
+    .then(data => res.json(data))
+    .catch(err => res.end(JSON.stringify(err)));
+});
+
+// test for POST requests
+import test_form from './test_form.json'
+router.get('/domain/search', (req, res) => {
+  domain('https://api.domain.com.au/v1/listings/_search', test_form)
+    .then(data => res.json(data))
+    .catch(err => res.end(JSON.stringify(err)));
 });
 
 app.get('/test', function(req, res){

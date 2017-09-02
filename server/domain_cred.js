@@ -1,7 +1,7 @@
 import request from 'request';
 
-const token = {
-  auth: null,
+const auth = {
+  token: null,
   expires: null
 }
 
@@ -14,10 +14,10 @@ client_id2: 'mzt6yh8t2ysh7kdtrpbda2cy',
 client_secret2: 'tKSNGm4Ysh'
 */
 
-export default function getToken() {
+function getToken() {
   return new Promise((success, reject) => {
-    if (token.auth && token.expires > Math.floor(Date.now() / 1000))
-      success(token.auth);
+    if (auth.token && auth.expires > Math.floor(Date.now() / 1000))
+      success(auth.token);
     else {
       // TODO: move auth tokens out of code?
       request({
@@ -33,14 +33,40 @@ export default function getToken() {
         }
       }, (err, res) => {
         if (err)
-          reject(err);
+          reject(JSON.stringify(err));
         else {
           const json = JSON.parse(res.body);
-          token.auth = json.access_token;
-          token.expires = Math.floor(Date.now() / 1000) + json.expires_in;
-          success(token.auth);
+          auth.token = json.access_token;
+          auth.expires = Math.floor(Date.now() / 1000) + json.expires_in;
+          success(auth.token);
         }
       });
     }
+  });
+}
+
+export default function doAPI(uri, post) {
+  return new Promise((success, reject) => {
+    getToken()
+      .then(token => {
+        const request_info = {
+          url: uri,
+          auth: {
+            'bearer': token
+          }
+        };
+        if (post) {
+          request_info.method = 'POST';
+          request_info.json = post;
+        }
+
+        request(request_info, (err, data) => {
+          if (err)
+            reject(JSON.stringify(err));
+          else
+            success(data)
+        });
+      })
+      .catch(err => reject(err));
   });
 }

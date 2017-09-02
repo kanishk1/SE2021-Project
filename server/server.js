@@ -23,8 +23,8 @@ router.get('/hello', (req, res) => {
   }
 })
 
-router.get('/testdb', (req, res) => {
-  const collection = db.get().collection('test');
+router.get('/suburbs', (req, res) => {
+  const collection = db.get().collection('suburb_names');
   collection.find().toArray((err, docs) => {
     res.json({ docs });
   });

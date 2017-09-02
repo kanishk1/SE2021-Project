@@ -14,49 +14,35 @@ app.use(staticFiles)
 var request = require('request')
 
 app.get('/api', function(req, res, next) {
-
-    request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q", function (error, response, body) {
-      console.log('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    //   console.log('body:', body); // Print the HTML for the Google homepage.
-    //   res.json(body);
-      res.send(body);
+    request(
+    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
+    function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            // res.jsonp(body);
+            res.set('Content-Type', 'text/json');
+            // console.log(body);
+            res.send(body);
+        }
+        else {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        }
     });
-  // request({
-  //   method: "GET",
-  //   url: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&type=restaurant&keyword=cruise&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
-  //   function(error, response, body) {
-  //     if (!error && response.statusCode === 200) {
-  //       console.log(body);
-  //       res.json(body);
-  //       res.send(body);
-  //       res.send('hello world');
-  //     } else {
-  //       res.json(error);
-  //     }
-  //   }
-  // });
 });
 
-// router.get('/hello', (req, res) => {
-//   const param = req.query.q;
-//   if (param) {
-//     res.json({
-//       name: param
-//     });
-//     // console.log("hello world");
-//     return;
-//   }
-// });
+router.get('/hello', (req, res) => {
+  const param = req.query.q;
+  if (param) {
+    res.json({
+      name: param
+    });
+    return;
+  }
+});
 
-// app.get('/test', function(req, res){
-//     var request = require('request');
-// request('http://www.google.com', function (error, response, body) {
-//  console.log('error:', error); // Print the error if one occurred
-//  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//  console.log('body:', body); // Print the HTML for the Google homepage.
-// });
-// });
+app.get('/test', function(req, res){
+    res.send('hello world');
+});
 
 app.use(router)
 

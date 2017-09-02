@@ -29,6 +29,7 @@ var places = {
     type: "restaurant",
 }
 
+// Google Places API
 
 app.get('/placesapi', function(req, res, next) {
     request(
@@ -47,6 +48,7 @@ app.get('/placesapi', function(req, res, next) {
     });
 });
 
+// Wiki API
 app.get('/wikiapi', function(req, res, next) {
     request(
     "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json",
@@ -56,6 +58,27 @@ app.get('/wikiapi', function(req, res, next) {
             res.set('Content-Type', 'text/json');
             // console.log(body);
             res.send(body);
+            // console.log(body);
+        }
+        else {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        }
+    });
+});
+
+// Census API
+
+app.get('/censusapi', function(req, res, next) {
+    request(
+    "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetDataStructure/ABS_C16_T01_LGA?pid=01d10e24-7886-4949-b0b2-c372a2266374",
+    function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            // res.json(body);
+            res.set('Content-Type', 'text/xml');
+            // console.log(body);
+            res.send(body);
+            // console.log(body);
         }
         else {
             console.log('error:', error); // Print the error if one occurred

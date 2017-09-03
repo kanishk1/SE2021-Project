@@ -39,24 +39,39 @@ app.get('/test', function(req, res){
 });
 
 // TWITTER API CALL
-// Right now just searches #hurstville, can easily make it into any inputted suburb
-// It refuses to print nicely and Idk hwo to iterate through it so I give up im going to go watch netflix
-//Callback functions
-var error = function (err, response, body) {
-    console.log('ERROR [%s]', err);
-};
-var success = function (data) {
-    router.get('/twitter/search', (req, res) => {
-    res.send(data)
-    });
-}
+// Example Call... http://localhost:3001/twitter/search?suburb=hurstville&num=3
+router.get('/twitter/search', (req, res) => {
+    const suburb = req.query.suburb;
+    const numtweets = req.query.num;
+    if (suburb && numtweets) {
+        
+        var error = function (err, response, body) {
+            console.log('ERROR [%s]', err);
+        }
+        var success = function (data) {
+            data = JSON.parse(data);
+            
+            // This is an array of all the statuses
+            var statuses = data['statuses'];
+            
+            // We are now to extract the text from each tweet
+            var tweets = [];
+            var i = 0;
+            for (i = 0; i < numtweets; i++) {
+                tweets.push(statuses[i]['text']);
+            }
+            res.send(tweets);
+        }
+        
+        const hashtag = '#'.concat(suburb)
+        var Twitter = require('twitter-node-client').Twitter;
+        var fs = require('fs');
+        var config = JSON.parse(fs.readFileSync('./data/twitter_config.json'));
+        var twitter = new Twitter(config);
+        twitter.getSearch({'q': hashtag,'count': numtweets}, error, success);
+    }
 
-var Twitter = require('twitter-node-client').Twitter;
-var fs = require('fs');
-var config = JSON.parse(fs.readFileSync('./data/twitter_config.json'));
-var twitter = new Twitter(config);
-twitter.getSearch({'q': '#hurstville','count': 10}, error, success);
-
+});
 
 app.use(router)
 

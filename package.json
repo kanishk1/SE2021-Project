@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "concurrently": "^3.1.0",
-    "rimraf": "^2.5.4"
+    "react": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "rimraf": "^2.5.4",
+    "wikijs": "^4.1.0"
   },
   "scripts": {
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",

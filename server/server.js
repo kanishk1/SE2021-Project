@@ -1,7 +1,9 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
+import wiki from 'wikijs';
 import * as db from './db'
+
 
 const app = express()
 
@@ -22,6 +24,25 @@ router.get('/hello', (req, res) => {
     return;
   }
 })
+
+router.get('/wiki', (req, res) => {
+  wiki().page(req.query.sub)
+        .then(function(response) {
+          return Promise.all([
+            response.info(),
+            response.content(),
+            response.summary()
+          ])
+        }).then(function(response) {
+          res.json({
+            info: response[0],
+            content: response[1],
+            summary: response[2]
+          })
+        }).catch(function(err) {
+          console.log(err);
+        });
+  return;
 
 router.get('/suburbs', (req, res) => {
   const collection = db.get().collection('suburb_names');

@@ -43,6 +43,7 @@ router.get('/wiki', (req, res) => {
           console.log(err);
         });
   return;
+})
 
 router.get('/suburbs', (req, res) => {
   const collection = db.get().collection('suburb_names');

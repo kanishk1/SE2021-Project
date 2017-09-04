@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 const router = express.Router()
 
+// EXAMPLE STUFF HERE
 router.get('/hello', (req, res) => {
   const param = req.query.q;
   if (param) {
@@ -17,6 +18,26 @@ router.get('/hello', (req, res) => {
     });
     return;
   }
+});
+
+app.get('/test', function(req, res){
+    res.send('hello world');
+});
+
+// DOMAIN API CALL
+
+router.get('/domain/search', (req, res) => {
+    // We need to get the Suburb address value first...
+    const suburb = req.query.suburb;
+    const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
+    const statequery = 'state=NSW';
+    const searchlevel = '?searchLevel=Suburb&'
+    const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery; 
+    console.log(totalQuery)
+    console.log('https://api.domain.com.au/v1/addressLocators?searchLevel=Suburb&suburb=Hurstville&state=NSW')
+    domain(totalQuery)
+        .then(data => res.json(data))
+        .catch(err => res.end(JSON.stringify(err)));
 });
 
 // test for GET requests
@@ -32,10 +53,6 @@ router.get('/domain/search', (req, res) => {
   domain('https://api.domain.com.au/v1/listings/_search', test_form)
     .then(data => res.json(data))
     .catch(err => res.end(JSON.stringify(err)));
-});
-
-app.get('/test', function(req, res){
-    res.send('hello world');
 });
 
 // TWITTER API CALL

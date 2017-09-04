@@ -24,8 +24,8 @@ function getToken() {
         url: 'https://auth.domain.com.au/v1/connect/token',
         method: 'POST',
         auth: {
-          user: 'pr7nycgdtyfw56ahvnpy9eyu',
-          pass: '8USA7GAgzD'
+          user: 'mzt6yh8t2ysh7kdtrpbda2cy',
+          pass: 'tKSNGm4Ysh'
         },
         form: {
           'grant_type': 'client_credentials',

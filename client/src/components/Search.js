@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
-import reactjs from '../img/reactjs.jpg'
+import logo from '../img/suburber.png';
 import '../css/App.css';
 
 
 class Search extends Component {
-  state = {
-    name: "",
-    searchValue: "",
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      name: "",
+      searchValue: "",
+      suburb: ""
+    };
+  }
 
   handleSearchChange = e => {
+    const value = e.target.value;
+    this.setState({
+      suburb: value
+    });
+  };
+
+  handleNameChange = e => {
     const value = e.target.value;
 
     this.setState({
@@ -33,25 +44,35 @@ class Search extends Component {
     this.setState({name: message.name})
   }
 
+
+
   render() {
+    var link = 'http://www.google.com/search?q=' + this.state.suburb;
     return (
+
       <div className="App">
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to Surburber {this.state.name}</h2>
+        <h2>Search for a Suburb {this.state.name}</h2>
       </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-      <img src={reactjs} className="App-logo" alt="reactjs memes" />
 
-      <input
+      <div className="Search">
+       <input
           type="text"
           placeholder="Type in your name..."
           value={this.state.searchValue}
+          onChange={this.handleNameChange}
+        />
+        <p></p>
+        <input
+          type="text"
+          placeholder="Search for a Suburb..."
+          value={this.state.suburb}
           onChange={this.handleSearchChange}
         />
-
+        <p></p>
+        <a href={link} target="_blank"><button className="searchButton">GO!</button></a>
+      </div>
     </div>
     );
   }

@@ -58,15 +58,14 @@ class App extends Component {
     <div>  
       <Router>
       <div>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/housing">Housing</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/topics">Topics</Link></li>
-          <li><Link to="/search">Search</Link></li>
-        </ul>
+        <div className="topnav">
+          <Link to="/">Home</Link>
+          <Link to="/housing">Housing</Link>
+          <Link to="/about">About</Link>
+          <Link to="/topics">Topics</Link>
+          <Link to="/search">Search</Link>
+        </div>
   
-        <hr/>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/housing" component={Housing}/>

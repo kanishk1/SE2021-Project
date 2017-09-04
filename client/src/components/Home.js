@@ -50,6 +50,7 @@ class Home extends Component {
         <button autoFocus type="button" onClick={this.handleButtonClick}> Get Wiki Data </button>
         <br></br>
         <div><pre>{JSON.stringify(this.state.wikiData, null, 2)}</pre></div>
+        <hr></hr>
       </div>
     )
   }

@@ -19,7 +19,7 @@ try:
         response = urllib.request.urlopen(req1 % (key, *tokens))
         data = json.loads(response.read())
         if not data['predictions'] or len(data['predictions']) == 0:
-            print("Couldn't get predictions for %s", tokens[0])
+            print("Couldn't get predictions for", tokens[0], file=sys.stderr)
             continue
 
         place_id = data['predictions'][0]['place_id'];
@@ -35,4 +35,4 @@ try:
         print(*tokens, postal_code, sep=',')
         sys.stdout.flush();
 except urllib.error.HTTPError:
-    print("Error with tokens: ", *tokens)
+    print("Error with tokens:", *tokens, file=sys.stderr)

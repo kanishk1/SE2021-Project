@@ -40,6 +40,29 @@ app.get('/placesapi', function(req, res, next) {
     });
 });
 
+// Google Maps API
+// var gmAPI = new GoogleMapsAPI();
+// api_key=AIzaSyAGYGaI7RcITTzVzSyxxUc-I-q5E4NZ0R8
+
+app.get('/mapsapi', function(req, res, next) {
+    request(
+    "https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&key=AIzaSyCFITeGb3Qs7esM0iDS9mdc41Xmp9pn4RY",
+    function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            // res.json(body);
+            res.set('Content-Type', 'image/png');
+            // console.log(response);
+            res.type('png');
+            res.sendFile(response.body);
+        }
+        else {
+            res.send(response);
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        }
+    });
+});
+
 // Wiki API
 app.get('/wikiapi', function(req, res, next) {
     request(
@@ -101,7 +124,7 @@ router.get('/domain/search', (req, res) => {
     const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
     const statequery = 'state=NSW';
     const searchlevel = '?searchLevel=Suburb&'
-    const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery; 
+    const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
     console.log(totalQuery)
     console.log('https://api.domain.com.au/v1/addressLocators?searchLevel=Suburb&suburb=Hurstville&state=NSW')
     domain(totalQuery)
@@ -130,16 +153,16 @@ router.get('/twitter/search', (req, res) => {
     const suburb = req.query.suburb;
     const numtweets = req.query.num;
     if (suburb && numtweets) {
-        
+
         var error = function (err, response, body) {
             console.log('ERROR: [%s]', err);
         }
         var success = function (data) {
             data = JSON.parse(data);
-            
+
             // This is an array of all the statuses
             var statuses = data['statuses'];
-            
+
             // We are now to extract the text from each tweet
             var tweets = [];
             var i = 0;
@@ -148,7 +171,7 @@ router.get('/twitter/search', (req, res) => {
             }
             res.send(tweets);
         }
-        
+
         const hashtag = '#'.concat(suburb)
         var Twitter = require('twitter-node-client').Twitter;
         var fs = require('fs');

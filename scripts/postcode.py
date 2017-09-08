@@ -10,7 +10,7 @@ import re
 # change to environment variable?
 key = 'AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q'
 
-req1 = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=%s&input=%s%%20Australia&location=%s,%s&types=(regions)'
+req1 = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=%s&input=%s,%%20New%%20South%%20Wales,%%20Australia&location=%s,%s&types=(regions)'
 req2 = 'https://maps.googleapis.com/maps/api/place/details/json?key=%s&placeid=%s'
 
 try:

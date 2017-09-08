@@ -32,12 +32,15 @@ try:
         response = urllib.request.urlopen(req2 % (key, place_id))
         data = json.loads(response.read())
 
-        postal_code = '';
-        for x in data['result']['address_components']:
-            if 'postal_code' in x['types']:
-                postal_code = x['long_name']
+        postal_code = None
+        if 'result' in data:
+            for x in data['result']['address_components']:
+                if 'postal_code' in x['types']:
+                    postal_code = x['long_name']
+        if not postal_code:
+            print("Couldn't get postal code (%s)" % (*values,), file=sys.stderr)
+            continue
 
         print(*tokens, postal_code, sep=',')
-        sys.stdout.flush();
 except urllib.error.HTTPError:
-    print("Error with tokens:", *tokens, file=sys.stderr)
+    print("Error with tokens (%s)" % (*tokens,), file=sys.stderr)

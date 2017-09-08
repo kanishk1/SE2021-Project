@@ -2,6 +2,9 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
 import domain from './domain_cred'
+import wiki from 'wikijs';
+import * as db from './db'
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -182,12 +185,49 @@ router.get('/twitter/search', (req, res) => {
 
 });
 
+router.get('/wiki', (req, res) => {
+  wiki().page(req.query.sub)
+        .then(function(response) {
+          return Promise.all([
+            response.info(),
+            response.content(),
+            response.summary()
+          ])
+        }).then(function(response) {
+          res.json({
+            info: response[0],
+            content: response[1],
+            summary: response[2]
+          })
+        }).catch(function(err) {
+          console.log(err);
+        });
+  return;
+})
+
+router.get('/suburbs', (req, res) => {
+  const collection = db.get().collection('suburb_names');
+  collection.find().toArray((err, docs) => {
+    res.json({ docs });
+  });
+})
+
 app.use(router)
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)
 
 app.set('port', (process.env.PORT || 3001))
-app.listen(app.get('port'), () => {
-  console.log(`Listening on ${app.get('port')}`)
-})
+app.set('dburl', (process.env.DBURL || 'mongodb://localhost:27017/suburber'))
+
+// connect to database
+db.connect(app.get('dburl'), (err) => {
+  if (err) {
+    console.log('Unable to connect to database')
+    process.exit(1)
+  } else {
+    app.listen(app.get('port'), () => {
+      console.log(`Listening on ${app.get('port')}`)
+    })
+  }
+});

@@ -47,7 +47,7 @@ app.get('/wikiapi', function(req, res, next) {
     function (error, response, body) {
         if (!error && response.statusCode === 200) {
             // res.json(body);
-            res.set('Content-Type', 'text/json');
+            res.set('Content-Type', 'text/html');
             // console.log(body);
             res.send(body);
             // console.log(body);
@@ -162,7 +162,6 @@ router.get('/twitter/search', (req, res) => {
 app.use(router)
 
 // any routes not picked up by the server api will be handled by the react router
-const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 app.use('/*', staticFiles)
 
 app.set('port', (process.env.PORT || 3001))

@@ -38,9 +38,9 @@ try:
                 if 'postal_code' in x['types']:
                     postal_code = x['long_name']
         if not postal_code:
-            print("Couldn't get postal code (%s)" % (*values,), file=sys.stderr)
+            print("Couldn't get postal code (%s)" % (str(values)), file=sys.stderr)
             continue
 
         print(*tokens, postal_code, sep=',')
 except urllib.error.HTTPError:
-    print("Error with tokens (%s)" % (*tokens,), file=sys.stderr)
+    print("Error with tokens (%s)" % (str(tokens)), file=sys.stderr)

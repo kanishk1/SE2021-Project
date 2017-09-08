@@ -1,7 +1,7 @@
 {
-"consumerKey": "CJHLqwToLpMfPZSnMokQi6L71",
-"consumerSecret": "PNPSAysdM40ffR0cago5v5p6o13wqBtInihEudeb72IMyWkfIO",
-"accessToken": "836055204583747584-FZ6dlSMeBqK6OvHuNTQoJA1O7LCCv6Q",
-"accessTokenSecret": "lWm9f6blYLd8RQuJgAWLa5TiuO2ds4Zhxxh8CNdtSoIv4",
+"consumerKey": "af4o4Swyctg17u00r2Zbz5L19",
+"consumerSecret": "Kw14FflguqeN30NqJaNpFx2cAwJuijbRDGGsT1JzKhr1ihm5po",
+"accessToken": "836055204583747584-jY0LOOKJHllIXLGBeWvEjno6ICtsRn9",
+"accessTokenSecret": "HYq3alw3NUeEMDaeV5NMz1XQaKWyhtCLmlaKNg5tKgrt3",
 "callBackUrl": "localhost:3001/test"
 }

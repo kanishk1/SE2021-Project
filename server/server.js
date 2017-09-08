@@ -63,7 +63,7 @@ router.get('/twitter/search', (req, res) => {
     if (suburb && numtweets) {
         
         var error = function (err, response, body) {
-            console.log('ERROR [%s]', err);
+            console.log('ERROR: [%s]', err);
         }
         var success = function (data) {
             data = JSON.parse(data);

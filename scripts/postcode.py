@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
+import urllib.parse
 import urllib.request
+import urllib.error
 import json
 import sys
 import re
@@ -14,9 +16,12 @@ req2 = 'https://maps.googleapis.com/maps/api/place/details/json?key=%s&placeid=%
 try:
     for line in sys.stdin:
         tokens = re.split(',', line.strip())
+        if len(tokens) != 3:
+            print("Wrong number of tokens (%s)" % (str(tokens)), file=sys.stderr)
+            continue
 
-        tokens[0] = urllib.parse.quote_plus(tokens[0])
-        response = urllib.request.urlopen(req1 % (key, *tokens))
+        values = [urllib.parse.quote_plus(t) for t in tokens];
+        response = urllib.request.urlopen(req1 % (key, *values))
         data = json.loads(response.read())
         if not data['predictions'] or len(data['predictions']) == 0:
             print("Couldn't get predictions for", tokens[0], file=sys.stderr)

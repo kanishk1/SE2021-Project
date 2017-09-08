@@ -150,7 +150,7 @@ router.get('/domain/search', (req, res) => {
     .catch(err => res.end(JSON.stringify(err)));
 });
 
-// TWITTER API CALL
+// TWITTER API
 // Example Call... http://localhost:3001/twitter/search?suburb=hurstville&num=3
 router.get('/twitter/search', (req, res) => {
     const suburb = req.query.suburb;
@@ -182,6 +182,29 @@ router.get('/twitter/search', (req, res) => {
         var twitter = new Twitter(config);
         twitter.getSearch({'q': hashtag,'count': numtweets}, error, success);
     }
+
+});
+
+// ACCUWEATHER API
+// Example Call... http://localhost:3001/weather?postcode=2220
+router.get('/weather', (req, res) => {
+    const postcode = req.query.postcode;
+    const country = 'Australia';
+    var weather = require('node-openweather')({
+        key: 'aa69bf79cee1f390f63d8203bd191e3b',
+        accuracy: "like",
+        unit: "metric",
+        language: "en"
+    });
+
+    weather.zip(postcode, country).now().then(function(result) {
+       result['main']['temp'] -= 273.15;
+       result['main']['temp_min'] -= 273.15;
+       result['main']['temp_max'] -= 273.15; 
+        res.end(JSON.stringify(result, null, 2))
+    }).catch(function(err) {
+        console.log('Error [%s]', err)
+    });
 
 });
 

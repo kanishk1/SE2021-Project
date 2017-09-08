@@ -29,13 +29,14 @@ function getToken() {
         },
         form: {
           'grant_type': 'client_credentials',
-          'scope': 'api_listings_read'
+          'scope': 'api_addresslocators_read'
         }
-      }, (err, res) => {
+      }, (err, res, body) => {
         if (err)
-          reject(JSON.stringify(err));
+          reject(err);
         else {
-          const json = JSON.parse(res.body);
+          console.log(body);
+          const json = JSON.parse(body);
           auth.token = json.access_token;
           auth.expires = Math.floor(Date.now() / 1000) + json.expires_in;
           success(auth.token);
@@ -62,7 +63,7 @@ export default function doAPI(uri, post) {
 
         request(request_info, (err, data) => {
           if (err)
-            reject(JSON.stringify(err));
+            reject(err);
           else
             success(data)
         });

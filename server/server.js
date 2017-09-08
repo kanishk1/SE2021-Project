@@ -121,7 +121,7 @@ app.get('/test', function(req, res){
 });
 
 // DOMAIN API
-router.get('/domain/search', (req, res) => {
+router.get('/domain/search2', (req, res) => {
     // We need to get the Suburb address value first...
     const suburb = req.query.suburb;
     const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
@@ -129,25 +129,9 @@ router.get('/domain/search', (req, res) => {
     const searchlevel = '?searchLevel=Suburb&'
     const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
     console.log(totalQuery)
-    console.log('https://api.domain.com.au/v1/addressLocators?searchLevel=Suburb&suburb=Hurstville&state=NSW')
     domain(totalQuery)
         .then(data => res.json(data))
-        .catch(err => res.end(JSON.stringify(err)));
-});
-
-// test for GET requests
-router.get('/domain/get/:id', (req, res) => {
-  domain('https://api.domain.com.au/v1/listings/' + req.params.id)
-    .then(data => res.json(data))
-    .catch(err => res.end(JSON.stringify(err)));
-});
-
-// test for POST requests
-import test_form from './test_form.json'
-router.get('/domain/search', (req, res) => {
-  domain('https://api.domain.com.au/v1/listings/_search', test_form)
-    .then(data => res.json(data))
-    .catch(err => res.end(JSON.stringify(err)));
+        .catch(err => res.send(err));
 });
 
 // TWITTER API
@@ -200,7 +184,7 @@ router.get('/weather', (req, res) => {
     weather.zip(postcode, country).now().then(function(result) {
        result['main']['temp'] -= 273.15;
        result['main']['temp_min'] -= 273.15;
-       result['main']['temp_max'] -= 273.15; 
+       result['main']['temp_max'] -= 273.15;
         res.end(JSON.stringify(result, null, 2))
     }).catch(function(err) {
         console.log('Error [%s]', err)

@@ -58,7 +58,14 @@ class App extends Component {
     <div>  
       <Router>
       <div>
-        <Switch>
+        <div className="topnav">
+          <Link to="/">Home</Link>
+          <Link to="/housing">Housing</Link>
+          <Link to="/about">About</Link>
+          <Link to="/topics">Topics</Link>
+          <Link to="/search">Search</Link>
+        </div>
+          <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/housing" component={Housing}/>
           <Route path="/search" component={Search}/>

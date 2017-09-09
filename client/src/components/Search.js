@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../img/suburber.png';
 import '../css/App.css';
 
 

@@ -1,56 +1,30 @@
 import React, { Component } from 'react';
-import '../css/App.css';
-
+import { Grid, Row, Col} from 'react-bootstrap';
+import PopularSuburbs from './PopularSuburbs.js'
+import Autocomplete from './Autocomplete.js'
+import logo from '../img/logo.jpg';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-        suburb: "",
-        wikiData: {},
-    };
-  }
-  //change query to be more specific
-  async wikiApiCall(suburb) {
-    const res = await fetch('/wiki?sub='+suburb)
-    const data = await res.json();
-    this.setState({
-      wikiData: data 
-    })
-  }
-
-  handleButtonClick = () => {
-    this.wikiApiCall(this.state.suburb);
-  }
-
-  handleInputChange = e => {
-    this.setState({
-      suburb: e.target.value
-    });
-  }
-
-
 
   render () {
     return (
-      <div>
-        <h2> HOME! </h2>
-        To search, type with proper capitalisation and replace spaces with underscores.
-        Also include state.
-        E.g- For Kingsford, search "Kingsford,_New_South_Wales"
-        <br></br>
-        And have some patience
-        <br></br>
-        <input 
-            type="text"
-            placeholder="Enter suburb here"
-            value={this.state.suburb}
-            onChange={this.handleInputChange}/> 
-        <br></br>
-        <button autoFocus type="button" onClick={this.handleButtonClick}> Get Wiki Data </button>
-        <br></br>
-        <div><pre>{JSON.stringify(this.state.wikiData, null, 2)}</pre></div>
-      </div>
+      <Grid>
+        <Row>
+          <Col lgOffset={3}>
+            <img className="centre-block" src={logo} alt="Logo"/>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6} lgOffset={3}>
+            <Autocomplete />
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6} lgOffset={3}>
+            <PopularSuburbs />
+          </Col>
+        </Row>
+      </Grid>
     )
   }
 

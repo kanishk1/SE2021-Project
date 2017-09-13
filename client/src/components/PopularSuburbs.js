@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Thumbnail } from 'react-bootstrap';
 import Slider from 'react-slick';
-
+import placeholder from '../img/placeholder.png'
 const SampleNextArrow = (props) => {
     const {className, style, onClick} = props
     return (
@@ -39,12 +40,36 @@ class PopularSuburbs extends Component {
     };
     return (
       <Slider {...settings}>
-        <div><h3>1</h3></div>
-        <div><h3>2</h3></div>
-        <div><h3>3</h3></div>
-        <div><h3>4</h3></div>
-        <div><h3>5</h3></div>
-        <div><h3>6</h3></div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>Chatswood</h2>
+          </Thumbnail>
+        </div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>Kensington</h2>
+          </Thumbnail>
+        </div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>Hornsby</h2>
+          </Thumbnail>
+        </div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>DeeWhy</h2>
+          </Thumbnail>
+        </div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>Bondi</h2>
+          </Thumbnail>
+        </div>
+        <div>
+          <Thumbnail src={placeholder} >
+            <h2>New York</h2>
+          </Thumbnail>
+        </div>
       </Slider>
     )
   }

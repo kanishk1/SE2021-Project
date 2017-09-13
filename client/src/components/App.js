@@ -3,6 +3,7 @@ import '../css/App.css';
 import Housing from '../components/Housing.js'
 import Search from '../components/Search.js'
 import Home from '../components/Home.js'
+import ProfileSelection from './ProfileSelection.js'
 import {
   BrowserRouter as Router,
   Route,
@@ -60,13 +61,15 @@ class App extends Component {
       <div>
         <div className="topnav">
           <Link to="/">Home</Link>
+          <Link to="/profiles">Profile Selection</Link>
           <Link to="/housing">Housing</Link>
           <Link to="/about">About</Link>
           <Link to="/topics">Topics</Link>
           <Link to="/search">Search</Link>
         </div>
-          <Switch>
+        <Switch>
           <Route exact path="/" component={Home}/>
+          <Route path="/profiles" component={ProfileSelection}/>
           <Route path="/housing" component={Housing}/>
           <Route path="/search" component={Search}/>
           <Route path="/about" component={About}/>

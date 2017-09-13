@@ -1,0 +1,14 @@
+/* Colour the Material Icons */
+.material-icons.close {
+  color: red;
+  opacity: 100;
+  float: none;
+}
+.material-icons.done {
+  color: green;
+  opacity: 100;
+}
+
+.row.wiki {
+	margin-bottom: 30px;
+}

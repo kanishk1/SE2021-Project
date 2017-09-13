@@ -70,11 +70,11 @@ export default function doAPI(scope, uri, post) {
           request_info.json = post;
         }
 
-        request(request_info, (err, data) => {
+        request(request_info, (err, data, body) => {
           if (err)
             reject(err);
           else
-            success(data)
+            success(JSON.parse(body));
         });
       })
       .catch(err => reject(err));

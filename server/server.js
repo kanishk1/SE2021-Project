@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
-import domain from './domain_cred'
+import domain from './domain'
 import wiki from 'wikijs';
 import * as db from './db'
 
@@ -121,7 +121,7 @@ app.get('/test', function(req, res){
 });
 
 // DOMAIN API
-router.get('/domain/search2', (req, res) => {
+router.get('/domain/search', (req, res) => {
     // We need to get the Suburb address value first...
     const suburb = req.query.suburb;
     const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
@@ -129,7 +129,7 @@ router.get('/domain/search2', (req, res) => {
     const searchlevel = '?searchLevel=Suburb&'
     const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
     console.log(totalQuery)
-    domain(totalQuery)
+    domain('addresslocators', totalQuery)
         .then(data => res.json(data))
         .catch(err => res.send(err));
 });

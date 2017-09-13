@@ -4,7 +4,8 @@ import path from 'path'
 import domain from './domain_cred'
 import wiki from 'wikijs';
 import * as db from './db'
-
+import twitter from './twitter'
+import accuweather from './accuweather'
 const app = express()
 
 app.use(bodyParser.json())
@@ -156,33 +157,10 @@ router.get('/twitter/search', (req, res) => {
     const suburb = req.query.suburb;
     const numtweets = req.query.num;
     if (suburb && numtweets) {
-
-        var error = function (err, response, body) {
-            console.log('ERROR: [%s]', err);
-        }
-        var success = function (data) {
-            data = JSON.parse(data);
-
-            // This is an array of all the statuses
-            var statuses = data['statuses'];
-
-            // We are now to extract the text from each tweet
-            var tweets = [];
-            var i = 0;
-            for (i = 0; i < numtweets; i++) {
-                tweets.push(statuses[i]['text']);
-            }
-            res.send(tweets);
-        }
-
-        const hashtag = '#'.concat(suburb)
-        var Twitter = require('twitter-node-client').Twitter;
-        var fs = require('fs');
-        var config = JSON.parse(fs.readFileSync('./data/twitter_config.json'));
-        var twitter = new Twitter(config);
-        twitter.getSearch({'q': hashtag,'count': numtweets}, error, success);
+        twitter(suburb,numtweets)
+            .then(response => res.send(response))
+            .catch(fail => res.send(fail));
     }
-
 });
 
 // ACCUWEATHER API
@@ -190,22 +168,11 @@ router.get('/twitter/search', (req, res) => {
 router.get('/weather', (req, res) => {
     const postcode = req.query.postcode;
     const country = 'Australia';
-    var weather = require('node-openweather')({
-        key: 'aa69bf79cee1f390f63d8203bd191e3b',
-        accuracy: "like",
-        unit: "metric",
-        language: "en"
-    });
-
-    weather.zip(postcode, country).now().then(function(result) {
-       result['main']['temp'] -= 273.15;
-       result['main']['temp_min'] -= 273.15;
-       result['main']['temp_max'] -= 273.15; 
-        res.end(JSON.stringify(result, null, 2))
-    }).catch(function(err) {
-        console.log('Error [%s]', err)
-    });
-
+    if (postcode && country) {
+        accuweather(postcode,country)
+            .then(response => res.end(response))
+            .catch(fail => res.send(fail))
+    }
 });
 
 router.get('/wiki', (req, res) => {

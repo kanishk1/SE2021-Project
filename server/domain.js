@@ -4,6 +4,7 @@ import request from 'request';
 const cred_A = {
   user: 'mzt6yh8t2ysh7kdtrpbda2cy',
   pass: 'tKSNGm4Ysh',
+  scopes: ['addresslocators', 'suburbperformance'],
   token: null,
   expires: null
 };
@@ -12,12 +13,14 @@ const cred_A = {
 const cred_B = {
   user: 'pr7nycgdtyfw56ahvnpy9eyu',
   pass: '8USA7GAgzD',
+  scopes: ['listings'],
   token: null,
   expires: null
 };
 
 const auth = {
   'addresslocators': cred_A,
+  'suburbperformance': cred_A,
   'listings': cred_B
 };
 
@@ -39,7 +42,7 @@ function getToken(scope) {
       },
       form: {
         'grant_type': 'client_credentials',
-        'scope': 'api_' + scope + '_read'
+        'scope': auth[scope].scopes.map(x => 'api_' + x + '_read').join(' ')
       }
     }, (err, res, body) => {
       if (err)

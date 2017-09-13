@@ -130,6 +130,19 @@ router.get('/domain/search', (req, res) => {
     const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
     console.log(totalQuery)
     domain('addresslocators', totalQuery)
+        .then(data => {
+          const id = data[0].ids[0].id;
+          const api = 'https://api.domain.com.au/v1/suburbPerformanceStatistics?';
+          const queries = [
+            statequery,
+            'suburbID=' + id,
+            'propertyCategory=house',
+            'chronologicalSpan=12',
+            'tPlusFrom=1',
+            'tPlusTo=3'
+          ];
+          return domain('suburbperformance', api+queries.join('&'));
+        })
         .then(data => res.json(data))
         .catch(err => res.send(err));
 });

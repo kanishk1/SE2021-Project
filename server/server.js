@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
-import domain from './domain_cred'
+import domain from './domain'
 import wiki from 'wikijs';
 import * as db from './db'
 
@@ -129,25 +129,22 @@ router.get('/domain/search', (req, res) => {
     const searchlevel = '?searchLevel=Suburb&'
     const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
     console.log(totalQuery)
-    console.log('https://api.domain.com.au/v1/addressLocators?searchLevel=Suburb&suburb=Hurstville&state=NSW')
-    domain(totalQuery)
+    domain('addresslocators', totalQuery)
+        .then(data => {
+          const id = data[0].ids[0].id;
+          const api = 'https://api.domain.com.au/v1/suburbPerformanceStatistics?';
+          const queries = [
+            statequery,
+            'suburbID=' + id,
+            'propertyCategory=house',
+            'chronologicalSpan=12',
+            'tPlusFrom=1',
+            'tPlusTo=3'
+          ];
+          return domain('suburbperformance', api+queries.join('&'));
+        })
         .then(data => res.json(data))
-        .catch(err => res.end(JSON.stringify(err)));
-});
-
-// test for GET requests
-router.get('/domain/get/:id', (req, res) => {
-  domain('https://api.domain.com.au/v1/listings/' + req.params.id)
-    .then(data => res.json(data))
-    .catch(err => res.end(JSON.stringify(err)));
-});
-
-// test for POST requests
-import test_form from './test_form.json'
-router.get('/domain/search', (req, res) => {
-  domain('https://api.domain.com.au/v1/listings/_search', test_form)
-    .then(data => res.json(data))
-    .catch(err => res.end(JSON.stringify(err)));
+        .catch(err => res.send(err));
 });
 
 // TWITTER API
@@ -200,7 +197,7 @@ router.get('/weather', (req, res) => {
     weather.zip(postcode, country).now().then(function(result) {
        result['main']['temp'] -= 273.15;
        result['main']['temp_min'] -= 273.15;
-       result['main']['temp_max'] -= 273.15; 
+       result['main']['temp_max'] -= 273.15;
         res.end(JSON.stringify(result, null, 2))
     }).catch(function(err) {
         console.log('Error [%s]', err)

@@ -7,6 +7,7 @@ import * as db from './db'
 import twitter from './twitter'
 import accuweather from './accuweather'
 import news from './newsapi'
+import bing from './bing'
 const app = express()
 
 app.use(bodyParser.json())
@@ -195,7 +196,17 @@ router.get('/news', (req,res) => {
         .catch(fail => res.send(fail))
 });
     
-            
+// Bing API
+// Example Call... http://localhost:3001/bing?suburb=hurstville&num=10
+router.get('/bing', (req, res) => {
+    const suburb = req.query.suburb;
+    const numResults = req.query.num;
+    if (suburb && numResults) {
+        bing(suburb, numResults)
+            .then(response => res.end(response))
+            .catch(fail => res.send(fail))
+    }
+});
 
 router.get('/wiki', (req, res) => {
   wiki().page(req.query.sub)

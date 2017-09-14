@@ -14,6 +14,7 @@
     "mongodb": "^2.2.31",
     "newsapi": "^2.0.1",
     "node-accuweather": "^1.7.0",
+    "node-bing-api": "^3.2.2",
     "node-openweather": "^0.0.5",
     "request": "^2.81.0",
     "twitter-node-client": "^0.0.6"

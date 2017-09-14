@@ -6,6 +6,7 @@ import wiki from 'wikijs';
 import * as db from './db'
 import twitter from './twitter'
 import accuweather from './accuweather'
+import news from './newsapi'
 const app = express()
 
 app.use(bodyParser.json())
@@ -174,6 +175,27 @@ router.get('/weather', (req, res) => {
             .catch(fail => res.send(fail))
     }
 });
+
+// NewsAPI
+// Example Call... http://localhost:3001/news?sortBy=top&source=abc-news-au
+router.get('/news', (req,res) => {
+    var sort = 'latest';
+    var newsSource = 'abc-news-au';
+    if (req.query.sortBy && req.query.source) {
+        if (['top', 'latest', 'popular'].indexOf(req.query.sortBy) >= 0) {
+            var sort = req.query.sortBy;
+        }
+        
+        if (['abc-news-au', 'the-guardian-au'].indexOf(req.query.source) >= 0) {
+            var newsSource = req.query.source;
+        }
+    }
+    news(sort, newsSource)
+        .then(response => res.send(response))
+        .catch(fail => res.send(fail))
+});
+    
+            
 
 router.get('/wiki', (req, res) => {
   wiki().page(req.query.sub)

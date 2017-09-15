@@ -1,4 +1,7 @@
 import request from 'request';
+import express from 'express';
+
+const router = express.Router();
 
 // TODO: move auth tokens out of code?
 const cred_A = {
@@ -58,28 +61,55 @@ function getToken(scope) {
   });
 }
 
-export default function doAPI(scope, uri, post) {
-  return new Promise((success, reject) => {
-    getToken(scope)
-      .then(token => {
-        const request_info = {
-          url: uri,
-          auth: {
-            'bearer': token
-          }
-        };
-        if (post) {
-          request_info.method = 'POST';
-          request_info.json = post;
+function get(scope, uri, post) {
+  return getToken(scope)
+    .then(token => {
+      const request_info = {
+        url: uri,
+        auth: {
+          'bearer': token
         }
+      };
+      if (post) {
+        request_info.method = 'POST';
+        request_info.json = post;
+      }
 
+      return new Promise((success, reject) => {
         request(request_info, (err, data, body) => {
           if (err)
-            reject(err);
+            reject(data);
           else
             success(JSON.parse(body));
         });
-      })
-      .catch(err => reject(err));
-  });
-}
+      });
+    });
+} 
+
+router.get('/housing', (req, res) => {
+  // We need to get the Suburb address value first...
+  const suburb = req.query.suburb;
+  const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
+  const statequery = 'state=NSW';
+  const searchlevel = '?searchLevel=Suburb&'
+  const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
+  console.log(totalQuery)
+  get('addresslocators', totalQuery)
+    .then(data => {
+      const id = data[0].ids[0].id;
+      const api = 'https://api.domain.com.au/v1/suburbPerformanceStatistics?';
+      const queries = [
+        statequery,
+        'suburbID=' + id,
+        'propertyCategory=house',
+        'chronologicalSpan=12',
+        'tPlusFrom=1',
+        'tPlusTo=3'
+      ];
+      return get('suburbperformance', api+queries.join('&'));
+    })
+    .then(data => res.json(data))
+    .catch(err => res.send(err));
+});
+
+export default router;

@@ -120,33 +120,6 @@ app.get('/test', function(req, res){
     res.send('hello world');
 });
 
-// DOMAIN API
-router.get('/domain/search', (req, res) => {
-    // We need to get the Suburb address value first...
-    const suburb = req.query.suburb;
-    const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
-    const statequery = 'state=NSW';
-    const searchlevel = '?searchLevel=Suburb&'
-    const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
-    console.log(totalQuery)
-    domain('addresslocators', totalQuery)
-        .then(data => {
-          const id = data[0].ids[0].id;
-          const api = 'https://api.domain.com.au/v1/suburbPerformanceStatistics?';
-          const queries = [
-            statequery,
-            'suburbID=' + id,
-            'propertyCategory=house',
-            'chronologicalSpan=12',
-            'tPlusFrom=1',
-            'tPlusTo=3'
-          ];
-          return domain('suburbperformance', api+queries.join('&'));
-        })
-        .then(data => res.json(data))
-        .catch(err => res.send(err));
-});
-
 // TWITTER API
 // Example Call... http://localhost:3001/twitter/search?suburb=hurstville&num=3
 router.get('/twitter/search', (req, res) => {
@@ -233,6 +206,7 @@ router.get('/suburbs', (req, res) => {
 })
 
 app.use(router)
+app.use('/domain', domain);
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)

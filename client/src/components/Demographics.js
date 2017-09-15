@@ -67,10 +67,10 @@ class Demographics extends Component {
           </Row>
         </Col>  
         <Col className="demoCol2" lg={6}>
-          <Row className ="title">
+          <Row className="title">
             <p>Demographics</p>
           </Row>
-          <Row className = "demoPhotos">{/* Blue Box*/} 
+          <Row className="demoPhotos">{/* Blue Box*/} 
             <p> Photos here. Function is ready, have to pick an api </p>
             <Col className="actualImg1"  lgOffset={3} lg={3}>
                 <Thumbnail src={placeholder} >

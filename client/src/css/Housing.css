@@ -1,6 +1,18 @@
 /* Colour the Material Icons */
 .material-icons{
-	font-size: 50px;
+	font-size: 70px;
+}
+.bus{
+	color: #00B5EF;	
+}
+.train{
+	color:#F6891F;
+}
+.ferry{
+	color:#5AB031;
+}
+.lightrail{
+	color:#EE343F;
 }
 .material-icons.close {
   color: red;
@@ -11,7 +23,6 @@
   color: green;
   opacity: 100;
 }
-
 
 .wiki {
 	margin-top: 30px;
@@ -33,7 +44,6 @@
 	font-size: 30px;
 	
 }
-
 .map{
 	align-content: center;
 	margin-top: 5%;	
@@ -45,6 +55,6 @@
 	margin-left: 30px;
 }
 .CouncilButton{
-	margin-left: 20%;
+	margin-left: 30%;
 	font-size: 20px;
 }

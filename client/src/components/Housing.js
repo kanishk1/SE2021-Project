@@ -21,7 +21,7 @@ class Housing extends Component {
 
   render() {
     return (
-      <Grid className="wtf" fluid="true">
+      <Grid fluid="true">
         <Col className="everything" lg={6}>
           <Row className="suburbName">
             <p>Chatswood, 2067</p>
@@ -34,39 +34,39 @@ class Housing extends Component {
           <Row className="suburbData">
             <Col className="transportCol" lg={4}>
               <Row>
-                <Col xsOffset={3} lg={3}>
+                <Col className="bus" lgOffset={3} lg={3}>
                   <i className="material-icons">directions_bus</i>
                 </Col>
-                <Col xsOffset={1} lg={3}>
+                <Col lgOffset={1} lg={3}>
                   <i className="material-icons done">done</i>
                 </Col>
               </Row>
               <Row>
-                <Col xsOffset={3} lg={3}>
+                <Col className="train" lgOffset={3} lg={3}>
                   <i className="material-icons">train</i>
                 </Col>
-                <Col xsOffset={1} lg={3}>
+                <Col lgOffset={1} lg={3}>
                   <i className="material-icons done">done</i>
                 </Col>
               </Row>
               <Row>
-                <Col xsOffset={3} lg={3}>
+                <Col className="ferry" lgOffset={3} lg={3}>
                   <i className="material-icons">directions_boat</i>
                 </Col>
-                <Col xsOffset={1} lg={3}>
+                <Col lgOffset={1} lg={3}>
                   <i className="material-icons close">close</i>
                 </Col>
               </Row>
               <Row>
-                <Col xsOffset={3} lg={3}>
+                <Col className="lightrail"lgOffset={3} lg={3}>
                   <i className="material-icons">tram</i>
                 </Col>
-                <Col xsOffset={1} lg={3}>
+                <Col lgOffset={1} lg={3}>
                   <i className="material-icons close">close</i>
                 </Col>
               </Row>
             </Col>
-            <Col className="distancesCol" xsOffset={2} lg={6}>
+            <Col className="distancesCol" lgOffset={2} lg={6}>
               <p><strong>Distances to Popular Places</strong></p>
               <Row>
                 <Col lg={6}>
@@ -111,19 +111,18 @@ class Housing extends Component {
             </Col>
           </Row>
         </Col>
-        <Col lg={5}>
+        <Col lgOffset={1} lg={4}>
           <iframe
             className="map"
             width="500"
             height="500"
-            frameBorder="0"
-            style={{border: 0}}
+            frameBorder="0"it
             src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q=Chatswood" 
             allowFullScreen>
           </iframe>
           <Button className="CouncilButton">Council Website</Button>
           <Row>
-            <Col className="weatherCol" xsOffset={1} lg={4}>
+            <Col className="weatherCol" lgOffset={3} lg={4}>
                 <GenericWeather city="Chatswood" temp={33} status="sun" />
             </Col>
           </Row>

@@ -64,3 +64,20 @@
     background-color: #4CAF50;
     color: white;
 }
+
+
+/*Start page css*/
+.carousel{
+  margin-top: 25px;
+}
+.carouselSlider div{
+  border-color: white;
+  border-width:15px;
+  text-align: center;
+}
+.carouselSlider div :hover {
+    border-color: #EDEDED;
+}
+.searchBox{
+  margin-top: 20px;
+}

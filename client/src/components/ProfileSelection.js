@@ -29,17 +29,17 @@ class ProfileSelection extends Component {
     <Grid>
       <Row className="ProfileSelectionOne">
         <div>
-          <Col xs={6} md={4}>
+          <Col lg={4}>
             <Thumbnail className="some" src={investor} alt="242x200" onClick={() => this.updateValue("Investor")}>
               <h2>Investor</h2>
             </Thumbnail>
           </Col>
-          <Col xs={6} md={4}>
+          <Col lg={4}>
             <Thumbnail className="some" src={general} alt="242x200" onClick={() => this.updateValue("General")}>
               <h2>General User</h2>
             </Thumbnail>
           </Col>
-          <Col xs={6} md={4}>
+          <Col lg={4}>
             <Thumbnail className="some" src={researcher} alt="242x200" onClick={() => this.updateValue("Researcher")}>
               <h2>Researcher</h2>
             </Thumbnail>

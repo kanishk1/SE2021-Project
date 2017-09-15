@@ -4,6 +4,7 @@ import Housing from '../components/Housing.js'
 import Search from '../components/Search.js'
 import Home from '../components/Home.js'
 import Demographics from '../components/Demographics.js'
+import Lifestyle from '../components/Lifestyle.js'
 import ProfileSelection from './ProfileSelection.js'
 import {
   BrowserRouter as Router,
@@ -67,6 +68,7 @@ class App extends Component {
           <Link to="/about">About</Link>
           <Link to="/topics">Topics</Link>
           <Link to="/search">Search</Link>
+          <Link to="/lifestyle">Lifestyle</Link>
           <Link to="/demographics">Demographics</Link>
         </div>
         <Switch>
@@ -76,6 +78,7 @@ class App extends Component {
           <Route path="/search" component={Search}/>
           <Route path="/about" component={About}/>
           <Route path="/topics" component={Topics}/>
+          <Route path="/lifestyle" component={Lifestyle}/>
           <Route path="/demographics" component={Demographics}/>
         </Switch>
       </div>

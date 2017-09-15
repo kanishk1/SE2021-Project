@@ -7,7 +7,7 @@ import placeholder from '../img/placeholder.png'
 
 
 
-class Demographics extends Component {
+class Lifestyle extends Component {
   constructor() {
     super();
     this.state = {};
@@ -26,7 +26,7 @@ class Demographics extends Component {
         <Col className="demoCol1" lg={6}>
           <Row className="summary">{/* Red Box*/} 
             <p>
-              <strong>Demographics summary goes here.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <strong>Lifestyle summary goes here.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           </Row>
           <Row className="chartsOne">{/* Yellow Box*/} 
@@ -68,7 +68,7 @@ class Demographics extends Component {
         </Col>  
         <Col className="demoCol2" lg={6}>
           <Row className ="title">
-            <p>Demographics</p>
+            <p>Lifestyle</p>
           </Row>
           <Row className = "demoPhotos">{/* Blue Box*/} 
             <p> Photos here. Function is ready, have to pick an api </p>
@@ -108,4 +108,4 @@ class Demographics extends Component {
 
 } 
 
-export default Demographics;
+export default Lifestyle;

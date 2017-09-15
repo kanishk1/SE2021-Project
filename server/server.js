@@ -15,32 +15,14 @@ const router = express.Router()
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 app.use(staticFiles)
 
-var request = require('request')
-
-var places = {
-    api_key : "AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
-    keyword : "thai",
-    location: "-33.8670522,151.1957362",
-    radius: "500",
-    type: "restaurant",
-}
-
 // Google Places API
-app.get('/placesapi', function(req, res, next) {
-    request(
-    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + places.location + "&radius=" + places.radius + "&type=" + places.type + "&keyword=" + places.keyword + "&key="+ places.api_key,
-    function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            // res.json(body);
-            res.set('Content-Type', 'text/json');
-            // console.log(body);
-            res.send(body);
-        }
-        else {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        }
-    });
+router.get('/places/search', (req,res) => {
+    const keyword = req.query.keyword;
+    if(keyword){
+        places(keyword)
+            .then(data => res.end(data))
+            .catch(err => res.send(err))
+    }
 });
 
 // Google Maps API

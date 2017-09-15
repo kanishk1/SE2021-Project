@@ -21,7 +21,7 @@ function doAPI(postcode, country) {
     });
 }
 
-// ACCUWEATHER API
+// Open Weather API
 // Example Call... http://localhost:3001/weather?postcode=2220
 router.get('/weather', (req, res) => {
     const postcode = req.query.postcode;

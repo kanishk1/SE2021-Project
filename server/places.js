@@ -1,6 +1,9 @@
-import request from 'request'
+import request from 'request';
+import express from 'express';
 
-export default function doAPI(keyword) {
+const router = express.Router();
+
+function doAPI(keyword) {
     return new Promise ((success, reject) => {
         request({
             url: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + keyword + "&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
@@ -16,3 +19,15 @@ export default function doAPI(keyword) {
         })
     });
 }
+
+// Google Places API
+router.get('/places/search', (req,res) => {
+    const keyword = req.query.keyword;
+    if(keyword){
+        doAPI(keyword)
+            .then(data => res.end(data))
+            .catch(err => res.send(err))
+    }
+});
+
+export default router;

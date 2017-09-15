@@ -104,22 +104,6 @@ app.get('/censusapi', function(req, res, next) {
     });
 });
 
-
-// EXAMPLE STUFF HERE
-router.get('/hello', (req, res) => {
-  const param = req.query.q;
-  if (param) {
-    res.json({
-      name: param
-    });
-    return;
-  }
-});
-
-app.get('/test', function(req, res){
-    res.send('hello world');
-});
-
 // TWITTER API
 // Example Call... http://localhost:3001/twitter/search?suburb=hurstville&num=3
 router.get('/twitter/search', (req, res) => {

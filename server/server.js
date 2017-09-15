@@ -5,8 +5,7 @@ import domain from './domain_cred'
 import wiki from 'wikijs';
 import * as db from './db'
 import twitter from './twitter'
-import accuweather from './accuweather'
-import news from './newsapi'
+import weather from './openweather'
 import bing from './bing'
 const app = express()
 
@@ -107,22 +106,6 @@ app.get('/censusapi', function(req, res, next) {
     });
 });
 
-
-// EXAMPLE STUFF HERE
-router.get('/hello', (req, res) => {
-  const param = req.query.q;
-  if (param) {
-    res.json({
-      name: param
-    });
-    return;
-  }
-});
-
-app.get('/test', function(req, res){
-    res.send('hello world');
-});
-
 // DOMAIN API
 router.get('/domain/search', (req, res) => {
     // We need to get the Suburb address value first...
@@ -152,62 +135,7 @@ router.get('/domain/search', (req, res) => {
     .then(data => res.json(data))
     .catch(err => res.end(JSON.stringify(err)));
 });
-
-// TWITTER API
-// Example Call... http://localhost:3001/twitter/search?suburb=hurstville&num=3
-router.get('/twitter/search', (req, res) => {
-    const suburb = req.query.suburb;
-    const numtweets = req.query.num;
-    if (suburb && numtweets) {
-        twitter(suburb,numtweets)
-            .then(response => res.send(response))
-            .catch(fail => res.send(fail));
-    }
-});
-
-// ACCUWEATHER API
-// Example Call... http://localhost:3001/weather?postcode=2220
-router.get('/weather', (req, res) => {
-    const postcode = req.query.postcode;
-    const country = 'Australia';
-    if (postcode && country) {
-        accuweather(postcode,country)
-            .then(response => res.end(response))
-            .catch(fail => res.send(fail))
-    }
-});
-
-// NewsAPI
-// Example Call... http://localhost:3001/news?sortBy=top&source=abc-news-au
-router.get('/news', (req,res) => {
-    var sort = 'latest';
-    var newsSource = 'abc-news-au';
-    if (req.query.sortBy && req.query.source) {
-        if (['top', 'latest', 'popular'].indexOf(req.query.sortBy) >= 0) {
-            var sort = req.query.sortBy;
-        }
-        
-        if (['abc-news-au', 'the-guardian-au'].indexOf(req.query.source) >= 0) {
-            var newsSource = req.query.source;
-        }
-    }
-    news(sort, newsSource)
-        .then(response => res.send(response))
-        .catch(fail => res.send(fail))
-});
     
-// Bing API
-// Example Call... http://localhost:3001/bing?suburb=hurstville&num=10
-router.get('/bing', (req, res) => {
-    const suburb = req.query.suburb;
-    const numResults = req.query.num;
-    if (suburb && numResults) {
-        bing(suburb, numResults)
-            .then(response => res.end(response))
-            .catch(fail => res.send(fail))
-    }
-});
-
 router.get('/wiki', (req, res) => {
   wiki().page(req.query.sub)
         .then(function(response) {
@@ -239,6 +167,9 @@ app.use(router)
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)
+app.use('/twitter',twitter)
+app.use('/weather',weather)
+app.use('/bing',bing)
 
 app.set('port', (process.env.PORT || 3001))
 app.set('dburl', (process.env.DBURL || 'mongodb://localhost:27017/suburber'))

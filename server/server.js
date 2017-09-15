@@ -49,25 +49,6 @@ app.get('/mapsapi', function(req, res, next) {
     });
 });
 
-// Wiki API
-app.get('/wikiapi', function(req, res, next) {
-    request(
-    "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json",
-    function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            // res.json(body);
-            res.set('Content-Type', 'text/html');
-            // console.log(body);
-            res.send(body);
-            // console.log(body);
-        }
-        else {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        }
-    });
-});
-
 // Census API
 app.get('/censusapi', function(req, res, next) {
     request(

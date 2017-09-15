@@ -7,7 +7,7 @@ const router = express.Router();
 const cred_A = {
   user: 'mzt6yh8t2ysh7kdtrpbda2cy',
   pass: 'tKSNGm4Ysh',
-  scopes: ['addresslocators', 'suburbperformance'],
+  scopes: ['addresslocators', 'suburbperformance', 'demographics'],
   token: null,
   expires: null
 };
@@ -24,6 +24,7 @@ const cred_B = {
 const auth = {
   'addresslocators': cred_A,
   'suburbperformance': cred_A,
+  'demographics': cred_A,
   'listings': cred_B
 };
 
@@ -84,32 +85,50 @@ function get(scope, uri, post) {
         });
       });
     });
-} 
+}
+
+function addressID(suburb) {
+  const url = 'https://api.domain.com.au/v1/addressLocators';
+  const queries = [
+    'suburb=' + suburb.split(' ').join('+'),
+    'state=NSW',
+    'searchLevel=Suburb',
+  ];
+
+  return get('addresslocators', url + '?' + queries.join('&'))
+    .then(data => data[0].ids[0].id);
+}
 
 router.get('/housing', (req, res) => {
-  // We need to get the Suburb address value first...
-  const suburb = req.query.suburb;
-  const suburbquery = 'suburb=' + suburb.split(' ').join('+') + '&';
-  const statequery = 'state=NSW';
-  const searchlevel = '?searchLevel=Suburb&'
-  const totalQuery = 'https://api.domain.com.au/v1/addressLocators' + searchlevel + suburbquery + statequery;
-  console.log(totalQuery)
-  get('addresslocators', totalQuery)
-    .then(data => {
-      const id = data[0].ids[0].id;
-      const api = 'https://api.domain.com.au/v1/suburbPerformanceStatistics?';
+  addressID(req.query.suburb)
+    .then(id => {
+      const url = 'https://api.domain.com.au/v1/suburbPerformanceStatistics';
       const queries = [
-        statequery,
+        'state=NSW',
         'suburbID=' + id,
         'propertyCategory=house',
         'chronologicalSpan=12',
         'tPlusFrom=1',
         'tPlusTo=3'
       ];
-      return get('suburbperformance', api+queries.join('&'));
+      return get('suburbperformance', url + '?' + queries.join('&'));
     })
     .then(data => res.json(data))
     .catch(err => res.send(err));
+});
+
+router.get('/demographics', (req, res) => {
+  addressID(req.query.suburb)
+    .then(id => {
+      const url = 'https://api.domain.com.au/v1/demographics';
+      const queries = [
+        'level=Suburb',
+        'id=' + id
+      ];
+      return get('demographics', url + '?' + queries.join('&'));
+    })
+    .then(data => res.json(data))
+    .catch(err => res.send(err))
 });
 
 export default router;

@@ -2,6 +2,7 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
 import domain from './domain'
+import places from './places'
 import wiki from 'wikijs';
 import * as db from './db'
 

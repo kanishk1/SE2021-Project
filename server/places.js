@@ -7,7 +7,6 @@ export default function doAPI(keyword) {
             method: 'GET',
         }, (err, res, body) => {
             if (!err && res.statusCode === 200) {
-                console.log(body);
                 success(body);
             }
             else {

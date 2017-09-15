@@ -1,7 +1,8 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 import path from 'path'
-import domain from './domain_cred'
+import domain from './domain'
+import places from './places'
 import wiki from 'wikijs';
 import * as db from './db'
 import twitter from './twitter'
@@ -17,32 +18,14 @@ const router = express.Router()
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 app.use(staticFiles)
 
-var request = require('request')
-
-var places = {
-    api_key : "AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q",
-    keyword : "thai",
-    location: "-33.8670522,151.1957362",
-    radius: "500",
-    type: "restaurant",
-}
-
 // Google Places API
-app.get('/placesapi', function(req, res, next) {
-    request(
-    "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + places.location + "&radius=" + places.radius + "&type=" + places.type + "&keyword=" + places.keyword + "&key="+ places.api_key,
-    function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            // res.json(body);
-            res.set('Content-Type', 'text/json');
-            // console.log(body);
-            res.send(body);
-        }
-        else {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        }
-    });
+router.get('/places/search', (req,res) => {
+    const keyword = req.query.keyword;
+    if(keyword){
+        places(keyword)
+            .then(data => res.end(data))
+            .catch(err => res.send(err))
+    }
 });
 
 // Google Maps API
@@ -62,25 +45,6 @@ app.get('/mapsapi', function(req, res, next) {
         }
         else {
             res.send(response);
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        }
-    });
-});
-
-// Wiki API
-app.get('/wikiapi', function(req, res, next) {
-    request(
-    "https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json",
-    function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            // res.json(body);
-            res.set('Content-Type', 'text/html');
-            // console.log(body);
-            res.send(body);
-            // console.log(body);
-        }
-        else {
             console.log('error:', error); // Print the error if one occurred
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         }
@@ -164,6 +128,7 @@ router.get('/suburbs', (req, res) => {
 })
 
 app.use(router)
+app.use('/domain', domain);
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)

@@ -1,4 +1,7 @@
 /* Colour the Material Icons */
+.material-icons{
+	font-size: 50px;
+}
 .material-icons.close {
   color: red;
   opacity: 100;
@@ -9,6 +12,39 @@
   opacity: 100;
 }
 
-.row.wiki {
+
+.wiki {
+	margin-top: 30px;
 	margin-bottom: 30px;
+	font-size: 20px;
+}
+.suburbName{
+	margin-top: 5%;
+	font-size: 50px;
+}
+.weatherCol{
+	position: absolute;
+}
+.distancesCol{
+	position: relative;
+	font-size: 20px;
+}
+.transportCol{
+	font-size: 30px;
+	
+}
+
+.map{
+	align-content: center;
+	margin-top: 5%;	
+}
+.CouncilButton{
+	margin-top: 2%;
+}
+.everything{
+	margin-left: 30px;
+}
+.CouncilButton{
+	margin-left: 20%;
+	font-size: 20px;
 }

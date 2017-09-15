@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col} from 'react-bootstrap';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
+import { Grid, Row, Col} from 'react-bootstrap';
 
 class Home extends Component {
 

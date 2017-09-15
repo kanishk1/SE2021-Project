@@ -120,8 +120,7 @@ class Housing extends Component {
             height="500"
             frameBorder="0"
             style={{border: 0}}
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo
-              &q=Chatswood" 
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q=Chatswood" 
             allowFullScreen>
           </iframe>
           <Button>Council Website</Button>

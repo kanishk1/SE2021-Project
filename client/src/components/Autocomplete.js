@@ -20,6 +20,11 @@ class Autocomplete extends Component {
     }
   }
 
+  async getSuburbs () {
+    const response = await fetch('/suburbs');
+    const data = await response.json();
+  }
+
   render () {
   	const options =  [
 		    { value: 'chatswood', label: 'Chatswood' },

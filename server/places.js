@@ -27,7 +27,7 @@ function doAPI(keyword) {
 router.get('/search', (req,res) => {
     const keyword = req.query.keyword;
     doAPI(keyword)
-        .then(data => res.end(data))
+        .then(data => res.json(data))
         .catch(err => res.send(err))
 });
 

@@ -10,17 +10,22 @@ import placeholder from '../img/placeholder.png'
 class housing extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      wiki: {}
+    };
   }
 
   async photos(query) {
-    const response = await fetch('/wiki?sub='+query);
+    const response = await fetch('/wiki/search?suburb='+query);
     const data = await response.json();
     console.log(data);
+    this.setState({
+      wiki: data
+    })
   }
 
   render() {
-    //{this.photos('Hurstville,_New_South_Wales')}S
+    this.photos('Kensington');
     return (
       <Grid fluid="true">
           <Col className="housCol1" lg={4}>
@@ -29,7 +34,7 @@ class housing extends Component {
             </Row>
             <Row className="summary">{/* Red Box*/} 
               <p>
-                <strong>housing summary goes here.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <strong>{this.state.wiki.summary}</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
             </Row>
           </Col> 

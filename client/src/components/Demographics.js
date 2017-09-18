@@ -22,7 +22,7 @@ class Demographics extends Component {
   render() {
     //{this.photos('Hurstville,_New_South_Wales')}S
     return (
-      <Grid fluid="true">
+      <Grid fluid={true}>
         <Col className="demoCol1" lg={6}>
           <Row className="summary">{/* Red Box*/} 
             <p>

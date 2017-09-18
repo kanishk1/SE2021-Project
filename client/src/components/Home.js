@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
-import { Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class Home extends Component {
 
-  render () {
+  render() {
     return (
-      <Grid className="startPage" fluid="true">
+      <Grid className="startPage" fluid={true}>
         <Row>
           <Col lgOffset={4} lg={3}>
             <img className="centre-block" src={suburber} alt="suburber"/>

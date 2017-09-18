@@ -3,6 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
+// ALL TODO
 function doAPI() {
     return new Promise((success, fail) => {
         request(
@@ -18,13 +19,14 @@ function doAPI() {
 }
 
 // Census API
-router.get('/censusapi', function(req, res, next) {
+router.get('/search', function(req, res, next) {
   doAPI()
     .then(response => {
       res.set('Content-Type', 'text/xml');
       res.send(response);
     }).catch(fail => {
       console.log('error:', fail); // Print the error if one occurred
+      res.send('Error: ' + fail);
     });
 });
 

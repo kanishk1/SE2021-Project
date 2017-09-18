@@ -7,7 +7,7 @@ const SampleNextArrow = (props) => {
     return (
       <div
         className={className}
-        style={{...style, display: 'block', background: 'red'}}
+        style={{...style, display: 'block', background: 'black'}}
         onClick={onClick}
       ></div>
     );
@@ -18,7 +18,7 @@ const SampleNextArrow = (props) => {
     return (
       <div
         className={className}
-        style={{...style, display: 'block', background: 'green'}}
+        style={{...style, display: 'block', background: 'black'}}
         onClick={onClick}
       ></div>
     );
@@ -34,12 +34,12 @@ class PopularSuburbs extends Component {
       infinite: true,
       speed: 500,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 3,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
     return (
-      <Slider {...settings}>
+      <Slider {...settings} className="carouselSlider">
         <div>
           <Thumbnail src={placeholder} >
             <h2>Chatswood</h2>

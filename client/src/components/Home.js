@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col} from 'react-bootstrap';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
+import { Grid, Row, Col} from 'react-bootstrap';
 
 class Home extends Component {
 
   render () {
     return (
-      <Grid>
+      <Grid className="startPage" fluid="true">
         <Row>
-          <Col lgOffset={3}>
+          <Col lgOffset={4} lg={3}>
             <img className="centre-block" src={suburber} alt="suburber"/>
           </Col>
         </Row>
-        <Row>
-          <Col lg={6} lgOffset={3}>
+        <Row className="searchBox">
+          <Col lgOffset={3} lg={6} >
             <Autocomplete />
           </Col>
         </Row>
-        <Row>
+        <Row className="carousel">
           <Col lg={6} lgOffset={3}>
             <PopularSuburbs />
           </Col>

@@ -3,6 +3,9 @@ import express from 'express';
 const router = express.Router();
 
 function doAPI(suburb, numResults) {
+    if (!suburb || !numResults)
+        return Promise.reject("Invalid Parameters");
+
     return new Promise((response, fail) => {
         var apikey1 = '2e466941fe314289af733fa47696b09c';
         var apikey2 = '39937d23b2784b3584ce3252c1c11e44';
@@ -18,15 +21,13 @@ function doAPI(suburb, numResults) {
 }
 
 // Bing API
-// Example Call... http://localhost:3001/bing?suburb=hurstville&num=10
-router.get('/bing', (req, res) => {
+// Example Call... http://localhost:3001/bing/search?suburb=hurstville&num=10
+router.get('/search', (req, res) => {
     const suburb = req.query.suburb;
     const numResults = req.query.num;
-    if (suburb && numResults) {
-        doAPI(suburb, numResults)
-            .then(response => res.end(response))
-            .catch(fail => res.send(fail))
-    }
+    doAPI(suburb, numResults)
+        .then(response => res.end(response))
+        .catch(fail => res.send(fail))
 });
 
 export default router;

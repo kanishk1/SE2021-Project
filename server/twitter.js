@@ -5,26 +5,29 @@ import config from './data/twitter_config.json';
 const router = express.Router();
 
 function doAPI(suburb, numtweets) {
+    if (!suburb || !numtweets)
+      return Promise.reject('ERROR: [Missing parameters]');
+
     return new Promise((response, fail) => {
         var error = function (err, response, body) {
             fail('ERROR: [%s]', err);
         }
         var success = function (data) {
-            
+
             // Data parsed...
             data = JSON.parse(data);
             var statuses = data['statuses'];
-            
+
             // We are now to extract the text from each tweet
             var tweets = [];
             var i = 0;
-            for (i = 0; i < numtweets; i++) {
+            for (i = 0; i < statuses.length && i < numtweets; i++) {
                 tweets.push(statuses[i]['text']);
             }
             response(tweets);
         }
-        
-        
+
+
         const hashtag = '#'.concat(suburb)
         const twitter = new Twitter(config);
         twitter.getSearch({'q': hashtag,'count': numtweets}, error, success);
@@ -36,11 +39,9 @@ function doAPI(suburb, numtweets) {
 router.get('/search', (req, res) => {
     const suburb = req.query.suburb;
     const numtweets = req.query.num;
-    if (suburb && numtweets) {
-        doAPI(suburb,numtweets)
-            .then(response => res.send(response))
-            .catch(fail => res.send(fail));
-    }
+    doAPI(suburb,numtweets)
+        .then(response => res.send(response))
+        .catch(fail => res.send(fail));
 });
 
 export default router;

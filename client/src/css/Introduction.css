@@ -1,0 +1,60 @@
+/* Colour the Material Icons */
+.material-icons{
+	font-size: 70px;
+}
+.bus{
+	color: #00B5EF;	
+}
+.train{
+	color:#F6891F;
+}
+.ferry{
+	color:#5AB031;
+}
+.lightrail{
+	color:#EE343F;
+}
+.material-icons.close {
+  color: red;
+  opacity: 100;
+  float: none;
+}
+.material-icons.done {
+  color: green;
+  opacity: 100;
+}
+
+.wiki {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+.suburbName{
+	margin-top: 5%;
+	font-size: 50px;
+}
+.weatherCol{
+	position: absolute;
+}
+.distancesCol{
+	position: relative;
+	font-size: 20px;
+}
+.transportCol{
+	font-size: 30px;
+	
+}
+.map{
+	align-content: center;
+	margin-top: 5%;	
+}
+.CouncilButton{
+	margin-top: 2%;
+}
+.everything{
+	margin-left: 30px;
+}
+.CouncilButton{
+	margin-left: 30%;
+	font-size: 20px;
+}

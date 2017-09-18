@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import '../css/App.css';
-import Housing from '../components/Housing.js'
+import Introduction from '../components/Introduction.js'
 import Search from '../components/Search.js'
 import Home from '../components/Home.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
+import Housing from '../components/Housing.js'
 import ProfileSelection from './ProfileSelection.js'
 import {
   BrowserRouter as Router,
@@ -64,21 +65,23 @@ class App extends Component {
         <div className="topnav">
           <Link to="/">Home</Link>
           <Link to="/profiles">Profile Selection</Link>
-          <Link to="/housing">Housing</Link>
+          <Link to="/introduction">Introduction</Link>
           <Link to="/about">About</Link>
           <Link to="/topics">Topics</Link>
           <Link to="/search">Search</Link>
           <Link to="/lifestyle">Lifestyle</Link>
+          <Link to="/housing">Housing</Link>
           <Link to="/demographics">Demographics</Link>
         </div>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route path="/profiles" component={ProfileSelection}/>
-          <Route path="/housing" component={Housing}/>
+          <Route path="/introduction" component={Introduction}/>
           <Route path="/search" component={Search}/>
           <Route path="/about" component={About}/>
           <Route path="/topics" component={Topics}/>
           <Route path="/lifestyle" component={Lifestyle}/>
+          <Route path="/housing" component={Housing}/>
           <Route path="/demographics" component={Demographics}/>
         </Switch>
       </div>

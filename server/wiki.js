@@ -4,35 +4,29 @@ import express from 'express';
 const router = express.Router();
 
 function doAPI(suburb) {
-    return new Promise((success, fail) => {
-        wiki().page(suburb)
-            .then(function(response) {
-              return Promise.all([
-                response.info(),
-                response.content(),
-                response.summary()
-              ])
-            }).then(function(response) {
-              success({
-                info: response[0],
-                content: response[1],
-                summary: response[2]
-              })
-            }).catch(function(err) {
-              fail(err);
-            });
+  return wiki().page(suburb)
+    .then((response) => {
+      return Promise.all([
+        response.info(),
+        response.content(),
+        response.summary()
+      ])
+    }).then((response) => {
+      return {
+        info: response[0],
+        content: response[1],
+        summary: response[2]
+      };
     });
 }
 
-router.get('/wiki', (req, res) => {
+router.get('/search', (req, res) => {
   const suburb = req.query.suburb
-  if (suburb) {
-    doAPI(suburb)
-      .then(success => res.json(success))
-      .catch(fail => console.log(fail))
-  }
+  doAPI(suburb)
+    .then(success => res.json(success))
+    .catch(fail => res.send("Error: " + fail))
 });
 
 export default router;
-      
-      
+
+

@@ -4,6 +4,7 @@ import path from 'path'
 import domain from './domain'
 import places from './places'
 import * as db from './db'
+
 import twitter from './twitter'
 import weather from './openweather'
 import bing from './bing'
@@ -26,7 +27,7 @@ router.get('/suburbs', (req, res) => {
   });
 })
 
-app.use(router)
+app.use(router);
 app.use('/domain', domain);
 app.use('/twitter',twitter);
 app.use('/weather',weather);
@@ -34,7 +35,6 @@ app.use('/bing',bing);
 app.use('/places',places);
 app.use('/census',census);
 app.use('/wiki', wiki);
-
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)

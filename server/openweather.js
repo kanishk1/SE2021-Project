@@ -24,7 +24,7 @@ function doAPI(postcode, country) {
 }
 
 // Open Weather API
-// Example Call... http://localhost:3001/weather?postcode=2220
+// Example Call... http://localhost:3001/weather/2220
 router.get('/:postcode', (req, res) => {
   const postcode = req.params.postcode;
   const country = 'Australia';

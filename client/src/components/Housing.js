@@ -21,7 +21,7 @@ class Housing extends Component {
 
   render() {
     return (
-      <Grid fluid="true">
+      <Grid fluid={true}>
         <Col className="everything" lg={6}>
           <Row className="suburbName">
             <p>Chatswood, 2067</p>
@@ -116,7 +116,7 @@ class Housing extends Component {
             className="map"
             width="500"
             height="500"
-            frameBorder="0"it
+            frameBorder="0"
             src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q=Chatswood" 
             allowFullScreen>
           </iframe>

@@ -1,22 +1,41 @@
 import Select from 'react-select';
 import React, { Component } from 'react';
 import 'react-select/dist/react-select.css';
+import { Button, Form, FormGroup, Radio } from 'react-bootstrap';
 
 class Autocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectValue: ""
+        selectedSuburb: null,
+        selectedProfile: null
     };
-    this.updateValue = this.updateValue.bind(this)
+    this.updateSuburb = this.updateSuburb.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
  
-  updateValue (newValue) {
+  updateSuburb (newValue) {
     if (newValue != null) {
       this.setState({
-        selectValue: newValue.value
-      });
-      console.log(newValue.value)
+        selectedSuburb: newValue.value
+      })
+      console.log("Selected Suburb is: ", newValue.value)
+    }
+  }
+
+  updateProfile (newValue) {
+    if (newValue != null) {
+      this.setState({
+        selectedProfile: newValue
+      })
+      console.log("Selected Profile is: ", newValue)
+    }
+  }
+
+  handleSubmit (event) {
+    event.preventDefault();
+    if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
+      console.log("Ready to submit")
     }
   }
 
@@ -33,15 +52,36 @@ class Autocomplete extends Component {
 		  ];
 
     return (
-     <Select 
-        autofocus={true} 
-        options={options}
-        clearable={false} 
-        value={this.state.selectValue} 
-        onChange={this.updateValue} 
-        searchable={this.state.searchable}
-        noResultsText="No suburbs found..." 
-        />
+      <div>
+       <Select 
+          autofocus={true} 
+          options={options}
+          clearable={false} 
+          value={this.state.selectedSuburb}
+          onChange={this.updateSuburb} 
+          searchable={this.state.searchable}
+          noResultsText="No suburbs found..." 
+          placeholder="Select a suburb..."
+          />
+        <p>What kind of a user are you?</p>
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup role="form">
+            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"Investor")}>
+              Investor
+            </Radio>
+            {' '}
+            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"General User")}>
+              General User
+            </Radio>
+            {' '}
+            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"Researcher")}>
+              Researcher
+            </Radio>
+            {' '}
+            <Button type="submit">Submit</Button>
+          </FormGroup>
+        </Form>
+      </div>
     )
   }
 

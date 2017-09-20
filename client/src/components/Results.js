@@ -1,28 +1,44 @@
 import React, { Component } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
-
-import Housing from '../components/Housing.js'
+import { Tab, Tabs, TabContent, TabContentProps } from 'react-bootstrap';
+import Housing from './Housing.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
 
 class Results extends Component {
 
-  render () {
-    return (
-      <Tabs id="Introduction Tab" defaultActiveKey={1} >
-        <Tab eventKey={1} title="Introduction"> 
-          <Housing /> 
-        </Tab>
-        <Tab eventKey={2} title="Housing"> 
-          <Demographics /> 
-        </Tab>
-        <Tab eventKey={3} title="Demographics"> 
-          <Lifestyle /> 
-        </Tab>
-      </Tabs>
-    )
+  constructor() {
+    super();
+    this.state = {
+      key: 1
+    };
+    //this.handleSelect = this.handleSelect.bind(this);
   }
 
+  // handleSelect(key) {
+  //   console.log('selected  ' + key);
+  //   this.setState({key});
+  // }
+
+  render () {
+    return (
+      <div>
+      <Housing />
+      <Tabs id="Introduction Tab" activeKey={this.state.key}
+          >
+          {/* <Tab eventKey={1} title="Introduction">  */}
+            {/* <TabContent componentClass={Housing}> */}
+            {/* </TabContent> */}
+          {/* </Tab> */}
+          {/* <Tab eventKey={2} title="Demographics">  */}
+            {/* // <Demographics />  */}
+          {/* // </Tab> */}
+          {/* // <Tab eventKey={3} title="Lifestyle">  */}
+            {/* // <Lifestyle />  */}
+          {/* // </Tab> */}
+      </Tabs>
+      </div>
+    )
+  }
 }
 
 export default Results;

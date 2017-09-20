@@ -26,7 +26,6 @@ class App extends Component {
     this.setState({
       isFetching: newValue
     })
-    console.log(newValue);
   }
   
   assignData(data) {

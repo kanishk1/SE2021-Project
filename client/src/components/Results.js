@@ -30,7 +30,7 @@ class Results extends Component {
             <Housing />
           </Tab>
           <Tab eventKey={2} title="Demographics"> 
-            <Demographics data={this.state.data[1]}/> 
+            <Demographics data={this.props.data[1]}/> 
           </Tab>
           <Tab eventKey={3} title="Lifestyle"> 
              <Lifestyle /> 

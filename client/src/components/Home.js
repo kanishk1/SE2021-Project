@@ -59,10 +59,10 @@ class Home extends Component {
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
-      self.props.handleFetchChange(1);
       self.setState({
         isFetching: 1
       })
+      self.props.handleFetchChange(1);
       self.props.assignData(response);
       console.log(response);
     }).catch(function(err) {

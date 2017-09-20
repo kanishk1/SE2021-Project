@@ -26,7 +26,10 @@ router.get('/search', (req, res) => {
   const suburb = req.query.suburb
   doAPI(suburb)
     .then(success => res.json(success))
-    .catch(fail => res.send("Error: " + fail))
+    .catch(fail => {
+      console.log(fail);
+      res.json({})
+    })
 });
 
 export default router;

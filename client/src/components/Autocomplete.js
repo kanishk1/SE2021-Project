@@ -7,10 +7,12 @@ class Autocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectedSuburb: this.props.selectedSuburb,
-        selectedProfile: this.props.selectedProfile,
+        selectedSuburb: null,
+        selectedProfile: null,
+        selectedPostcode: null,
         options: []
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.getSuburbs();
   }
  
@@ -18,6 +20,7 @@ class Autocomplete extends Component {
     event.preventDefault();
     if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
       console.log("Ready to submit")
+      this.props.getData();
     }
   }
 
@@ -28,6 +31,9 @@ class Autocomplete extends Component {
     if (nextProps.selectedProfile !== this.state.selectedProfile) {
       this.setState({ selectedProfile: nextProps.selectedProfile });
     }
+    if (nextProps.selectedPostcode !== this.state.selectedPostcode) {
+      this.setState({ selectedPostcode: nextProps.selectedPostcode });
+    }
   }
 
   async getSuburbs () {
@@ -37,7 +43,7 @@ class Autocomplete extends Component {
     var i = 0;
     data.docs.forEach(function(elem) {
       suburbs[i] = {};
-      suburbs[i].value = elem.name;
+      suburbs[i].value = elem.name + ' ' + elem.post;
       suburbs[i].label = elem.name + ' ' + elem.post;
       i++;
     });
@@ -53,7 +59,7 @@ class Autocomplete extends Component {
           autofocus={true} 
           options={this.state.options}
           clearable={false} 
-          value={this.state.selectedSuburb}
+          value={this.state.selectedSuburb + ' ' + this.state.selectedPostcode}
           onChange={this.props.updateSuburb} 
           searchable={this.state.searchable}
           noResultsText="No suburbs found..." 

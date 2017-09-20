@@ -3,7 +3,7 @@ import { Tab, Tabs, } from 'react-bootstrap';
 import Housing from './Housing.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
-import Social from '../components/Social.js'
+// import Social from '../components/Social.js'
 
 class Results extends Component {
 

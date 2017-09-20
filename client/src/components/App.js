@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Home from '../components/Home.js'
 import Results from '../components/Results.js'
-import Housing from '../components/Housing.js'
 import {
   BrowserRouter as Router,
   Route,

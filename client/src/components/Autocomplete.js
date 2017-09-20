@@ -7,37 +7,26 @@ class Autocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectedSuburb: null,
-        selectedProfile: null,
+        selectedSuburb: this.props.selectedSuburb,
+        selectedProfile: this.props.selectedProfile,
         options: []
     };
-    this.updateSuburb = this.updateSuburb.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.getSuburbs();
   }
  
-  updateSuburb (newValue) {
-    if (newValue != null) {
-      this.setState({
-        selectedSuburb: newValue.value
-      })
-      console.log("Selected Suburb is: ", newValue.value)
-    }
-  }
-
-  updateProfile (newValue) {
-    if (newValue != null) {
-      this.setState({
-        selectedProfile: newValue
-      })
-      console.log("Selected Profile is: ", newValue)
-    }
-  }
-
   handleSubmit (event) {
     event.preventDefault();
     if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
       console.log("Ready to submit")
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedSuburb !== this.state.selectedSuburb) {
+      this.setState({ selectedSuburb: nextProps.selectedSuburb });
+    }
+    if (nextProps.selectedProfile !== this.state.selectedProfile) {
+      this.setState({ selectedProfile: nextProps.selectedProfile });
     }
   }
 
@@ -65,7 +54,7 @@ class Autocomplete extends Component {
           options={this.state.options}
           clearable={false} 
           value={this.state.selectedSuburb}
-          onChange={this.updateSuburb} 
+          onChange={this.props.updateSuburb} 
           searchable={this.state.searchable}
           noResultsText="No suburbs found..." 
           placeholder="Select a suburb..."
@@ -73,15 +62,15 @@ class Autocomplete extends Component {
         <p>What kind of a user are you?</p>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup role="form">
-            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"Investor")}>
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Investor")}>
               Investor
             </Radio>
             {' '}
-            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"General User")}>
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"General User")}>
               General User
             </Radio>
             {' '}
-            <Radio name="radioGroup" inline onChange={this.updateProfile.bind(this,"Researcher")}>
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Researcher")}>
               Researcher
             </Radio>
             {' '}

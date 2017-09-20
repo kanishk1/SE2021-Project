@@ -8,10 +8,12 @@ class Autocomplete extends Component {
     super(props);
     this.state = {
         selectedSuburb: null,
-        selectedProfile: null
+        selectedProfile: null,
+        options: []
     };
     this.updateSuburb = this.updateSuburb.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getSuburbs();
   }
  
   updateSuburb (newValue) {
@@ -42,25 +44,25 @@ class Autocomplete extends Component {
   async getSuburbs () {
     const response = await fetch('/suburbs');
     const data = await response.json();
+    var suburbs = [];
+    var i = 0;
+    data.docs.forEach(function(elem) {
+      suburbs[i] = {};
+      suburbs[i].value = elem.name;
+      suburbs[i].label = elem.name + ' ' + elem.post;
+      i++;
+    });
+    this.setState({
+      options: suburbs
+    });
   }
 
   render () {
-  	const options =  [
-		    { value: 'chatswood', label: 'Chatswood' },
-		    { value: 'hurstville', label: 'Hurstville' },
-		    { value: 'kensington', label: 'Kensington' },
-		    { value: 'randwick', label: 'Randwick' },
-		    { value: 'townhall', label: 'Townhall' },
-		    { value: 'epping', label: 'Epping' },
-		    { value: 'roseberry', label: 'Roseberry' },
-		    { value: 'hornsby', label: 'Hornsby' },
-		  ];
-
     return (
       <div>
        <Select 
           autofocus={true} 
-          options={options}
+          options={this.state.options}
           clearable={false} 
           value={this.state.selectedSuburb}
           onChange={this.updateSuburb} 

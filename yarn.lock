@@ -977,7 +977,7 @@ lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
 
-lodash@^4.0.0, lodash@^4.5.1, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.17.4, lodash@^4.5.1, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -1378,6 +1378,13 @@ react-bootstrap@^0.31.3:
     react-prop-types "^0.4.0"
     uncontrollable "^4.1.0"
     warning "^3.0.0"
+
+react-chartjs-2@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-2.6.2.tgz#3631b5f79dce494ea1ea87f011389a540782223b"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.8"
 
 react-dom@^15.6.1:
   version "15.6.1"

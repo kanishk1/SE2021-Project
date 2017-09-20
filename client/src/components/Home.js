@@ -3,6 +3,7 @@ import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
 import { Grid, Row, Col } from 'react-bootstrap';
+import Redirect from 'react-router-dom';
 
 class Home extends Component {
  
@@ -55,6 +56,9 @@ class Home extends Component {
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
+      this.setState({
+        isFetching: 1
+      });
       console.log(response);
     }).catch(function(err) {
       throw Error('Couldn\'t get data rip');
@@ -62,30 +66,38 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <Grid className="startPage" fluid={true}>
-        <Row>
-          <Col lgOffset={4} lg={3}>
-            <img className="centre-block" src={suburber} alt="suburber"/>
-          </Col>
-        </Row>
-        <Row className="searchBox">
-          <Col lgOffset={3} lg={6} >
-            <Autocomplete updateSuburb={this.updateSuburb}
-                updateProfile={this.updateProfile}
-                selectedSuburb={this.state.selectedSuburb}
-                selectedProfile={this.state.selectedProfile}
-                selectedPostcode={this.state.selectedPostcode}
-                getData={this.getData}/>
-          </Col>
-        </Row>
-        <Row className="carousel">
-          <Col lg={6} lgOffset={3}>
-            <PopularSuburbs />
-          </Col>
-        </Row>
-      </Grid>
-    )
+    if (this.state.isFetching === 0) {
+      return (
+        <Grid className="startPage" fluid={true}>
+          <Row>
+            <Col lgOffset={4} lg={3}>
+              <img className="centre-block" src={suburber} alt="suburber"/>
+            </Col>
+          </Row>
+          <Row className="searchBox">
+            <Col lgOffset={3} lg={6} >
+              <Autocomplete updateSuburb={this.updateSuburb}
+                  updateProfile={this.updateProfile}
+                  selectedSuburb={this.state.selectedSuburb}
+                  selectedProfile={this.state.selectedProfile}
+                  selectedPostcode={this.state.selectedPostcode}
+                  getData={this.getData}/>
+            </Col>
+          </Row>
+          <Row className="carousel">
+            <Col lg={6} lgOffset={3}>
+              <PopularSuburbs />
+            </Col>
+          </Row>
+        </Grid>
+      )
+    } else if (this.state.isFetching === 0.5) {
+      
+    } else {
+      return (<Redirect push to='/results' />);
+    }
+  
+  
   }
 
 }

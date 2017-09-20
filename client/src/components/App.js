@@ -19,7 +19,6 @@ class App extends Component {
       <div>
         <div className="topnav">
           <Link to="/">Home</Link>
-          <Link to="/results"> Result </Link>
         </div>
         <Switch>
           <Route exact path="/" component={Home}/>

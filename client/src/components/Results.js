@@ -7,10 +7,11 @@ import Lifestyle from '../components/Lifestyle.js'
 
 class Results extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      key: 1
+      key: 1,
+      data: this.props.data
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -29,7 +30,7 @@ class Results extends Component {
             <Housing />
           </Tab>
           <Tab eventKey={2} title="Demographics"> 
-            <Demographics /> 
+            <Demographics data={this.state.data[1]}/> 
           </Tab>
           <Tab eventKey={3} title="Lifestyle"> 
              <Lifestyle /> 

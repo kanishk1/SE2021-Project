@@ -6,31 +6,65 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch
-} from 'react-router-dom'
+  Switch,
+} from 'react-router-dom';
 
 class App extends Component {
 
-  
-  render() {
-    return (
-    <div>  
-      <Router>
-      <div>
-        <div className="topnav">
-          <Link to="/">Home</Link>
-        </div>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/results" component={Results}/>
-        </Switch>
-      </div>
-      </Router>        
-    </div>
-    );
+  constructor() {
+    super();
+
+    this.state = {
+      isFetching: 0,
+      data: []
+    }
+    this.handleFetchChange = this.handleFetchChange.bind(this);
+    this.assignData= this.assignData.bind(this);
   }
 
+  handleFetchChange(newValue) {
+    this.setState({
+      isFetching: newValue
+    })
+    console.log(newValue);
+  }
   
+  assignData(data) {
+    this.setState({
+      data: data
+    })
+  }
+  
+  render() {   
+    return (
+      <div>  
+        <Router>
+        <div>
+          <div className="topnav">
+            <Link to={{
+              pathname: '/',
+              state: {isFetching: 0} 
+            }}>
+              Home
+            </Link>
+          </div>
+          <Switch>
+            <Route exact path="/" render={
+              () => 
+              <Home handleFetchChange={this.handleFetchChange}
+                    assignData={this.assignData}
+              />}
+            />
+            <Route path="/results" render={
+              () =>
+              <Results data={this.state.data} />}
+            />
+          </Switch>
+        </div>
+        </Router>        
+      </div>
+    );
+  }
 }
 
 export default App;

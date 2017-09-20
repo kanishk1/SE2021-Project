@@ -3,7 +3,8 @@ import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Redirect from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 
 class Home extends Component {
  
@@ -41,9 +42,11 @@ class Home extends Component {
 
   // Very ugly as of now, might rehash later
   getData() {
+    this.props.handleFetchChange(0.5);
     this.setState({
       isFetching: 0.5
     })
+    var self = this;
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
@@ -56,12 +59,15 @@ class Home extends Component {
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
-      this.setState({
+      self.props.handleFetchChange(1);
+      self.setState({
         isFetching: 1
-      });
+      })
+      self.props.assignData(response);
       console.log(response);
     }).catch(function(err) {
-      throw Error('Couldn\'t get data rip');
+      console.log(err);
+      throw new Error('Couldn\'t get data rip');
     })
   }
 
@@ -92,14 +98,16 @@ class Home extends Component {
         </Grid>
       )
     } else if (this.state.isFetching === 0.5) {
-      
+      return (
+        <div style={{align: 'center', top: '50%', left: '50%'}}>
+         <ReactLoading type={'bars'} color={'#000000'} />
+        </div>
+      )
     } else {
-      return (<Redirect push to='/results' />);
+      return <Redirect push to="/results" />
     }
-  
-  
+    
   }
-
 }
 
 export default Home;

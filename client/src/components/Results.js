@@ -3,6 +3,7 @@ import { Tab, Tabs, TabContent, TabContentProps } from 'react-bootstrap';
 import Housing from './Housing.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
+import Social from '../components/Social.js'
 
 class Results extends Component {
 
@@ -42,4 +43,3 @@ class Results extends Component {
 }
 
 export default Results;
-

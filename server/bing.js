@@ -31,7 +31,7 @@ router.get('/search', (req, res) => {
           image:       article['image']['thumbnail'], // provides url,width,height
           description: article['description'],
           publishDate: article['datePublished'],
-          category:    article['category'] // won't always get this
+          provider:    article['provider'][0]['name']
         });
       }
       res.json(results);

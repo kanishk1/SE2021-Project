@@ -4,7 +4,9 @@ import express from 'express';
 const router = express.Router();
 
 function doAPI(suburb) {
-  return wiki().page(suburb)
+  // Hardcoded to NSW for now, maybe change later
+  var actualSearchParam = suburb + ',_New_South_Wales';
+  return wiki().page(actualSearchParam)
     .then((response) => {
       return Promise.all([
         response.info(),

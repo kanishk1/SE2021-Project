@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, } from 'react-bootstrap';
-import Housing from './Housing.js'
+import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
-// import Social from '../components/Social.js'
+import Housing from '../components/Housing.js'
+
 
 class Results extends Component {
 
@@ -27,13 +28,16 @@ class Results extends Component {
       <Tabs id="Introduction Tab" activeKey={this.state.key}
           onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction"> 
-            <Housing />
+            <Introduction />
           </Tab>
           <Tab eventKey={2} title="Demographics"> 
             <Demographics data={this.props.data[1]}/> 
           </Tab>
           <Tab eventKey={3} title="Lifestyle"> 
              <Lifestyle /> 
+          </Tab>
+          <Tab eventKey={4} title = "Housing">
+            <Housing data={this.props.data[0]}/>
           </Tab>
       </Tabs>
       </div>

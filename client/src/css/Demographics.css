@@ -11,24 +11,34 @@
   font-size: 50px
 }
 .chartsOne{
-  background-color: yellow;
+  background-color: white;
 }
 .chartsTwo{
-  background-color: green;
+  background-color: white;
 }
 .chartsThree{
-  background-color: orange;
+  background-color: white;
 }
 .demoPhotos{
-  background-color: blue;
+  background-color: white;
 }
 
 .actualChart1{
-  background-color: black;
+  background-color: white;
 }
 .actualChart2{
-  background-color: blue;
+  background-color: white;
 }
 .actualChart3{
-  background-color: orange;
+  background-color: white;
+}
+.actualImg1{
+  width: 50%;
+  height: 50%;
+  align-self: auto;
+}
+.actualImg2{
+  width: 50%;
+  height: 50%;
+  align-self: auto;
 }

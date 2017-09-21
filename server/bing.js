@@ -25,14 +25,18 @@ router.get('/search', (req, res) => {
     else {
       const results = [];
       for (const article of body['value']) {
-        results.push({
-          name:        article['name'],
-          url:         article['url'],
-          image:       article['image']['thumbnail'], // provides url,width,height
-          description: article['description'],
-          publishDate: article['datePublished'],
-          provider:    article['provider'][0]['name']
-        });
+        var result = {
+            name:        article['name'],
+            url:         article['url'],
+            description: article['description'],
+            publishDate: article['datePublished'],
+            provider:    article['provider'][0]['name']
+        }
+        if (article['image']) {
+          result.image = article['image']['thumbnail']; // provides url,width,height
+          result.actualImage = article['image'];
+        }
+        results.push(result);
       }
       res.json(results);
     }

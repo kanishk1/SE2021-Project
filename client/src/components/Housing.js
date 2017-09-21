@@ -17,7 +17,11 @@ function GenericWeather({ city, temp, status }) {
 
 
 class Housing extends Component {
-  state = {};
+  
+  constructor() {
+    super();
+    this.state = {};
+  }
 
   render() {
     return (

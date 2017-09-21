@@ -17,18 +17,38 @@ function GenericWeather({ city, temp, status }) {
 
 
 class Introduction extends Component {
-  state = {};
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      wiki: this.props.wiki,
+    };
+  }
 
+  wikiIntroText(){
+    if (this.props.wiki) { 
+      return this.props.wiki.summary
+    }
+    console.log("called it !!!")
+  }
   render() {
+    console.log('in intro, the wiki data is ');
+    if (this.props.wiki) { 
+      var wikiSummary = this.props.wiki.summary
+      var name = this.props.wiki.info.name
+      var postcode = this.props.wiki.info.postcode
+      var maps = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q="+this.props.wiki.info.name
+    }
     return (
-      <Grid fluid="true">
+     
+      <Grid fluid={true}>
         <Col className="everything" lg={6}>
           <Row className="suburbName">
-            <p>Chatswood, 2067</p>
+            <p>{name}, {postcode}</p>
           </Row>
           <Row className="wiki">
             <p>
-              <strong>Wiki text goes here. </strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              {wikiSummary}
             </p>
           </Row>
           <Row className="suburbData">
@@ -116,14 +136,14 @@ class Introduction extends Component {
             className="map"
             width="500"
             height="500"
-            frameBorder="0"it
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q=Chatswood" 
+            frameBorder="0"
+            src={maps} 
             allowFullScreen>
           </iframe>
           <Button className="CouncilButton">Council Website</Button>
           <Row>
             <Col className="weatherCol" lgOffset={3} lg={4}>
-                <GenericWeather city="Chatswood" temp={33} status="sun" />
+                <GenericWeather city={name} temp={28} status="sun" />
             </Col>
           </Row>
         </Col>

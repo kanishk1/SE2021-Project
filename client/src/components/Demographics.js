@@ -23,8 +23,6 @@ class Demographics extends Component {
   // }
 
   render() {
-    console.log('in demo ');
-    console.log(this.props.data);
     if (this.props.data) {
       var label1 = [];
       var values1 = []
@@ -34,8 +32,6 @@ class Demographics extends Component {
         values1[i] = element.value;
         i++;
       });
-      console.log(label1)
-      console.log(values1)
       var chart1Data =  {
         labels: label1,
         datasets: [{

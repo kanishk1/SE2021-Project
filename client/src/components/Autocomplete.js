@@ -1,47 +1,89 @@
 import Select from 'react-select';
 import React, { Component } from 'react';
 import 'react-select/dist/react-select.css';
+import { Button, Form, FormGroup, Radio } from 'react-bootstrap';
 
 class Autocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        selectValue: ""
+        selectedSuburb: null,
+        selectedProfile: null,
+        selectedPostcode: null,
+        options: []
     };
-    this.updateValue = this.updateValue.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.getSuburbs();
   }
  
-  updateValue (newValue) {
-    if (newValue != null) {
-      this.setState({
-        selectValue: newValue.value
-      });
-      console.log(newValue.value)
+  handleSubmit (event) {
+    event.preventDefault();
+    if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
+      console.log("Ready to submit")
+      this.props.getData();
     }
   }
 
-  render () {
-  	const options =  [
-		    { value: 'chatswood', label: 'Chatswood' },
-		    { value: 'hurstville', label: 'Hurstville' },
-		    { value: 'kensington', label: 'Kensington' },
-		    { value: 'randwick', label: 'Randwick' },
-		    { value: 'townhall', label: 'Townhall' },
-		    { value: 'epping', label: 'Epping' },
-		    { value: 'roseberry', label: 'Roseberry' },
-		    { value: 'hornsby', label: 'Hornsby' },
-		  ];
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedSuburb !== this.state.selectedSuburb) {
+      this.setState({ selectedSuburb: nextProps.selectedSuburb });
+    }
+    if (nextProps.selectedProfile !== this.state.selectedProfile) {
+      this.setState({ selectedProfile: nextProps.selectedProfile });
+    }
+    if (nextProps.selectedPostcode !== this.state.selectedPostcode) {
+      this.setState({ selectedPostcode: nextProps.selectedPostcode });
+    }
+  }
 
+  async getSuburbs () {
+    const response = await fetch('/suburbs');
+    const data = await response.json();
+    var suburbs = [];
+    var i = 0;
+    data.docs.forEach(function(elem) {
+      suburbs[i] = {};
+      suburbs[i].value = elem.name + ' ' + elem.post;
+      suburbs[i].label = elem.name + ' ' + elem.post;
+      i++;
+    });
+    this.setState({
+      options: suburbs
+    });
+  }
+
+  render () {
     return (
-     <Select 
-        autofocus={true} 
-        options={options}
-        clearable={false} 
-        value={this.state.selectValue} 
-        onChange={this.updateValue} 
-        searchable={this.state.searchable}
-        noResultsText="No suburbs found..." 
-        />
+      <div>
+       <Select 
+          autofocus={true} 
+          options={this.state.options}
+          clearable={false} 
+          value={this.state.selectedSuburb + ' ' + this.state.selectedPostcode}
+          onChange={this.props.updateSuburb} 
+          searchable={this.state.searchable}
+          noResultsText="No suburbs found..." 
+          placeholder="Select a suburb..."
+          />
+        <p>What kind of a user are you?</p>
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup role="form">
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Investor")}>
+              Investor
+            </Radio>
+            {' '}
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"General User")}>
+              General User
+            </Radio>
+            {' '}
+            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Researcher")}>
+              Researcher
+            </Radio>
+            {' '}
+            <Button type="submit">Submit</Button>
+          </FormGroup>
+        </Form>
+      </div>
     )
   }
 

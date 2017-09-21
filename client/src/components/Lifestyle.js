@@ -3,10 +3,6 @@ import { Grid, Row, Col, Thumbnail} from 'react-bootstrap';
 import '../css/Lifestyle.css';
 import placeholder from '../img/placeholder.png'
 
-
-
-
-
 class Lifestyle extends Component {
   constructor() {
     super();
@@ -22,7 +18,7 @@ class Lifestyle extends Component {
   render() {
     //{this.photos('Hurstville,_New_South_Wales')}S
     return (
-      <Grid fluid="true">
+      <Grid fluid={true}>
         <Row className="lifeRow1">
           <Col className="lifeCol1" lg={4}>
             <Row className="title">

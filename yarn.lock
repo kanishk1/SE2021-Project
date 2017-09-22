@@ -1472,6 +1472,10 @@ react-slick@^0.15.4:
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
 
+react-splitter-layout@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-splitter-layout/-/react-splitter-layout-0.2.1.tgz#77099ab5e80b0fad3e0e8dc31dd4a93aa26441fa"
+
 react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"

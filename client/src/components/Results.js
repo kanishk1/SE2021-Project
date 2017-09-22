@@ -3,7 +3,8 @@ import { Tab, Tabs, } from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
-// import Social from '../components/Social.js'
+import Social from '../components/Social.js'
+import News from '../components/News.js'
 
 class Results extends Component {
 
@@ -26,20 +27,26 @@ class Results extends Component {
       <div>
       <Tabs id="Introduction Tab" activeKey={this.state.key}
           onSelect={this.handleSelect}>
-          <Tab eventKey={1} title="Introduction"> 
+          <Tab eventKey={1} title="Introduction">
             <Introduction wiki={this.props.data[10]}/>
           </Tab>
-          <Tab eventKey={2} title="Demographics"> 
-            <Demographics data={this.props.data[1]}/> 
+          <Tab eventKey={2} title="Demographics">
+            <Demographics data={this.props.data[1]}/>
           </Tab>
-          <Tab eventKey={3} title="Lifestyle"> 
-             <Lifestyle 
-              schools={this.props.data[4]} 
+          <Tab eventKey={3} title="Lifestyle">
+             <Lifestyle
+              schools={this.props.data[4]}
               shops={this.props.data[5]}
-              food={this.props.data[6]} 
+              food={this.props.data[6]}
               recreation={this.props.data[7]}
               religious={this.props.data[8]}
-              wiki={this.props.data[10]} /> 
+              wiki={this.props.data[10]} />
+          </Tab>
+          <Tab eventKey={4} title="Social">
+            <Social />
+          </Tab>
+          <Tab eventKey={5} title="News">
+            <News />
           </Tab>
       </Tabs>
       </div>

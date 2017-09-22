@@ -26,10 +26,8 @@ class Social extends Component {
       </div>
       <div className="my-pane">
         <Image src={insta1} responsive />
-        <br> </br>
-        <Image src={insta2} responsive />
-        <br> </br>
-        <Image src={insta3} responsive />
+        {/* <Image src={insta2} responsive />
+        <Image src={insta3} responsive /> */}
       </div>
     </SplitterLayout>
     )

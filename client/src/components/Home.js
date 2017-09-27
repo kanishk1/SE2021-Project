@@ -28,6 +28,7 @@ class Home extends Component {
         selectedPostcode: newValue.value.slice(-4)
       })
       console.log("Selected Suburb is: ", newValue.value)
+      this.props.sendUpdatedSuburb(newValue)
     }
   }
 
@@ -59,7 +60,8 @@ class Home extends Component {
       fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb),
       fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
-      fetch('/wiki/search?suburb=' + this.state.selectedSuburb)      
+      fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
+      fetch('/places/search?keyword=' + this.state.selectedSuburb),      
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {

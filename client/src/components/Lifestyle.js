@@ -50,7 +50,7 @@ class Lifestyle extends Component {
     // regex: History ==\\n(.*?)\\n\\n\\n== 
     if (this.props.wiki){
       var string = this.props.wiki.content
-      var re = /== Commercial area ==\s(.*)/g;
+      var re = /== Commercial area ==\s(.*?)/g;
       var match = re.exec(string);
       if (match != null) {
         return match[1]

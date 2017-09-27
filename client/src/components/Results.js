@@ -11,7 +11,6 @@ class Results extends Component {
     super(props);
     this.state = {
       key: 1,
-      data: this.props.data
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -27,7 +26,12 @@ class Results extends Component {
       <Tabs id="Introduction Tab" activeKey={this.state.key}
           onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction"> 
-            <Introduction wiki={this.props.data[10]}/>
+            <Introduction 
+              wiki={this.props.data[10]}
+              name={this.props.suburbName}
+              postcode={this.props.suburbPostcode}
+              location={this.props.data[11]}
+              />
           </Tab>
           <Tab eventKey={2} title="Demographics"> 
             <Demographics data={this.props.data[1]}/> 

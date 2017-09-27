@@ -54,14 +54,14 @@ class Home extends Component {
       fetch('/bing/search?suburb=' + this.state.selectedSuburb
         + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
-      fetch('/places/search?keyword=schools+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=shops+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=food+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb),
+      fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=food+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=' + this.state.selectedSuburb),      
+      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),      
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {

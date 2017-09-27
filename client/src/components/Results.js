@@ -31,6 +31,7 @@ class Results extends Component {
               name={this.props.suburbName}
               postcode={this.props.suburbPostcode}
               location={this.props.data[11]}
+              weather={this.props.data[3]}
               />
           </Tab>
           <Tab eventKey={2} title="Demographics"> 

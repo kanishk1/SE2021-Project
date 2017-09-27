@@ -3,8 +3,9 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import cx from 'classnames';
 import '../css/Introduction.css';
 import '../css/Weather.css';
+import moment from 'moment';
 
-function GenericWeather({ city, min, max, status, day }) {
+function Weather({min, max, status, day }) {
   const cls = cx('weather-icon', status);
   return (
     <div className="weather-card">
@@ -12,7 +13,6 @@ function GenericWeather({ city, min, max, status, day }) {
       <div className={cls} />
       <h2>{min} &#8451;</h2>
       <h1>{max} &#8451;</h1>
-      <p>{city}</p>
     </div>
   );
 }
@@ -25,7 +25,8 @@ class Introduction extends Component {
     this.state = {
       wiki: this.props.wiki,
       name: this.props.name,
-      postcode: this.props.postcode
+      postcode: this.props.postcode,
+      weather: this.props.weather
     };
   }
 
@@ -41,7 +42,6 @@ class Introduction extends Component {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
     d = Math.round(d * 100) / 100
-    console.log('distance calc is ', d)
     return d;
   }
 
@@ -101,10 +101,56 @@ class Introduction extends Component {
     }
   }
 
+  renderWeather(){
+    if (this.props.weather){
+      var weather = this.props.weather;
+      
+      return (
+        <div className="weatherCol">
+          <div className="weather-main">
+            <Weather min={Math.round(weather[0].min)} max={Math.round(weather[0].max)} status={this.getWeatherStatus(weather[0].conditions)} day={moment().format('dddd')} />
+          </div>
+          <div>
+            <Weather min={Math.round(weather[1].min)} max={Math.round(weather[1].max)} status={this.getWeatherStatus(weather[1].conditions)} day={moment().add(1, 'days').format('dddd')} />
+          </div>
+          <div>
+            <Weather min={Math.round(weather[2].min)} max={Math.round(weather[2].max)} status={this.getWeatherStatus(weather[2].conditions)} day={moment().add(2, 'days').format('dddd')} />
+          </div>
+          <div>
+            <Weather min={Math.round(weather[3].min)} max={Math.round(weather[3].max)} status={this.getWeatherStatus(weather[3].conditions)} day={moment().add(3, 'days').format('dddd')} />
+          </div>
+          <div>
+            <Weather min={Math.round(weather[4].min)} max={Math.round(weather[4].max)} status={this.getWeatherStatus(weather[4].conditions)} day={moment().add(4, 'days').format('dddd')} />
+          </div>
+        </div>
+      )
+    }
+  }
+
+  getWeatherStatus(input){
+    var cloudPattern = new RegExp("cloud");
+    var rainPattern = new RegExp("rain");
+    var sunPattern = new RegExp("clear");
+
+    if (cloudPattern.test(input)){
+      return "cloud"
+    } 
+    else if (rainPattern.test(input)){
+      return "rain"
+    }
+    else if (sunPattern.test(input)){
+      return "sun"
+    } 
+    else {
+      return "sun"
+    }
+  }
+
+
   render() {
     if (this.props.wiki) { 
       var wikiSummary = this.props.wiki.summary
-      var maps = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q="+this.state.name
+      var maps = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q="+this.state.name+",NSW"
     }
     return (
      
@@ -119,6 +165,7 @@ class Introduction extends Component {
             </p>
           </Row>
           <Row className="suburbData">
+            <p><strong>Transport Access</strong></p>
             <Col className="transportCol" lg={4}>
               <Row>
                 <Col className="bus" lgOffset={3} lg={3}>
@@ -169,8 +216,9 @@ class Introduction extends Component {
             allowFullScreen>
           </iframe>
           <Row>
-            <Col className="weatherCol" lgOffset={3} lg={4}>
-                <GenericWeather city={this.state.name} min={17} max={28} status="rain" day={"monday"}/>
+            <Col lgOffset={3}> 
+              <p><strong>Weather</strong></p>
+              {this.renderWeather()}
             </Col>
           </Row>
         </Col>

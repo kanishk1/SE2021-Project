@@ -19,9 +19,16 @@ class Lifestyle extends Component {
 
   renderResults(place){
     if (this.props[place]){
+      var places = this.props[place].results;
+      var count = 0
+      if (places.length > 10){
+        count = 10;
+      } else {
+        count = places.length;
+      }
 
       var items = [];
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < count; i++) {
           if (this.props[place].results[i].name){
             items.push(<li key={i}>{this.props[place].results[i].name}</li>);
           }
@@ -46,17 +53,28 @@ class Lifestyle extends Component {
   //   } 
   // }
 
-  parseWikiHistory(){
-    // regex: History ==\\n(.*?)\\n\\n\\n== 
+  parseWiki(){
+    // find history or local commerce
     if (this.props.wiki){
       var string = this.props.wiki.content
-      var re = /== Commercial area ==\s(.*?)/g;
-      var match = re.exec(string);
+      
+      // Capture first section of commercial area
+      var commerceRegex = /== Commercial area ==\s(.*)/g; 
+      var match = commerceRegex.exec(string);
       if (match != null) {
         return match[1]
-      } else {
-        console.log("Invalid regex for wikiHistory");
-        return "No lifestyle information found :("
+      } 
+
+      // Capture all of history
+      var histroyRegex = /== History ==\n([\w\s,\.'-:]*)\n/g
+      match = histroyRegex.exec(string);
+      if (match != null) {
+        return match[1]
+      } 
+
+      else {
+        console.log("Wiki parsing failed");
+        return "No local commerce or history information found"
       }
     }
   }
@@ -72,7 +90,7 @@ class Lifestyle extends Component {
             </Row>
             <Row className="">
               <p>
-                {this.parseWikiHistory()}
+                {this.parseWiki()}
               </p>
             </Row>
           </Col>  
@@ -80,14 +98,11 @@ class Lifestyle extends Component {
             <Row> 
               <p> Photos here. Function is ready, have to pick an api </p>
               <Thumbnail src={placeholder} >
-                  <p>img2</p>
-                </Thumbnail>
+                <p>img2</p>
+              </Thumbnail>
             </Row>  
           </Col>
-          <Col className="lifeCol3" lg={4}>
-            <Row > 
-              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </Row>  
+          <Col className="lifeCol3" lg={4}> 
           </Col>
         </Row>
         <Row>

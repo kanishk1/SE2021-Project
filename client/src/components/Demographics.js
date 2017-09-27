@@ -111,34 +111,18 @@ class Demographics extends Component {
       <Grid fluid={true}>
         <Col className="demoCol1" lg={6}>
           <Row className="chartsOne">{/* Yellow Box*/} 
-            <Col className="actualChart1" lg={5}>
+            <Col className="actualChart1" lg={12}>
               <p> Age group distribution </p>
-              <Pie data={chart1Data} width={5} height={5} options={{}}/>
+              <Pie data={chart1Data} width={5} height={2} options={{}}/>
             </Col>
-            <Col className="actualChart2" lg={5}>
-              <p> Occupancy distribution </p>
-              <Doughnut data={chart3Data} width={5} height={5} options={{}}/>
-            </Col>
-            <Col className="actualChart3" lg={5}>
-              <p> Religion distribution </p>
-              <Bar data={chart4Data} width={5} height={5} options={{}}/>
-            </Col>
+            
           </Row>
           <Row className="chartsTwo">{/* Green Box*/} 
-            <p> MOAR charts here </p>
-            <Col className="actualChart1" lg={5}>
-              <p> Country distribution </p>
-              <Pie data={chart2Data} width={5} height={5} options={{}}/>
-            </Col>
-            <Col className="actualChart2" lg={5}>
-              <p> Education distribution </p>
-              <Line data={chart5Data} width={5} height={5} options={{}}/>
-            </Col>
-            <Col className="actualChart3" lg={5}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart3</h2>
-                </Thumbnail>
-            </Col>
+          <Col className="actualChart2" lg={12}>
+          <p> Occupancy distribution </p>
+          <Doughnut data={chart3Data} width={5} height={2} options={{}}/>
+        </Col>
+       
           </Row>
         </Col>  
         <Col className="demoCol2" lg={6}>
@@ -146,33 +130,21 @@ class Demographics extends Component {
             <p>Demographics</p>
           </Row>
           <Row className="demoPhotos">{/* Blue Box*/} 
-            <Col className="actualImg1"  lgOffset={3} lg={3}>
-                <img
-                width="350" height="200"
-                src="http://gaia.adage.com/images/bin/image/jumbo/Demographics_iStock533728478_3x2.jpg" alt="nah"></img>
-            </Col>
-            <Col className="actualImg2" lg={3}>
+            
+            <Col className="actualImg2" lg={12}>
                 <img 
                 width="400" height="200"
                 src="http://demographics.coopercenter.org/files/2016/12/HeaderImage_PopData_600X325.jpg" alt="nah" ></img>
             </Col>
           </Row>
           <Row className="chartsThree">{/* Orange Box*/} 
-            <p> SUM MOAR charts here </p>
-            <Col className="actualChart1" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart1</h2>
-                </Thumbnail>
+              <Col className="actualChart3" lg={6}>
+              <p> Religion distribution </p>
+              <Bar data={chart4Data} width={5} height={5} options={{}}/>
             </Col>
-            <Col className="actualChart2" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart2</h2>
-                </Thumbnail>
-            </Col>
-            <Col className="actualChart3" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart3</h2>
-                </Thumbnail>
+            <Col className="actualChart2" lg={6}>
+              <p> Education distribution </p>
+              <Line data={chart5Data} width={5} height={5} options={{}}/>
             </Col>
           </Row>  
         </Col>  

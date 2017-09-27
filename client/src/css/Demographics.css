@@ -2,7 +2,7 @@
   margin-top: 30px;
 }
 .demoCol1{
-  background-color: red;
+  padding: 50px;
 }
 .demoCol2{
   text-align: right;
@@ -17,6 +17,7 @@
   background-color: white;
 }
 .chartsThree{
+  margin-top:30px;
   background-color: white;
 }
 .demoPhotos{
@@ -24,21 +25,22 @@
 }
 
 .actualChart1{
+
+  text-align: center;
   background-color: white;
 }
 .actualChart2{
+  text-align: center;
+  
   background-color: white;
 }
 .actualChart3{
+  text-align: center;
   background-color: white;
 }
 .actualImg1{
-  width: 50%;
-  height: 50%;
   align-self: auto;
 }
 .actualImg2{
-  width: 50%;
-  height: 50%;
   align-self: auto;
 }

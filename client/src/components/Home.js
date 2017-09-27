@@ -103,9 +103,11 @@ class Home extends Component {
       )
     } else if (this.state.isFetching === 0.5) {
       return (
-        <div style={{align: 'center', top: '50%', left: '50%'}}>
-         <ReactLoading type={'bars'} color={'#000000'} />
-        </div>
+        <Grid>
+          <Col className="loading" lgOffset={3} lg={4}>
+          <ReactLoading type={'bars'} color={'#FF0000'} width={'500'} height={'500'}/>
+          </Col>
+        </Grid>
       )
     } else {
       return <Redirect push to="/results" />

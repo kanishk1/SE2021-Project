@@ -22,9 +22,11 @@ class Lifestyle extends Component {
 
       var items = [];
       for (var i = 0; i < 4; i++) {
+        if (this.props[place].results[i]) {
           if (this.props[place].results[i].name){
-            items.push(<li key={i}>{this.props[place].results[i].name}</li>);
+              items.push(<li key={i}>{this.props[place].results[i].name}</li>);
           }
+        }  
       }
       return (
          <ul>
@@ -36,21 +38,23 @@ class Lifestyle extends Component {
 
   // Tried to render photos, its buggy 
   // usage: <Thumbnail src={this.renderResultsPhotos('schools')} >
-  // renderResultsPhotos(place){
-  //   if (this.props[place].hasOwnProperty('results')){
-  //     if (this.props[place].results[0].hasOwnProperty('photos')){
-  //       return "https://maps.googleapis.com/maps/api/place/photo?photoreference="+ this.props[place].results[0].photos[0].photo_reference +"&sensor=false&maxheight=196&maxwidth=196&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q"
-  //     }
-  //   } else {
-  //     return { placeholder }
-  //   } 
-  // }
+  renderResultsPhotos(place){
+    if (this.props[place]) {
+      if (this.props[place].hasOwnProperty('results')){
+        if (this.props[place].results[0].hasOwnProperty('photos')){
+          return "https://maps.googleapis.com/maps/api/place/photo?photoreference="+ this.props[place].results[0].photos[0].photo_reference +"&sensor=false&maxheight=196&maxwidth=196&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q"
+        }
+      } else {
+        return { placeholder }
+      } 
+    }
+  }
 
   parseWikiHistory(){
     // regex: History ==\\n(.*?)\\n\\n\\n== 
     if (this.props.wiki){
       var string = this.props.wiki.content
-      var re = /== Commercial area ==\s(.*)/g;
+      var re = /== Commercial area ==\s(.\*)/g;
       var match = re.exec(string);
       if (match != null) {
         return match[1]
@@ -114,28 +118,23 @@ class Lifestyle extends Component {
         </Row> 
         <Row>
           <Col lgOffset={1} lg={2}>
-              <Thumbnail src={placeholder} >
-                <h2>img1</h2>
+              <Thumbnail src={this.renderResultsPhotos('schools')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={placeholder} >
-                <h2>img2</h2>
+              <Thumbnail src={this.renderResultsPhotos('shops')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={placeholder} >
-                <h2>img3</h2>
+              <Thumbnail src={this.renderResultsPhotos('restaurants')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={placeholder} >
-                <h2>img1</h2>
+              <Thumbnail src={this.renderResultsPhotos('recreation')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={placeholder} >
-                <h2>img2</h2>
+              <Thumbnail src={this.renderResultsPhotos('religios')} >
               </Thumbnail>
           </Col>
         </Row>

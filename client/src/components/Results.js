@@ -3,8 +3,9 @@ import { Tab, Tabs, } from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
-import Housing from '../components/Housing.js'
-// import Social from '../components/Social.js'
+import housing from '../img/resultPage4.png'
+import social from '../img/resultPage5.png'
+import news from '../img/resultPage6.png'
 
 class Results extends Component {
 
@@ -42,7 +43,13 @@ class Results extends Component {
               wiki={this.props.data[10]} /> 
           </Tab>
           <Tab eventKey={4} title = "Housing">
-            <Housing data={this.props.data[0]}/>
+          <img src={housing} alt="" height="100%" width="100%"/>            
+          </Tab>
+          <Tab eventKey={5} title = "Social">
+            <img src={social} alt="" height="100%" width="100%"/>
+          </Tab>
+          <Tab eventKey={6} title = "News">
+            <img src={news} alt="" height="100%" width="100%"/>
           </Tab>
       </Tabs>
       </div>

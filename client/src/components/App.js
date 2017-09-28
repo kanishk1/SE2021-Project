@@ -16,10 +16,13 @@ class App extends Component {
 
     this.state = {
       isFetching: 0,
-      data: []
+      data: [],
+      suburbName: "",
+      suburbPostcode: ""
     }
     this.handleFetchChange = this.handleFetchChange.bind(this);
     this.assignData= this.assignData.bind(this);
+    this.setUpdatedSuburbs = this.setUpdatedSuburbs.bind(this);
   }
 
   handleFetchChange(newValue) {
@@ -34,6 +37,13 @@ class App extends Component {
     })
   }
   
+  setUpdatedSuburbs(newValue){
+    this.setState({
+      suburbName: newValue.value.slice(0, -5),
+      suburbPostcode: newValue.value.slice(-4)
+    })
+  }
+
   render() {   
     return (
       <div>  
@@ -52,11 +62,15 @@ class App extends Component {
               () => 
               <Home handleFetchChange={this.handleFetchChange}
                     assignData={this.assignData}
+                    sendUpdatedSuburb={this.setUpdatedSuburbs}
               />}
             />
-            <Route path="/results" render={
-              () =>
-              <Results data={this.state.data} />}
+            <Route path="/results" render={ () =>
+              <Results data={this.state.data} 
+                       suburbName={this.state.suburbName}
+                       suburbPostcode={this.state.suburbPostcode}
+                       />
+              }
             />
           </Switch>
         </div>

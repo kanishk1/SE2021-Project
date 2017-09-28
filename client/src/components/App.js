@@ -1,57 +1,80 @@
 import React, { Component } from 'react';
-import logo from '../img/logo.svg';
-import reactjs from '../img/reactjs.jpg'
 import '../css/App.css';
+import Home from '../components/Home.js'
+import Results from '../components/Results.js'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+} from 'react-router-dom';
 
 class App extends Component {
 
-  state = {
-    name: "",
-    searchValue: ""
-  };
+  constructor() {
+    super();
 
-  handleSearchChange = e => {
-    const value = e.target.value;
-
-    this.setState({
-      searchValue: value
-    });
-
-    if (value === "") {
-      this.setState({
-        name: "",
-      });
-    } else {
-      this.apiCall(value)
+    this.state = {
+      isFetching: 0,
+      data: [],
+      suburbName: "",
+      suburbPostcode: ""
     }
-  };
-
-  async apiCall(query) {
-    const response = await fetch('hello?q='+query)
-    const message  = await response.json()
-
-    this.setState({name: message.name})
+    this.handleFetchChange = this.handleFetchChange.bind(this);
+    this.assignData= this.assignData.bind(this);
+    this.setUpdatedSuburbs = this.setUpdatedSuburbs.bind(this);
   }
 
-  render() {
+  handleFetchChange(newValue) {
+    this.setState({
+      isFetching: newValue
+    })
+  }
+  
+  assignData(data) {
+    this.setState({
+      data: data
+    })
+  }
+  
+  setUpdatedSuburbs(newValue){
+    this.setState({
+      suburbName: newValue.value.slice(0, -5),
+      suburbPostcode: newValue.value.slice(-4)
+    })
+  }
+
+  render() {   
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Surburber {this.state.name}</h2>
+      <div>  
+        <Router>
+        <div>
+          <div className="topnav">
+            <Link to={{
+              pathname: '/',
+              state: {isFetching: 0} 
+            }}>
+              Home
+            </Link>
+          </div>
+          <Switch>
+            <Route exact path="/" render={
+              () => 
+              <Home handleFetchChange={this.handleFetchChange}
+                    assignData={this.assignData}
+                    sendUpdatedSuburb={this.setUpdatedSuburbs}
+              />}
+            />
+            <Route path="/results" render={ () =>
+              <Results data={this.state.data} 
+                       suburbName={this.state.suburbName}
+                       suburbPostcode={this.state.suburbPostcode}
+                       />
+              }
+            />
+          </Switch>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <img src={reactjs} className="App-logo" alt="reactjs memes" />
-
-        <input
-            type="text"
-            placeholder="Type in your name..."
-            value={this.state.searchValue}
-            onChange={this.handleSearchChange}
-          />
-
+        </Router>        
       </div>
     );
   }

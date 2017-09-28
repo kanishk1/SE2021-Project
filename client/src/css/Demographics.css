@@ -1,0 +1,46 @@
+.summary{
+  margin-top: 30px;
+}
+.demoCol1{
+  padding: 50px;
+}
+.demoCol2{
+  text-align: right;
+}
+.title{
+  font-size: 50px
+}
+.chartsOne{
+  background-color: white;
+}
+.chartsTwo{
+  background-color: white;
+}
+.chartsThree{
+  margin-top:30px;
+  background-color: white;
+}
+.demoPhotos{
+  background-color: white;
+}
+
+.actualChart1{
+
+  text-align: center;
+  background-color: white;
+}
+.actualChart2{
+  text-align: center;
+  
+  background-color: white;
+}
+.actualChart3{
+  text-align: center;
+  background-color: white;
+}
+.actualImg1{
+  align-self: auto;
+}
+.actualImg2{
+  align-self: auto;
+}

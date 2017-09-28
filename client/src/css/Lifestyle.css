@@ -1,0 +1,22 @@
+.summary{
+  margin-top: 30px;
+}
+.lifeRow1{
+  margin-top: 20px;
+}
+.lifeCol1{
+  margin-left: 20px;
+}
+.lifeCol2{
+  text-align: right;
+  margin-left: 30px;
+}
+.lifeCol2 img{
+  height: 175px;
+}
+.lifeCol3{
+  margin-left: 40px;  
+}
+.title{
+  font-size: 50px
+}

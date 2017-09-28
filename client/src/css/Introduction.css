@@ -33,9 +33,23 @@
 	margin-top: 5%;
 	font-size: 50px;
 }
+
 .weatherCol{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 1em;
 	position: absolute;
+	align-content: center;
+	justify-content: center;
+	padding: 1em;
+	zoom: 0.27;
 }
+.weather-main {
+	grid-column: 1/3;
+	grid-row: 1/3;
+	zoom: 2;
+}
+
 .distancesCol{
 	position: relative;
 	font-size: 20px;

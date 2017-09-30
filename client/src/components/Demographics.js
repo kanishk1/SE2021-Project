@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, Thumbnail} from 'react-bootstrap';
 import '../css/Demographics.css';
 import placeholder from '../img/placeholder.png'
-import {Pie} from 'react-chartjs-2';
-
-
-
-
+import {Pie, Doughnut, Bar, Line, Polar, Radar} from 'react-chartjs-2';
 
 class Demographics extends Component {
   constructor(props) {
@@ -16,102 +12,117 @@ class Demographics extends Component {
     };
   }
 
-  // async photos(query) {
-  //   const response = await fetch('/wiki?sub='+query);
-  //   const data = await response.json();
-  //   console.log(data);
-  // }
+  
 
   render() {
+    console.log('in demo ');
+    //console.log(this.props.data);
+    var backgroundColor = [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+    ];
+    var borderColor = [
+      'rgba(255,99,132,1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ]
     if (this.props.data) {
-      var label1 = [];
-      var values1 = []
+      var labels = [];
+      var values = [];
       var i = 0;
-      this.props.data.demographics[0].items.forEach(function(element) {
-        label1[i] = element.label;
-        values1[i] = element.value;
+      this.props.data.demographics.forEach(function(element) {
+        var j = 0;
+        labels[i] = [];
+        values[i] = [];
+        element.items.forEach(function(element) {
+          labels[i][j] = element.label;
+          values[i][j] = element.value;
+          j++;
+        })
         i++;
-      });
+      })
+      console.log(labels);
+      console.log(values);
       var chart1Data =  {
-        labels: label1,
+        labels: labels[0],
         datasets: [{
             label: 'Age group distribution',
-            data: values1,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            data: values[0],
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
             borderWidth: 1
         }]
       };
-      var chart1Options =  {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-              ticks: {
-                  beginAtZero:true
-              }
-          }]
-        }
-      }
+
+      // do later, cuz its fucked
+      var chart2Data = {
+        labels: labels[1],
+        datasets: [{
+            label: 'Country distribution',
+            data: values[1],
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderWidth: 1
+        }]
+      };
+
+      var chart3Data = {
+        labels: labels[2],
+        datasets: [{
+            label: 'Occupancy distribution',
+            data: values[2],
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderWidth: 1
+        }]
+      };
+
+      var chart4Data = {
+        labels: labels[7],
+        datasets: [{
+            label: 'Religion distribution',
+            data: values[7],
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderWidth: 1
+        }]
+      };
+
+      var chart5Data = {
+        labels: labels[9],
+        datasets: [{
+            label: 'Education distribution',
+            data: values[9],
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderWidth: 1
+        }]
+      };
     }
 
     return (
       <Grid fluid={true}>
         <Col className="demoCol1" lg={6}>
-          <Row className="summary">{/* Red Box*/} 
-            <p>
-              <strong>Demographics summary goes here.</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </Row>
           <Row className="chartsOne">{/* Yellow Box*/} 
-            <p> Charts here </p>
-            <Col className="actualChart1" lg={4}>
-              <Pie data={chart1Data} />
+            <Col className="actualChart1" lg={12}>
+              <p> Age group distribution </p>
+              <Pie data={chart1Data} width={5} height={2} options={{}}/>
             </Col>
-            <Col className="actualChart2" lg={4}>
-                <Thumbnail src={placeholder} >
-                </Thumbnail>
-            </Col>
-            <Col className="actualChart3" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart3</h2>
-                </Thumbnail>
-            </Col>
+            
           </Row>
           <Row className="chartsTwo">{/* Green Box*/} 
-            <p> MOAR charts here </p>
-            <Col className="actualChart1" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart1</h2>
-                </Thumbnail>
-            </Col>
-            <Col className="actualChart2" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart2</h2>
-                </Thumbnail>
-            </Col>
-            <Col className="actualChart3" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart3</h2>
-                </Thumbnail>
-            </Col>
+          <Col className="actualChart2" lg={12}>
+          <p> Occupancy distribution </p>
+          <Doughnut data={chart3Data} width={5} height={2} options={{}}/>
+        </Col>
+       
           </Row>
         </Col>  
         <Col className="demoCol2" lg={6}>
@@ -119,34 +130,21 @@ class Demographics extends Component {
             <p>Demographics</p>
           </Row>
           <Row className="demoPhotos">{/* Blue Box*/} 
-            <p> Photos here. Function is ready, have to pick an api </p>
-            <Col className="actualImg1"  lgOffset={3} lg={3}>
-                <Thumbnail src={placeholder} >
-                  <h2>img1</h2>
-                </Thumbnail>
-            </Col>
-            <Col className="actualImg2" lg={3}>
-                <Thumbnail src={placeholder} >
-                  <h2>img2</h2>
-                </Thumbnail>
+            
+            <Col className="actualImg2" lg={12}>
+                <img 
+                width="400" height="200"
+                src="http://demographics.coopercenter.org/files/2016/12/HeaderImage_PopData_600X325.jpg" alt="nah" ></img>
             </Col>
           </Row>
           <Row className="chartsThree">{/* Orange Box*/} 
-            <p> SUM MOAR charts here </p>
-            <Col className="actualChart1" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart1</h2>
-                </Thumbnail>
+              <Col className="actualChart3" lg={6}>
+              <p> Religion distribution </p>
+              <Bar data={chart4Data} width={5} height={5} options={{}}/>
             </Col>
-            <Col className="actualChart2" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart2</h2>
-                </Thumbnail>
-            </Col>
-            <Col className="actualChart3" lg={4}>
-                <Thumbnail src={placeholder} >
-                  <h2>chart3</h2>
-                </Thumbnail>
+            <Col className="actualChart2" lg={6}>
+              <p> Education distribution </p>
+              <Line data={chart5Data} width={5} height={5} options={{}}/>
             </Col>
           </Row>  
         </Col>  

@@ -2,7 +2,7 @@
   margin-top: 30px;
 }
 .demoCol1{
-  background-color: red;
+  padding: 50px;
 }
 .demoCol2{
   text-align: right;
@@ -11,24 +11,36 @@
   font-size: 50px
 }
 .chartsOne{
-  background-color: yellow;
+  background-color: white;
 }
 .chartsTwo{
-  background-color: green;
+  background-color: white;
 }
 .chartsThree{
-  background-color: orange;
+  margin-top:30px;
+  background-color: white;
 }
 .demoPhotos{
-  background-color: blue;
+  background-color: white;
 }
 
 .actualChart1{
-  background-color: black;
+
+  text-align: center;
+  background-color: white;
 }
 .actualChart2{
-  background-color: blue;
+  text-align: center;
+  
+  background-color: white;
 }
 .actualChart3{
-  background-color: orange;
+  text-align: center;
+  background-color: white;
+}
+.actualImg1{
+  align-self: auto;
+}
+.actualImg2{
+  align-self: auto;
 }

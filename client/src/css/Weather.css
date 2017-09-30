@@ -24,6 +24,18 @@
     opacity: 0;
     transform: translateX(150px);
     animation: title-appear 500ms ease-out 500ms forwards; }
+  .weather-card h2 {
+    position: absolute;
+    padding-bottom: 110px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: #B8B8B8;
+    bottom: 0;
+    left: 35px;
+    opacity: 0;
+    transform: translateX(150px);
+    animation: title-appear 500ms ease-out 500ms forwards; }
   .weather-card p {
     position: absolute;
     font-family: 'Lato', sans-serif;
@@ -55,8 +67,26 @@
   border-radius: 20px;
   width: 25px;
   height: 25px;
-  box-shadow: #b6cede 24px -6px 0 2px, #b6cede 10px 5px 0 5px, #b6cede 30px 5px 0 2px, #b6cede 11px -8px 0 -3px, #b6cede 25px 11px 0 -1px; }
+  box-shadow: #b6cede 24px -6px 0 2px, #b6cede 10px 5px 0 5px, #b6cede 30px 5px 0 2px, #b6cede 11px -8px 0 -3px, #b6cede 25px 11px 0 -1px, #ebf2f6 50px -21px 0 2px, #ebf2f6 35px -10px 0 5px, #ebf2f6 55px -10px 0 2px, #ebf2f6 36px -23px 0 -3px, #ebf2f6 50px -4px 0 -1px; }
   .cloud:after {
+    content: "";
+    position: absolute;
+    border-radius: 10px;
+    background-color: transparent;
+    width: 4px;
+    height: 12px;
+    left: 0;
+    top: 31px;
+    transform: rotate(30deg); }
+
+.rain {
+  margin-right: 60px;
+  background: #b6cede;
+  border-radius: 20px;
+  width: 25px;
+  height: 25px;
+  box-shadow: #b6cede 24px -6px 0 2px, #b6cede 10px 5px 0 5px, #b6cede 30px 5px 0 2px, #b6cede 11px -8px 0 -3px, #b6cede 25px 11px 0 -1px; }
+  .rain:after {
     content: "";
     position: absolute;
     border-radius: 10px;

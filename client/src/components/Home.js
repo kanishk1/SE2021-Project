@@ -28,6 +28,7 @@ class Home extends Component {
         selectedPostcode: newValue.value.slice(-4)
       })
       console.log("Selected Suburb is: ", newValue.value)
+      this.props.sendUpdatedSuburb(newValue)
     }
   }
 
@@ -53,13 +54,14 @@ class Home extends Component {
       fetch('/bing/search?suburb=' + this.state.selectedSuburb
         + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
-      fetch('/places/search?keyword=schools+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=shops+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=food+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb),
+      fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=food+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
-      fetch('/wiki/search?suburb=' + this.state.selectedSuburb)      
+      fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
+      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),      
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -103,9 +105,11 @@ class Home extends Component {
       )
     } else if (this.state.isFetching === 0.5) {
       return (
-        <div style={{align: 'center', top: '50%', left: '50%'}}>
-         <ReactLoading type={'bars'} color={'#000000'} />
-        </div>
+        <Grid>
+          <Col className="loading" lgOffset={3} lg={4}>
+          <ReactLoading type={'bars'} color={'#FF0000'} width={'500'} height={'500'}/>
+          </Col>
+        </Grid>
       )
     } else {
       return <Redirect push to="/results" />

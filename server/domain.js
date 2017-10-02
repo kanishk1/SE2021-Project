@@ -1,5 +1,6 @@
 import request from 'request';
 import express from 'express';
+import * as db from './db.js';
 
 const router = express.Router();
 
@@ -99,8 +100,8 @@ function addressID(suburb) {
     .then(data => data[0].ids[0].id);
 }
 
-router.get('/housing', (req, res) => {
-  addressID(req.query.suburb)
+function getHousing(suburb) {
+  return addressID(suburb)
     .then(id => {
       const url = 'https://api.domain.com.au/v1/suburbPerformanceStatistics';
       const queries = [
@@ -112,13 +113,11 @@ router.get('/housing', (req, res) => {
         'tPlusTo=3'
       ];
       return get('suburbperformance', url + '?' + queries.join('&'));
-    })
-    .then(data => res.json(data))
-    .catch(err => res.send(err));
-});
+    });
+};
 
-router.get('/demographics', (req, res) => {
-  addressID(req.query.suburb)
+function getDemographics(suburb) {
+  return addressID(suburb)
     .then(id => {
       const url = 'https://api.domain.com.au/v1/demographics';
       const queries = [
@@ -127,8 +126,20 @@ router.get('/demographics', (req, res) => {
       ];
       return get('demographics', url + '?' + queries.join('&'));
     })
+};
+
+router.get('/housing', (req, res) => {
+  const suburb = req.query.suburb;
+  db.data('domain_housing', suburb, 'week', () => getHousing(suburb))
     .then(data => res.json(data))
-    .catch(err => res.send(err))
+    .catch(err => res.json({'error': err}));
+});
+
+router.get('/demographics', (req, res) => {
+  const suburb = req.query.suburb;
+  db.data('domain_demographics', suburb, 'week', () => getDemographics(suburb))
+    .then(data => res.json(data))
+    .catch(err => res.json({'error': '' + err}));
 });
 
 export default router;

@@ -7,13 +7,11 @@ const router = express.Router();
 
 const FORECASTS_PER_DAY = 24 / 3;
 
-router.get('/:postcode', (req, res) => {
-  const postcode = req.params.postcode;
+function getWeather(postcode) {
   const country = 'Australia';
 
   if (!postcode) {
-    res.send("Error: Invalid Paramenters.");
-    return;
+    return Promise.reject('Invalid Parameters');
   }
 
   const weather = openweather({
@@ -31,7 +29,7 @@ router.get('/:postcode', (req, res) => {
 
   console.log = logger; // re-enable it now ;)
 
-  promise.then((result) => {
+  return promise.then((result) => {
     const values = [];
 
     let min = +1e99; let min_dt = null;
@@ -71,8 +69,14 @@ router.get('/:postcode', (req, res) => {
       values.push({ min, min_dt, max, max_dt, humidity, conditions });
     }
 
-    res.json(values);
+    return values;
   }).catch(err => res.send("Error: " + err));
 })
+
+router.get('/:postcode', (req, res) => {
+  getWeather(postcode)
+    .then(data => res.json(data))
+    .catch(err => res.json({'error': '' + err}));
+}
 
 export default router;

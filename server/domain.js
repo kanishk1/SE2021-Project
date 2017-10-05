@@ -130,14 +130,14 @@ function getDemographics(suburb) {
 
 router.get('/housing', (req, res) => {
   const suburb = req.query.suburb;
-  db.data('domain_housing', suburb, 'week', () => getHousing(suburb))
+  db.data('domain_housing', suburb, 'month', () => getHousing(suburb))
     .then(data => res.json(data))
     .catch(err => res.json({'error': err}));
 });
 
 router.get('/demographics', (req, res) => {
   const suburb = req.query.suburb;
-  db.data('domain_demographics', suburb, 'week', () => getDemographics(suburb))
+  db.data('domain_demographics', suburb, 'month', () => getDemographics(suburb))
     .then(data => res.json(data))
     .catch(err => res.json({'error': '' + err}));
 });

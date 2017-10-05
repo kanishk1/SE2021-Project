@@ -16,7 +16,7 @@ class Housing extends Component {
     return (
       <Grid fluid={true}>
         <Col className="housingLeft" lg={6}>
-          <Row className="hosuingSummary">
+          <Row className="housingSummary">
             <p> some shit </p>
           </Row>
           <Row className="housingImage">

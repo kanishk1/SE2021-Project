@@ -71,12 +71,12 @@ function getWeather(postcode) {
 
     return values;
   });
-})
+}
 
 router.get('/:postcode', (req, res) => {
   getWeather(postcode)
     .then(data => res.json(data))
     .catch(err => res.json({'error': '' + err}));
-}
+});
 
 export default router;

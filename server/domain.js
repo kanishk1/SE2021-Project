@@ -51,7 +51,7 @@ function getToken(scope) {
       }
     }, (err, res, body) => {
       if (err)
-        reject(err);
+        reject('' + err);
       else {
         console.log(body);
         const json = JSON.parse(body);
@@ -80,7 +80,7 @@ function get(scope, uri, post) {
       return new Promise((success, reject) => {
         request(request_info, (err, data, body) => {
           if (err)
-            reject(data);
+            reject('' + err);
           else
             success(JSON.parse(body));
         });
@@ -125,14 +125,14 @@ function getDemographics(suburb) {
         'id=' + id
       ];
       return get('demographics', url + '?' + queries.join('&'));
-    })
+    });
 };
 
 router.get('/housing', (req, res) => {
   const suburb = req.query.suburb;
   db.data('domain_housing', suburb, 'month', () => getHousing(suburb))
     .then(data => res.json(data))
-    .catch(err => res.json({'error': err}));
+    .catch(err => res.json({'error': '' + err}));
 });
 
 router.get('/demographics', (req, res) => {

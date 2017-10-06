@@ -17,12 +17,11 @@ function doAPI(suburb, numtweets) {
             // Data parsed...
             data = JSON.parse(data);
             var statuses = data['statuses'];
-
             // We are now to extract the text from each tweet
             var tweets = [];
             var i = 0;
             for (i = 0; i < statuses.length && i < numtweets; i++) {
-                tweets.push(statuses[i]['text']);
+                tweets.push(statuses[i]['id']);
             }
             response(tweets);
         }

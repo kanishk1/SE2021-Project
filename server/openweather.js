@@ -70,7 +70,7 @@ function getWeather(postcode) {
     }
 
     return values;
-  }).catch(err => res.send("Error: " + err));
+  });
 })
 
 router.get('/:postcode', (req, res) => {

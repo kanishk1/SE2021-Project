@@ -131,4 +131,64 @@ router.get('/demographics', (req, res) => {
     .catch(err => res.send(err))
 });
 
+router.get('/listings', (req, res) => {
+  var uri = 'https://api.domain.com.au/v1/listings/residential/_search';
+  var reqbody =
+  {
+    "listingType":"Sale",
+    "minBedrooms":-1,
+    "maxBedrooms":-1,
+    "minBathrooms":-1,
+    "maxBathrooms":-1,
+    "minCarspaces":"",
+    "maxCarspaces":"",
+    "minPrice":"",
+    "maxPrice":"",
+    "minLandArea":"",
+    "maxLandArea":"",
+    "locationTerms":"",
+    "keywords":[
+      "" + req.query.suburb
+    ],
+    "inspectionFrom":"",
+    "inspectionTo":"",
+    "auctionFrom":"",
+    "auctionTo":"",
+    "sort":{
+      "sortKey":"",
+      "proximityTo":{
+        "lat":-1,
+        "lon":-1
+      }
+    },
+    "page":"",
+    "pageSize":"",
+    "geoWindow":{
+      "box":{
+        "topLeft":{
+          "lat":-1,
+          "lon":-1
+        },
+        "bottomRight":{
+          "lat":-1,
+          "lon":-1
+        }
+      },
+      "circle":{
+        "center":{
+          "lat":-1,
+          "lon":-1
+        },
+        "radiusInMeters":""
+      },
+      "polygon":{
+
+      }
+    }
+  };
+  get('listings', uri, reqbody)
+    .then(data => res.json(data))
+    .catch(err => res.send(err))
+});
+
 export default router;

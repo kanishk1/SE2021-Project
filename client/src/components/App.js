@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Home from '../components/Home.js'
 import Results from '../components/Results.js'
+import suburber from '../img/suburber.png';
 import {
   BrowserRouter as Router,
   Route,
@@ -54,7 +55,7 @@ class App extends Component {
               pathname: '/',
               state: {isFetching: 0} 
             }}>
-              Home
+               <img src={suburber} />
             </Link>
           </div>
           <Switch>

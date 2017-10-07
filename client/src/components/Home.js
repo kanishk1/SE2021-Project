@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import BackgroundImage from 'react-background-image-loader';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
+import background from '../img/Sydney.jpg';
+import loadingGif from '../img/loading.gif';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
@@ -80,34 +83,53 @@ class Home extends Component {
   render() {
     if (this.state.isFetching === 0) {
       return (
-        <Grid className="startPage" fluid={true}>
-          <Row>
-            <Col lgOffset={4} lg={3}>
-              <img className="centre-block" src={suburber} alt="suburber"/>
-            </Col>
-          </Row>
-          <Row className="searchBox">
-            <Col lgOffset={3} lg={6} >
-              <Autocomplete updateSuburb={this.updateSuburb}
-                  updateProfile={this.updateProfile}
-                  selectedSuburb={this.state.selectedSuburb}
-                  selectedProfile={this.state.selectedProfile}
-                  selectedPostcode={this.state.selectedPostcode}
-                  getData={this.getData}/>
-            </Col>
-          </Row>
+        <div>
+        <BackgroundImage className="backImg" src={background}>
+          <Grid className="startPage" fluid={true}>
+            <Row className="searchBox">
+              <Col lgOffset={3} lg={6} >
+                <div className="temp">
+                <Autocomplete updateSuburb={this.updateSuburb}
+                    updateProfile={this.updateProfile}
+                    selectedSuburb={this.state.selectedSuburb}
+                    selectedProfile={this.state.selectedProfile}
+                    selectedPostcode={this.state.selectedPostcode}
+                    getData={this.getData}/>
+                </div>
+              </Col>
+            </Row>
+          </Grid>
+        </BackgroundImage>
+        <Grid>
           <Row className="carousel">
+              <Col lg={6} lgOffset={3}>
+                <PopularSuburbs />
+              </Col>
+          </Row>
+          <Row className="teamInfo">
             <Col lg={6} lgOffset={3}>
-              <PopularSuburbs />
+              <p>
+                Neil Baksi, Front End<br /> 
+                Jonathan Charles, Back End<br /> 
+                Siddhant Virmani, Full Stack<br /> 
+                Kanishk Purohit, Front End<br /> 
+                Md Mashiur Rahman, Back End<br />
+                Nathaniel Shead, Back End<br />
+              </p>
+              <p>All rights reserved under MIT License. Suburber 2017 </p>
             </Col>
           </Row>
         </Grid>
+        </div>
       )
     } else if (this.state.isFetching === 0.5) {
       return (
         <Grid>
           <Col className="loading" lgOffset={3} lg={4}>
           <ReactLoading type={'bars'} color={'#FF0000'} width={'500'} height={'500'}/>
+          </Col>
+          <Col lgOffset={4} lg={3}>
+              <img className="centre-block" src={loadingGif} alt="suburber"/>
           </Col>
         </Grid>
       )

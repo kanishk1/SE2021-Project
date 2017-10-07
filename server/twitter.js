@@ -21,7 +21,7 @@ function doAPI(suburb, numtweets) {
             var tweets = [];
             var i = 0;
             for (i = 0; i < statuses.length && i < numtweets; i++) {
-                tweets.push(statuses[i]['id']);
+                tweets.push(statuses[i]['id_str']);
             }
             response(tweets);
         }

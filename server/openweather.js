@@ -74,7 +74,7 @@ function getWeather(postcode) {
 }
 
 router.get('/:postcode', (req, res) => {
-  getWeather(postcode)
+  getWeather(req.params.postcode)
     .then(data => res.json(data))
     .catch(err => res.json({'error': '' + err}));
 });

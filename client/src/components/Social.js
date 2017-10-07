@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Grid, Row, Col, Thumbnail, Media} from 'react-bootstrap';
 import placeholder from '../img/placeholder.png';
 import TweetEmbed from 'react-tweet-embed';
-import '../css/Social.css'
+// import '../css/Social.css'
 
 class Social extends Component {
   constructor(props) {

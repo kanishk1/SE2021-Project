@@ -81,7 +81,7 @@ function get(scope, uri, post) {
           if (err)
             reject(data);
           else
-            success(JSON.parse(body));
+            success(typeof body == 'string' ? JSON.parse(body) : body);
         });
       });
     });

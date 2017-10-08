@@ -1,5 +1,6 @@
 import wiki from 'wikijs';
 import express from 'express';
+import * as db from './db.js';
 
 const router = express.Router();
 
@@ -24,12 +25,12 @@ function doAPI(suburb) {
 
 router.get('/search', (req, res) => {
   const suburb = req.query.suburb
-  doAPI(suburb)
+  db.data('wiki', suburb, 'week', () => doAPI(suburb))
     .then(success => res.json(success))
     .catch(fail => {
       console.log(fail);
-      res.json({})
-    })
+      res.json({'error': '' + fail});
+    });
 });
 
 export default router;

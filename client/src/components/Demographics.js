@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail} from 'react-bootstrap';
+import { Grid, Row, Col} from 'react-bootstrap';
 import '../css/Demographics.css';
-import placeholder from '../img/placeholder.png'
 import {Pie, Doughnut, Bar, Line, Polar, Radar} from 'react-chartjs-2';
 
 class Demographics extends Component {

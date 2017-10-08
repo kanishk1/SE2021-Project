@@ -47,13 +47,13 @@ class Results extends Component {
               religious={this.props.data[8]}
               wiki={this.props.data[10]} /> 
           </Tab>
-          <Tab eventKey={4} title = "Housing">
+          <Tab eventKey={4} title="Housing">
           <img src={housing} alt="" height="100%" width="100%"/>            
           </Tab>
-          <Tab eventKey={5} title = "Social">
+          <Tab eventKey={5} title="Social">
             <img src={social} alt="" height="100%" width="100%"/>
           </Tab>
-          <Tab eventKey={6} title = "News">
+          <Tab eventKey={6} title="News">
             <img src={news} alt="" height="100%" width="100%"/>
           </Tab>
       </Tabs>

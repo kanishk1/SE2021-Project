@@ -6,8 +6,7 @@ import Lifestyle from '../components/Lifestyle.js'
 import housing from '../img/resultPage4.png'
 import social from '../img/resultPage5.png'
 import news from '../img/resultPage6.png'
-import ReactLoading from 'react-loading';
-import { Grid, Col } from 'react-bootstrap';
+import loading from '../img/loading.gif';
 
 class Results extends Component {
 
@@ -147,11 +146,7 @@ class Results extends Component {
       )
     } else if (this.state.isFetching === 1) {
       return (
-        <Grid>
-          <Col className="loading" lgOffset={3} lg={4}>
-          <ReactLoading type={'bars'} color={'#FF0000'} width={'500'} height={'500'}/>
-          </Col>
-        </Grid>
+        <img src={loading} alt="Wait" style={{align: 'center'}}/> 
       )
     } 
   }

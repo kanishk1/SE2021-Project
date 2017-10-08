@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 class Home extends Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +39,7 @@ class Home extends Component {
       })
       console.log("Selected Profile is: ", newValue)
     }
-  } 
+  }
 
   // Very ugly as of now, might rehash later
   getData() {
@@ -51,8 +51,7 @@ class Home extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/bing/search?suburb=' + this.state.selectedSuburb
-        + '&num=10'),
+      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
       fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
@@ -61,7 +60,7 @@ class Home extends Component {
       fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),      
+      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -114,7 +113,7 @@ class Home extends Component {
     } else {
       return <Redirect push to="/results" />
     }
-    
+
   }
 }
 

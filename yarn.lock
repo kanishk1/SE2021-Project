@@ -1472,6 +1472,10 @@ react-slick@^0.15.4:
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
 
+react-tweet-embed@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-tweet-embed/-/react-tweet-embed-1.0.8.tgz#5d339b27d05d9f8e9a7d277f3ed80d12f38824d9"
+
 react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"

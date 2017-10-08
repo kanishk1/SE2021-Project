@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col} from 'react-bootstrap';
 import '../css/Demographics.css';
-import {Pie, Doughnut, Bar, Line, Polar, Radar} from 'react-chartjs-2';
+import {Pie, Doughnut, Bar, Line} from 'react-chartjs-2';
+// Polar, Radar
 
 class Demographics extends Component {
   constructor(props) {
@@ -14,8 +15,6 @@ class Demographics extends Component {
   
 
   render() {
-    console.log('in demo ');
-    //console.log(this.props.data);
     var backgroundColor = [
       'rgba(255, 99, 132, 0.2)',
       'rgba(54, 162, 235, 0.2)',
@@ -47,8 +46,6 @@ class Demographics extends Component {
         })
         i++;
       })
-      console.log(labels);
-      console.log(values);
       var chart1Data =  {
         labels: labels[0],
         datasets: [{
@@ -61,16 +58,16 @@ class Demographics extends Component {
       };
 
       // do later, cuz its fucked
-      var chart2Data = {
-        labels: labels[1],
-        datasets: [{
-            label: 'Country distribution',
-            data: values[1],
-            backgroundColor: backgroundColor,
-            borderColor: borderColor,
-            borderWidth: 1
-        }]
-      };
+      // var chart2Data = {
+      //   labels: labels[1],
+      //   datasets: [{
+      //       label: 'Country distribution',
+      //       data: values[1],
+      //       backgroundColor: backgroundColor,
+      //       borderColor: borderColor,
+      //       borderWidth: 1
+      //   }]
+      // };
 
       var chart3Data = {
         labels: labels[2],

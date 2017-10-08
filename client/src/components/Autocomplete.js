@@ -10,17 +10,16 @@ class Autocomplete extends Component {
         selectedSuburb: null,
         selectedProfile: null,
         selectedPostcode: null,
-        options: []
+        options: this.props.suburbs
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getSuburbs();
   }
  
   handleSubmit (event) {
     event.preventDefault();
     if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
       console.log("Ready to submit")
-      this.props.getData();
+      this.props.updateSubmission();
     }
   }
 
@@ -34,23 +33,11 @@ class Autocomplete extends Component {
     if (nextProps.selectedPostcode !== this.state.selectedPostcode) {
       this.setState({ selectedPostcode: nextProps.selectedPostcode });
     }
+    if (nextProps.suburbs !== this.state.options) {
+      this.setState({ options: nextProps.suburbs });
+    }
   }
 
-  async getSuburbs () {
-    const response = await fetch('/suburbs');
-    const data = await response.json();
-    var suburbs = [];
-    var i = 0;
-    data.docs.forEach(function(elem) {
-      suburbs[i] = {};
-      suburbs[i].value = elem.name + ' ' + elem.post;
-      suburbs[i].label = elem.name + ' ' + elem.post;
-      i++;
-    });
-    this.setState({
-      options: suburbs
-    });
-  }
 
   render () {
     return (

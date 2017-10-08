@@ -4,7 +4,6 @@ import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
 import suburber from '../img/suburber.png';
 import background from '../img/Sydney.jpg';
-import loadingGif from '../img/loading.gif';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
@@ -61,25 +60,26 @@ class Home extends Component {
     if (this.state.isSubmitted === 0) {
       return (
         <div>
-        <BackgroundImage className="backImg" src={background}>
+        <BackgroundImage className="backImg" src={background} placeholder={suburber}>
           <Grid className="startPage" fluid={true}>
             <Row className="searchBox">
               <Col lgOffset={3} lg={6} >
                 <div className="temp">
-                <Autocomplete updateSuburb={this.updateSuburb}
-                    updateProfile={this.updateProfile}
-                    updateSubmission={this.updateSubmission}
-                    selectedSuburb={this.state.selectedSuburb}
-                    selectedProfile={this.state.selectedProfile}
-                    selectedPostcode={this.state.selectedPostcode}
-                    suburbs={this.state.suburbs}
-                    getData={this.getData}
-                    />
+                  {console.log(this.state)}
                 </div>
               </Col>
             </Row>
           </Grid>
         </BackgroundImage>
+        <Autocomplete updateSuburb={this.updateSuburb}
+            updateProfile={this.updateProfile}
+            updateSubmission={this.updateSubmission}
+            selectedSuburb={this.state.selectedSuburb}
+            selectedProfile={this.state.selectedProfile}
+            selectedPostcode={this.state.selectedPostcode}
+            suburbs={this.state.suburbs}
+            getData={this.getData}
+            />
         <Grid>
           <Row className="carousel">
               <Col lg={6} lgOffset={3}>

@@ -14,8 +14,6 @@
     "node-sass": "^4.5.3",
     "node-sass-chokidar": "^0.0.3",
     "react": "^15.6.1",
-    "react-background": "^0.1.0",
-    "react-background-image-loader": "^0.0.5",
     "react-bootstrap": "^0.31.3",
     "react-chartjs-2": "^2.6.2",
     "react-dom": "^15.6.1",

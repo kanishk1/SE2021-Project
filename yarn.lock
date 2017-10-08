@@ -1363,17 +1363,6 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-background-image-loader@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/react-background-image-loader/-/react-background-image-loader-0.0.5.tgz#217c0a2ee7b3d17db837f9ab38e0bc99dec330ca"
-  dependencies:
-    prop-types "^15.5.10"
-    react "^15.5.4"
-
-react-background@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-background/-/react-background-0.1.0.tgz#71f225ff9acbb689cc3149fd16003f89aa356787"
-
 react-bootstrap@^0.31.3:
   version "0.31.3"
   resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-0.31.3.tgz#db2b7d45b00b5dac1ab8b6de3dd97feb3091b849"
@@ -1482,16 +1471,6 @@ react-slick@^0.15.4:
     json2mq "^0.2.0"
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
-
-react@^15.5.4:
-  version "15.6.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
-  dependencies:
-    create-react-class "^15.6.0"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.10"
 
 react@^15.6.1:
   version "15.6.1"

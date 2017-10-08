@@ -7,21 +7,21 @@ import background from '../img/Sydney.jpg';
 import loadingGif from '../img/loading.gif';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 
 class Home extends Component {
  
   constructor(props) {
     super(props);
     this.state = {
-      isFetching: 0,
+      isSubmitted: 0,
       selectedSuburb: null,
       selectedPostcode: null,
-      selectedProfile: null
+      selectedProfile: null,
+      suburbs: this.props.suburbs
     }
     this.updateSuburb = this.updateSuburb.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
-    this.getData = this.getData.bind(this);
+    this.updateSubmission = this.updateSubmission.bind(this);
   }
 
   updateSuburb (newValue) {
@@ -44,44 +44,21 @@ class Home extends Component {
     }
   } 
 
-  // Very ugly as of now, might rehash later
-  getData() {
-    this.props.handleFetchChange(0.5);
-    this.setState({
-      isFetching: 0.5
-    })
-    var self = this;
-    return Promise.all([
-      fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
-      fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/bing/search?suburb=' + this.state.selectedSuburb
-        + '&num=10'),
-      fetch('/weather/' + this.state.selectedPostcode),
-      fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=food+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=recreation+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
-      fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),      
-    ]).then(responses =>
-      Promise.all(responses.map(res => res.json())))
-    .then(function(response) {
-      self.setState({
-        isFetching: 1
-      })
-      self.props.handleFetchChange(1);
-      self.props.assignData(response);
-      console.log(response);
-    }).catch(function(err) {
-      console.log(err);
-      throw new Error('Couldn\'t get data rip');
-    })
+  updateSubmission (newValue) {
+      this.setState({
+        isSubmitted: 1
+      });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.suburbs !== this.state.suburbs) {
+      this.setState({ suburbs: nextProps.suburbs });
+    }
+  }
+
+
   render() {
-    if (this.state.isFetching === 0) {
+    if (this.state.isSubmitted === 0) {
       return (
         <div>
         <BackgroundImage className="backImg" src={background}>
@@ -91,10 +68,13 @@ class Home extends Component {
                 <div className="temp">
                 <Autocomplete updateSuburb={this.updateSuburb}
                     updateProfile={this.updateProfile}
+                    updateSubmission={this.updateSubmission}
                     selectedSuburb={this.state.selectedSuburb}
                     selectedProfile={this.state.selectedProfile}
                     selectedPostcode={this.state.selectedPostcode}
-                    getData={this.getData}/>
+                    suburbs={this.state.suburbs}
+                    getData={this.getData}
+                    />
                 </div>
               </Col>
             </Row>
@@ -111,7 +91,7 @@ class Home extends Component {
               <p>
                 Neil Baksi, Front End<br /> 
                 Jonathan Charles, Back End<br /> 
-                Siddhant Virmani, Full Stack<br /> 
+                Siddhant Virmani, Front End<br /> 
                 Kanishk Purohit, Front End<br /> 
                 Md Mashiur Rahman, Back End<br />
                 Nathaniel Shead, Back End<br />
@@ -122,19 +102,9 @@ class Home extends Component {
         </Grid>
         </div>
       )
-    } else if (this.state.isFetching === 0.5) {
-      return (
-        <Grid>
-          <Col className="loading" lgOffset={3} lg={4}>
-          <ReactLoading type={'bars'} color={'#FF0000'} width={'500'} height={'500'}/>
-          </Col>
-          <Col lgOffset={4} lg={3}>
-              <img className="centre-block" src={loadingGif} alt="suburber"/>
-          </Col>
-        </Grid>
-      )
     } else {
-      return <Redirect push to="/results" />
+      var suburb = this.state.selectedSuburb.replace(/ */g, '').toLowerCase();
+      return <Redirect push to={"/results/" + suburb} />
     }
     
   }

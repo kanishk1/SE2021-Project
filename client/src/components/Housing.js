@@ -50,12 +50,13 @@ class Housing extends Component {
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
-    
+    console.log(this.state.listings);
     var cards = this.state.listings.map(function(value) {
                     return(
                       <div>
                         <Thumbnail src={value.media.url} >
                           <h2>{value.address}</h2>
+                          <h3>{value.price}</h3>
                             <p>
                               <img src={bath} alt="photo1"></img> {value.bathrooms}
                               <img src={car} alt="photo2"></img> {value.carspaces}

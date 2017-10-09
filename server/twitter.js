@@ -10,23 +10,20 @@ function doAPI(suburb, numtweets) {
 
     return new Promise((response, fail) => {
         var error = function (err, response, body) {
-            fail('ERROR: [%s]', err);
+            fail(err);
         }
         var success = function (data) {
-
             // Data parsed...
             data = JSON.parse(data);
             var statuses = data['statuses'];
-
             // We are now to extract the text from each tweet
             var tweets = [];
             var i = 0;
             for (i = 0; i < statuses.length && i < numtweets; i++) {
-                tweets.push(statuses[i]['text']);
+                tweets.push(statuses[i]['id_str']);
             }
             response(tweets);
         }
-
 
         const hashtag = '#'.concat(suburb)
         const twitter = new Twitter(config);
@@ -41,7 +38,7 @@ router.get('/search', (req, res) => {
     const numtweets = req.query.num;
     doAPI(suburb,numtweets)
         .then(response => res.send(response))
-        .catch(fail => res.send(fail));
+        .catch(fail => res.json({'error': fail}));
 });
 
 export default router;

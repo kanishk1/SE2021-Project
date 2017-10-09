@@ -1,5 +1,6 @@
 import request from 'request';
 import express from 'express';
+import * as db from './db.js';
 
 const router = express.Router();
 
@@ -50,7 +51,7 @@ function getToken(scope) {
       }
     }, (err, res, body) => {
       if (err)
-        reject(err);
+        reject('' + err);
       else {
         console.log(body);
         const json = JSON.parse(body);
@@ -79,9 +80,9 @@ function get(scope, uri, post) {
       return new Promise((success, reject) => {
         request(request_info, (err, data, body) => {
           if (err)
-            reject(data);
+            reject('' + err);
           else
-            success(JSON.parse(body));
+            success(typeof body == 'string' ? JSON.parse(body) : body);
         });
       });
     });
@@ -99,8 +100,8 @@ function addressID(suburb) {
     .then(data => data[0].ids[0].id);
 }
 
-router.get('/housing', (req, res) => {
-  addressID(req.query.suburb)
+function getHousing(suburb) {
+  return addressID(suburb)
     .then(id => {
       const url = 'https://api.domain.com.au/v1/suburbPerformanceStatistics';
       const queries = [
@@ -112,13 +113,11 @@ router.get('/housing', (req, res) => {
         'tPlusTo=3'
       ];
       return get('suburbperformance', url + '?' + queries.join('&'));
-    })
-    .then(data => res.json(data))
-    .catch(err => res.send(err));
-});
+    });
+};
 
-router.get('/demographics', (req, res) => {
-  addressID(req.query.suburb)
+function getDemographics(suburb) {
+  return addressID(suburb)
     .then(id => {
       const url = 'https://api.domain.com.au/v1/demographics';
       const queries = [
@@ -126,7 +125,79 @@ router.get('/demographics', (req, res) => {
         'id=' + id
       ];
       return get('demographics', url + '?' + queries.join('&'));
-    })
+    });
+};
+
+router.get('/housing', (req, res) => {
+  const suburb = req.query.suburb;
+  db.data('domain_housing', suburb, 'month', () => getHousing(suburb))
+    .then(data => res.json(data))
+    .catch(err => res.json({'error': '' + err}));
+});
+
+router.get('/demographics', (req, res) => {
+  const suburb = req.query.suburb;
+  db.data('domain_demographics', suburb, 'month', () => getDemographics(suburb))
+    .then(data => res.json(data))
+    .catch(err => res.json({'error': '' + err}));
+});
+
+router.get('/listings', (req, res) => {
+  var uri = 'https://api.domain.com.au/v1/listings/residential/_search';
+  var reqbody =
+  {
+    "listingType":"Sale",
+    "minBedrooms":-1,
+    "maxBedrooms":-1,
+    "minBathrooms":-1,
+    "maxBathrooms":-1,
+    "minCarspaces":"",
+    "maxCarspaces":"",
+    "minPrice":"",
+    "maxPrice":"",
+    "minLandArea":"",
+    "maxLandArea":"",
+    "locationTerms":"",
+    "keywords":[
+      "" + req.query.suburb
+    ],
+    "inspectionFrom":"",
+    "inspectionTo":"",
+    "auctionFrom":"",
+    "auctionTo":"",
+    "sort":{
+      "sortKey":"",
+      "proximityTo":{
+        "lat":-1,
+        "lon":-1
+      }
+    },
+    "page":"",
+    "pageSize":"",
+    "geoWindow":{
+      "box":{
+        "topLeft":{
+          "lat":-1,
+          "lon":-1
+        },
+        "bottomRight":{
+          "lat":-1,
+          "lon":-1
+        }
+      },
+      "circle":{
+        "center":{
+          "lat":-1,
+          "lon":-1
+        },
+        "radiusInMeters":""
+      },
+      "polygon":{
+
+      }
+    }
+  };
+  get('listings', uri, reqbody)
     .then(data => res.json(data))
     .catch(err => res.send(err))
 });

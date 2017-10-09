@@ -28,7 +28,7 @@ router.get('/search', (req,res) => {
     const keyword = req.query.keyword;
     doAPI(keyword)
         .then(data => res.end(data))
-        .catch(err => res.send(err))
+        .catch(err => res.json({error: '' + err}));
 });
 
 export default router;

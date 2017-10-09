@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Home from '../components/Home.js'
 import Results from '../components/Results.js'
+import suburber from '../img/suburber.png';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,36 +14,40 @@ class App extends Component {
 
   constructor() {
     super();
-
     this.state = {
-      isFetching: 0,
-      data: [],
       suburbName: "",
-      suburbPostcode: ""
+      suburbPostcode: "",
+      suburbs: []
     }
-    this.handleFetchChange = this.handleFetchChange.bind(this);
-    this.assignData= this.assignData.bind(this);
+    this.getSuburbs = this.getSuburbs.bind(this)
     this.setUpdatedSuburbs = this.setUpdatedSuburbs.bind(this);
+    this.getSuburbs();
+    console.log(this.state.suburbs);
   }
 
-  handleFetchChange(newValue) {
+  async getSuburbs () {
+    const response = await fetch('/suburbs');
+    const data = await response.json();
+    var suburbs = [];
+    var i = 0;
+    data.docs.forEach(function(elem) {
+      suburbs[i] = {};
+      suburbs[i].value = elem.name + ' ' + elem.post;
+      suburbs[i].label = elem.name + ' ' + elem.post;
+      i++;
+    });
     this.setState({
-      isFetching: newValue
+      suburbs: suburbs
     })
   }
-  
-  assignData(data) {
-    this.setState({
-      data: data
-    })
-  }
-  
+
   setUpdatedSuburbs(newValue){
     this.setState({
       suburbName: newValue.value.slice(0, -5),
       suburbPostcode: newValue.value.slice(-4)
     })
   }
+
 
   render() {   
     return (
@@ -52,23 +57,23 @@ class App extends Component {
           <div className="topnav">
             <Link to={{
               pathname: '/',
-              state: {isFetching: 0} 
+              state: {isSubmitted: 0} 
             }}>
-              Home
+              <img src={suburber} alt='logo' style={{height:'75px', width:'100px'}}/>
             </Link>
           </div>
           <Switch>
             <Route exact path="/" render={
               () => 
-              <Home handleFetchChange={this.handleFetchChange}
-                    assignData={this.assignData}
-                    sendUpdatedSuburb={this.setUpdatedSuburbs}
+              <Home sendUpdatedSuburb={this.setUpdatedSuburbs}
+                    suburbs={this.state.suburbs}
               />}
             />
-            <Route path="/results" render={ () =>
-              <Results data={this.state.data} 
-                       suburbName={this.state.suburbName}
+            <Route path="/results/:suburb" render={ ({match}) =>
+              <Results suburbName={this.state.suburbName}
                        suburbPostcode={this.state.suburbPostcode}
+                       match={match}
+                       suburbs={this.state.suburbs}
                        />
               }
             />

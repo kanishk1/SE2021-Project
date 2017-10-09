@@ -3,7 +3,7 @@ import { Tab, Tabs, } from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
-import housing from '../components/Housing.js'
+import Housing from '../components/Housing.js'
 import social from '../img/resultPage5.png'
 import news from '../img/resultPage6.png'
 import loading from '../img/loading.gif';
@@ -67,6 +67,7 @@ class Results extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
+      fetch('/domain/listings?suburb=' + this.state.selectedSuburb),
       fetch('/bing/search?suburb=' + this.state.selectedSuburb
         + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
@@ -107,44 +108,6 @@ class Results extends Component {
   }
 
   render () {
-<<<<<<< HEAD
-    return (
-      <div>
-      <Tabs id="Introduction Tab" activeKey={this.state.key}
-          onSelect={this.handleSelect}>
-          <Tab eventKey={1} title="Introduction"> 
-            <Introduction 
-              wiki={this.props.data[10]}
-              name={this.props.suburbName}
-              postcode={this.props.suburbPostcode}
-              location={this.props.data[11]}
-              weather={this.props.data[3]}
-              />
-          </Tab>
-          <Tab eventKey={2} title="Demographics"> 
-            <Demographics data={this.props.data[1]}/> 
-          </Tab>
-          <Tab eventKey={3} title="Lifestyle"> 
-             <Lifestyle schools={this.props.data[4]} 
-              shops={this.props.data[5]}
-              food={this.props.data[6]} 
-              recreation={this.props.data[7]}
-              religious={this.props.data[8]}
-              wiki={this.props.data[10]} /> 
-          </Tab>
-          <Tab eventKey={4} title="Housing">
-          <img src={housing} alt="" height="100%" width="100%"/>            
-          </Tab>
-          <Tab eventKey={5} title = "Social">
-            <img src={social} alt="" height="100%" width="100%"/>
-          </Tab>
-          <Tab eventKey={6} title = "News">
-            <img src={news} alt="" height="100%" width="100%"/>
-          </Tab>
-      </Tabs>
-      </div>
-    )
-=======
     if (this.state.isFetching === 0) {
       return (
         <div>
@@ -152,26 +115,26 @@ class Results extends Component {
             onSelect={this.handleSelect}>
             <Tab eventKey={1} title="Introduction"> 
               <Introduction 
-                wiki={this.state.data[10]}
+                wiki={this.state.data[11]}
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
-                location={this.state.data[11]}
-                weather={this.state.data[3]}
+                location={this.state.data[12]}
+                weather={this.state.data[4]}
                 />
             </Tab>
             <Tab eventKey={2} title="Demographics"> 
               <Demographics data={this.state.data[1]}/> 
             </Tab>
             <Tab eventKey={3} title="Lifestyle"> 
-               <Lifestyle schools={this.state.data[4]} 
-                shops={this.state.data[5]}
-                food={this.state.data[6]} 
-                recreation={this.state.data[7]}
-                religious={this.state.data[8]}
-                wiki={this.state.data[10]} /> 
+               <Lifestyle schools={this.state.data[5]} 
+                shops={this.state.data[6]}
+                food={this.state.data[7]} 
+                recreation={this.state.data[8]}
+                religious={this.state.data[9]}
+                wiki={this.state.data[11]} /> 
             </Tab>
             <Tab eventKey={4} title="Housing">
-            <img src={housing} alt="" height="100%" width="100%"/>            
+                <Housing data={this.state.data[2]}/>
             </Tab>
             <Tab eventKey={5} title="Social">
               <img src={social} alt="" height="100%" width="100%"/>
@@ -186,8 +149,7 @@ class Results extends Component {
       return (
         <img src={loading} alt="Wait" style={{align: 'center'}}/> 
       )
-    } 
->>>>>>> 9dc0b7371e29c12e15e526aa87b14141fa7db4d6
+    }
   }
 }
 

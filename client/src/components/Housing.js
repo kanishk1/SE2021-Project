@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import bed from '../img/housingBedIcon.png';
 import car from '../img/housingCarIcon.png';
 import bath from '../img/housingBathIcon.png';
+import housingPhoto from '../img/housingStockPhoto.jpg';
 const SampleNextArrow = (props) => {
   const {className, style, onClick} = props
   return (
@@ -112,15 +113,15 @@ class Housing extends Component {
                   Housing 
                 </h1>
                 <p>
-                  Median Selling Price: {this.parseHousingStats()[0]}<br/>
-                  Median Renting Price: {this.parseHousingStats()[1]}<br/>
-                  Total Number Sold: {this.parseHousingStats()[2]}<br/>
-                  Max Selling Price: {this.parseHousingStats()[3]}<br/>
-                  Min Selling Price: {this.parseHousingStats()[4]}<br/> 
+                  This suburb has a median selling price of ${this.parseHousingStats()[0]} and
+                  also has a median renting price of ${this.parseHousingStats()[1]}.
+                  In recent years, approximately {this.parseHousingStats()[2]} properties 
+                  have been sold in this area. Similarly properties have sold for prices
+                  as high as ${this.parseHousingStats()[3]} and as low as ${this.parseHousingStats()[4]}!
                 </p>
               </Col>
               <Col className="housingPhoto" lg={6}>
-                <img src="" alt="stock photo goes here"></img>
+                <img src={housingPhoto} alt="stock photo goes here"></img>
               </Col>
             </Row>
             <Row className="housingCarouselrow">

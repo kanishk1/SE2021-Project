@@ -67,7 +67,6 @@ class Results extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/domain/listings?suburb=' + this.state.selectedSuburb),
       fetch('/bing/search?suburb=' + this.state.selectedSuburb
         + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
@@ -78,7 +77,8 @@ class Results extends Component {
       fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),      
+      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),    
+      fetch('/domain/listings?suburb=' + this.state.selectedSuburb),  
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -115,26 +115,29 @@ class Results extends Component {
             onSelect={this.handleSelect}>
             <Tab eventKey={1} title="Introduction"> 
               <Introduction 
-                wiki={this.state.data[11]}
+                wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
-                location={this.state.data[12]}
-                weather={this.state.data[4]}
+                location={this.state.data[11]}
+                weather={this.state.data[3]}
                 />
             </Tab>
             <Tab eventKey={2} title="Demographics"> 
               <Demographics data={this.state.data[1]}/> 
             </Tab>
             <Tab eventKey={3} title="Lifestyle"> 
-               <Lifestyle schools={this.state.data[5]} 
-                shops={this.state.data[6]}
-                food={this.state.data[7]} 
-                recreation={this.state.data[8]}
-                religious={this.state.data[9]}
-                wiki={this.state.data[11]} /> 
+               <Lifestyle schools={this.state.data[4]} 
+                shops={this.state.data[5]}
+                food={this.state.data[6]} 
+                recreation={this.state.data[7]}
+                religious={this.state.data[8]}
+                wiki={this.state.data[10]} /> 
             </Tab>
             <Tab eventKey={4} title="Housing">
-                <Housing data={this.state.data[2]}/>
+                <Housing 
+                  listings={this.state.data[12]}
+                  stats={this.state.data[0]}
+                />
             </Tab>
             <Tab eventKey={5} title="Social">
               <img src={social} alt="" height="100%" width="100%"/>

@@ -45,7 +45,7 @@ function getResults(suburb, numResults) {
 // Example Call... http://localhost:3001/bing/search?suburb=hurstville&num=10
 router.get('/search', (req, res) => {
   const suburb = req.query.suburb;
-  db.data('bing', suburb, 'day', () => getResults(suburb, req.query.numResults))
+  db.data('bing', suburb, 'day', () => getResults(suburb, req.query.num))
     .then(data => res.json(data))
     .catch(err => res.json({'error': '' + err}));
 });

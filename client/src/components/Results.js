@@ -3,9 +3,8 @@ import { Tab, Tabs, } from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
+import Social from '../components/Social.js'
 import Housing from '../components/Housing.js'
-import social from '../img/resultPage5.png'
-import news from '../img/resultPage6.png'
 import loading from '../img/loading.gif';
 
 class Results extends Component {
@@ -24,7 +23,7 @@ class Results extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.getData = this.getData.bind(this);
     this.checkSuburb = this.checkSuburb.bind(this);
-    this.getSuburbs = this.getSuburbs.bind(this);    
+    this.getSuburbs = this.getSuburbs.bind(this);
   }
 
   componentWillMount() {
@@ -67,8 +66,7 @@ class Results extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/bing/search?suburb=' + this.state.selectedSuburb
-        + '&num=10'),
+      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
       fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
@@ -78,7 +76,7 @@ class Results extends Component {
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
       fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),    
-      fetch('/domain/listings?suburb=' + this.state.selectedSuburb),  
+      fetch('/domain/listings?suburb=' + this.state.selectedSuburb)
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -113,8 +111,8 @@ class Results extends Component {
         <div>
         <Tabs id="Introduction Tab" activeKey={this.state.key}
             onSelect={this.handleSelect}>
-            <Tab eventKey={1} title="Introduction"> 
-              <Introduction 
+            <Tab eventKey={1} title="Introduction">
+              <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
@@ -122,16 +120,16 @@ class Results extends Component {
                 weather={this.state.data[3]}
                 />
             </Tab>
-            <Tab eventKey={2} title="Demographics"> 
-              <Demographics data={this.state.data[1]}/> 
+            <Tab eventKey={2} title="Demographics">
+              <Demographics data={this.state.data[1]}/>
             </Tab>
-            <Tab eventKey={3} title="Lifestyle"> 
-               <Lifestyle schools={this.state.data[4]} 
+            <Tab eventKey={3} title="Lifestyle">
+               <Lifestyle schools={this.state.data[4]}
                 shops={this.state.data[5]}
-                food={this.state.data[6]} 
+                food={this.state.data[6]}
                 recreation={this.state.data[7]}
                 religious={this.state.data[8]}
-                wiki={this.state.data[10]} /> 
+                wiki={this.state.data[10]} />
             </Tab>
             <Tab eventKey={4} title="Housing">
                 <Housing 
@@ -140,17 +138,17 @@ class Results extends Component {
                 />
             </Tab>
             <Tab eventKey={5} title="Social">
-              <img src={social} alt="" height="100%" width="100%"/>
-            </Tab>
-            <Tab eventKey={6} title="News">
-              <img src={news} alt="" height="100%" width="100%"/>
+              <Social
+                news={this.state.data[2]}
+                twitter={this.state.data[9]}
+              />
             </Tab>
         </Tabs>
         </div>
       )
     } else if (this.state.isFetching === 1) {
       return (
-        <img src={loading} alt="Wait" style={{align: 'center'}}/> 
+        <img src={loading} alt="Wait" style={{align: 'center'}}/>
       )
     }
   }

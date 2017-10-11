@@ -1,132 +1,79 @@
 import React, { Component } from 'react';
-import {Grid, Row, Col, Thumbnail, Tabs, Tab, Button} from 'react-bootstrap';
+import {Grid, Row, Col, Media} from 'react-bootstrap';
 import placeholder from '../img/placeholder.png';
-import News from './News.js'
+import TweetEmbed from 'react-tweet-embed';
+// import '../css/Social.css'
 
 class Social extends Component {
-  render(){
-  return (
-    <Grid className="social-news" fluid={true}>
-      <Row>
-        <Col lgOffset={1} lg={10}>
-          <h1>Social</h1>
-          <div>
-            <Tabs id="social-tabs" defaultActiveKey={2} >
-              <Tab eventKey={1} title="Facebook">
-                <Row>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 1</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 2</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 3</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                </Row>
-              </Tab>
-              <Tab eventKey={2} title="Twitter">
-                <Row>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 1</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 2</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 3</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                </Row>
-              </Tab>
-              <Tab eventKey={3} title="Instagram">
-                <Row>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 1</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 2</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                  <Col lg={4}>
-                    <Thumbnail src={placeholder} alt="242x200">
-                      <h3>Post 3</h3>
-                      <p>Description</p>
-                      <p>
-                        <Button bsStyle="primary">Button</Button>&nbsp;
-                        <Button bsStyle="default">Button</Button>
-                      </p>
-                    </Thumbnail>
-                  </Col>
-                </Row>
-              </Tab>
-            </Tabs>
-          </div>
-        </Col>
-      </Row>
-      <Row className="news-carousel">
-        <Col lgOffset={1} lg={12}>
-          <h1>News</h1>
-          <News />
-        </Col>
-      </Row>
-    </Grid>
+  constructor(props) {
+    super(props);
+    this.state = {
+      news: this.props.news,
+      twitter: this.props.twitter
+    };
+    this.renderNews = this.renderNews.bind(this);
+    this.renderTweets = this.renderTweets.bind(this);
+  }
+
+renderNews() {
+  var newsData = this.props.news;
+
+  if (this.props.news) {
+    return (
+      newsData.map(function(value){
+        return (
+          <Media className='news'>
+            <Media.Left align="top">
+              <img width={180} height={180} src={placeholder} role="presentation"/>
+            </Media.Left>
+            <Media.Body>
+              <Media.Heading>
+                <strong>
+                  <a href={value.url}>{value.name}</a>
+                </strong>
+              </Media.Heading>
+              <i>{value.publishDate}</i><br />
+              <i>{value.provider}</i><br /><br />
+              <p>{value.description}</p>
+            </Media.Body>
+          </Media>
+        )
+      })
+    )
+  } else {
+    console.log("die. no data");
+  }
+}
+
+renderTweets() {
+  var tweets = this.props.twitter;
+  if (this.props.twitter) {
+    return (
+      tweets.map(function(id) {
+        return (
+          <TweetEmbed id={id} />
+        )
+      })
     )
   }
+}
+
+render(){
+return (
+  <Grid className='social-news' fluid={true}>
+    <Row>
+      <Col xs={12} md={8}>
+        <h1>News</h1>
+        {this.renderNews()}
+      </Col>
+      <Col xs={6} md={4}>
+        <h1> Twitter </h1>
+        {this.renderTweets()}
+      </Col>
+    </Row>
+  </Grid>
+  )
+}
 }
 
 export default Social;

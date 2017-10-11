@@ -22,7 +22,7 @@ try:
 
         values = [urllib.parse.quote_plus(t) for t in tokens];
         response = urllib.request.urlopen(req1 % (key, *values))
-        data = json.loads(response.read())
+        data = json.loads(response.read().decode('utf-8'))
         if not data['predictions'] or len(data['predictions']) == 0:
             print("Couldn't get predictions for", tokens[0], file=sys.stderr)
             continue
@@ -30,8 +30,7 @@ try:
         place_id = data['predictions'][0]['place_id'];
 
         response = urllib.request.urlopen(req2 % (key, place_id))
-        data = json.loads(response.read())
-
+        data = json.loads(response.read().decode('utf-8'))
         postal_code = None
         if 'result' in data:
             for x in data['result']['address_components']:

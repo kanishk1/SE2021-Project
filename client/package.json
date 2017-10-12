@@ -4,7 +4,8 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "react-scripts": "0.8.5"
+    "react-scripts": "0.8.5",
+    "react-tweet-embed": "^1.0.8"
   },
   "scripts": {
     "start": "react-scripts start",

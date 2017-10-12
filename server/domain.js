@@ -198,7 +198,23 @@ router.get('/listings', (req, res) => {
     }
   };
   get('listings', uri, reqbody)
-    .then(data => res.json(data))
+    .then(data => {
+      var newdata = []
+      data.forEach((element, i) => {
+        if (data[i].type == "PropertyListing") {
+          var houseEntry = {
+            "price": data[i]["listing"]["priceDetails"]["displayPrice"],
+            "media": data[i]["listing"]["media"][0],
+            "address": data[i]["listing"]["propertyDetails"]["displayableAddress"],
+            "bathrooms": data[i]["listing"]["propertyDetails"]["bathrooms"],
+            "bedrooms": data[i]["listing"]["propertyDetails"]["bedrooms"],
+            "carspaces": data[i]["listing"]["propertyDetails"]["carspaces"],
+          };
+          newdata.push(houseEntry);
+        }
+      });
+      res.json(newdata);
+    })
     .catch(err => res.send(err))
 });
 

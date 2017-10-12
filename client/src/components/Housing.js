@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button} from 'react-bootstrap';
+import { Grid, Row, Col} from 'react-bootstrap';
 import { Thumbnail } from 'react-bootstrap';
 import Slider from 'react-slick';
 import bed from '../img/housingBedIcon.png';
@@ -58,9 +58,9 @@ class Housing extends Component {
                           <h2>{value.address}</h2>
                           <h3>{value.price}</h3>
                             <p>
-                              <img src={bath} alt="photo1"></img> {value.bathrooms}
-                              <img src={car} alt="photo2"></img> {value.carspaces}
-                              <img src={bed} alt="photo3"></img> {value.bedrooms}
+                              <img src={bath} alt=""></img> {value.bathrooms}
+                              <img src={car} alt=""></img> {value.carspaces}
+                              <img src={bed} alt=""></img> {value.bedrooms}
                             </p>
                         </Thumbnail>
                       </div>
@@ -92,12 +92,12 @@ class Housing extends Component {
       if (highestSold < entry["values"]["highestSoldPrice"]) {
         highestSold = entry["values"]["highestSoldPrice"];    
       }
-      if (lowestSold > entry["values"]["lowestSoldPrice"] || lowestSold == 0) {
+      if (lowestSold > entry["values"]["lowestSoldPrice"] || !lowestSold) {
         lowestSold = entry["values"]["lowestSoldPrice"];    
       }
     });  
-    totalMedianSoldPrice = totalMedianSoldPrice/arraySize;
-    totalMedianRentPrice = totalMedianRentPrice/arraySize;
+    totalMedianSoldPrice /= arraySize;
+    totalMedianRentPrice /= arraySize;
     var newStatsArray = [totalMedianSoldPrice, totalMedianRentPrice, totalNumSold, highestSold, lowestSold];
     return newStatsArray;
   }
@@ -122,7 +122,7 @@ class Housing extends Component {
                 </p>
               </Col>
               <Col className="housingPhoto" lg={6}>
-                <img src={housingPhoto} alt="stock photo goes here"></img>
+                <img src={housingPhoto} alt=""></img>
               </Col>
             </Row>
             <Row className="housingCarouselrow">

@@ -11,6 +11,6 @@ URL="https://opendata.transport.nsw.gov.au/api/download/ca137e89-b274-428c-988c-
 # curl -H "Authorization: Basic $AUTH" "$URL" |
 cat LocationFacilityData.csv | # temporary
 ./decode_tfnsw.pl | sort -u |
-perl -anF, -e 'if($F[0]eq$o[0]){$F[$_]|=$o[$_]for(2..4)}else{print join",",@o}@o=@F' |
+perl -anF, -e 'if($F[0]eq$o[0]){$F[$_]|=$o[$_]for(2..5)}else{print join",",@o}@o=@F' |
 mongoimport -h"${1:-localhost:27017}" -d"${2:-suburber}" -c"transport" \
-    -f"suburb,postcode,train,bus,ferry" --type=csv --drop
+    -f"suburb,postcode,train,bus,ferry,lightrail" --type=csv --drop

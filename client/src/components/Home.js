@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Sydney.jpg';
+import background from '../img/Home.jpeg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import '../css/Home.css';
 
 class Home extends Component {
  
@@ -58,10 +59,11 @@ class Home extends Component {
     if (this.state.isSubmitted === 0) {
       return (
         <div>
-          <div className="temp" style={{backgroundImage:'url('+background+')'}}>
+          <div style={{backgroundImage:'url('+background+')'}}>
           <Grid className="startPage" fluid={true}>
             <Row className="searchBox">
               <Col lgOffset={3} lg={6} >
+                <div className="temp">
                   <Autocomplete updateSuburb={this.updateSuburb}
                       updateProfile={this.updateProfile}
                       updateSubmission={this.updateSubmission}
@@ -71,6 +73,7 @@ class Home extends Component {
                       suburbs={this.state.suburbs}
                       getData={this.getData}
                       />
+                </div>
               </Col>
             </Row>
           </Grid>

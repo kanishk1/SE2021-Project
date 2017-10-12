@@ -61,7 +61,7 @@ class Introduction extends Component {
             Sydney Intl. Airport
           </Col>
           <Col lg={6}>
-            - {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)}km's
+            -  {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)} km's
           </Col>
         </Row>
         <Row>
@@ -69,7 +69,7 @@ class Introduction extends Component {
             Sydney CBD
           </Col>
           <Col lg={6}>
-            - {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)}km's
+            -  {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)} km's
           </Col>
         </Row>
         <Row>
@@ -77,7 +77,7 @@ class Introduction extends Component {
             Circular Quay
           </Col>
           <Col lg={6}>
-            - {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)}km's
+            -  {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)} km's
           </Col>
         </Row>
         <Row>
@@ -85,7 +85,7 @@ class Introduction extends Component {
             Darling Harbour
           </Col>
           <Col lg={6}>
-            - {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)}km's
+            -  {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)} km's
           </Col>
         </Row>
         <Row>
@@ -93,7 +93,7 @@ class Introduction extends Component {
             Bondi Beach
           </Col>
           <Col lg={6}>
-            - {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)}km's
+            -  {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)} km's
           </Col>
         </Row>
         </div>
@@ -110,16 +110,16 @@ class Introduction extends Component {
           <div className="weather-main">
             <Weather min={Math.round(weather[0].min)} max={Math.round(weather[0].max)} status={this.getWeatherStatus(weather[0].conditions)} day={moment().format('dddd')} />
           </div>
-          <div>
+          <div className="weather-one">
             <Weather min={Math.round(weather[1].min)} max={Math.round(weather[1].max)} status={this.getWeatherStatus(weather[1].conditions)} day={moment().add(1, 'days').format('dddd')} />
           </div>
-          <div>
+          <div className="weather-two">
             <Weather min={Math.round(weather[2].min)} max={Math.round(weather[2].max)} status={this.getWeatherStatus(weather[2].conditions)} day={moment().add(2, 'days').format('dddd')} />
           </div>
-          <div>
+          <div className="weather-three">
             <Weather min={Math.round(weather[3].min)} max={Math.round(weather[3].max)} status={this.getWeatherStatus(weather[3].conditions)} day={moment().add(3, 'days').format('dddd')} />
           </div>
-          <div>
+          <div className="weather-four">
             <Weather min={Math.round(weather[4].min)} max={Math.round(weather[4].max)} status={this.getWeatherStatus(weather[4].conditions)} day={moment().add(4, 'days').format('dddd')} />
           </div>
         </div>
@@ -165,8 +165,8 @@ class Introduction extends Component {
             </p>
           </Row>
           <Row className="suburbData">
-            <p><strong>Transport Access</strong></p>
             <Col className="transportCol" lg={4}>
+              <p><strong>Transport Access</strong></p>
               <Row>
                 <Col className="bus" lgOffset={3} lg={3}>
                   <i className="material-icons">directions_bus</i>
@@ -206,7 +206,7 @@ class Introduction extends Component {
             </Col>
           </Row>
         </Col>
-        <Col lgOffset={1} lg={4}>
+        <Col lgOffset={0} lg={4}>
           <iframe
             className="map"
             width="500"
@@ -216,7 +216,7 @@ class Introduction extends Component {
             allowFullScreen>
           </iframe>
           <Row>
-            <Col lgOffset={3}> 
+            <Col className="weatherName" lgOffset={3}> 
               <p><strong>Weather</strong></p>
               {this.renderWeather()}
             </Col>

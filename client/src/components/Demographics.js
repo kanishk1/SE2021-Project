@@ -129,7 +129,7 @@ class Demographics extends Component {
             
             <Col className="actualImg2" lg={12}>
                 <img 
-                width="400" height="200"
+                width="400" height="400"
                 src="http://demographics.coopercenter.org/files/2016/12/HeaderImage_PopData_600X325.jpg" alt="nah" ></img>
             </Col>
           </Row>

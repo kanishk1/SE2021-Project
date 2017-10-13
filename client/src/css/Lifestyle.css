@@ -5,7 +5,7 @@
   margin-top: 20px;
 }
 .lifeCol1{
-  margin-left: 20px;
+  margin-left: 30px;
 }
 .lifeCol2{
   text-align: right;
@@ -19,4 +19,14 @@
 }
 .title{
   font-size: 50px
+}
+.row .col-lg-2 .thumbnail{
+  height:200px;
+}
+.row .col-lg-2 h2{
+  text-align: center;
+}
+ul{
+  list-style-type: none;
+  line-height: 25px;
 }

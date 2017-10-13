@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import suburber from '../img/suburber.png';
+import background from '../img/Home.jpeg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
+import '../css/Home.css';
 
 class Home extends Component {
  
@@ -57,30 +58,47 @@ class Home extends Component {
   render() {
     if (this.state.isSubmitted === 0) {
       return (
-        <Grid className="startPage" fluid={true}>
-          <Row>
-            <Col lgOffset={4} lg={3}>
-              <img className="centre-block" src={suburber} alt="suburber"/>
-            </Col>
-          </Row>
-          <Row className="searchBox">
-            <Col lgOffset={3} lg={6} >
-              <Autocomplete updateSuburb={this.updateSuburb}
-                  updateProfile={this.updateProfile}
-                  updateSubmission={this.updateSubmission}
-                  selectedSuburb={this.state.selectedSuburb}
-                  selectedProfile={this.state.selectedProfile}
-                  selectedPostcode={this.state.selectedPostcode}
-                  suburbs={this.state.suburbs}
-                  getData={this.getData}/>
-            </Col>
-          </Row>
+        <div>
+          <div style={{backgroundImage:'url('+background+')'}}>
+          <Grid className="startPage" fluid={true}>
+            <Row className="searchBox">
+              <Col lgOffset={3} lg={6} >
+                <div className="temp">
+                  <Autocomplete updateSuburb={this.updateSuburb}
+                      updateProfile={this.updateProfile}
+                      updateSubmission={this.updateSubmission}
+                      selectedSuburb={this.state.selectedSuburb}
+                      selectedProfile={this.state.selectedProfile}
+                      selectedPostcode={this.state.selectedPostcode}
+                      suburbs={this.state.suburbs}
+                      getData={this.getData}
+                      />
+                </div>
+              </Col>
+            </Row>
+          </Grid>
+          </div>
+        <Grid>
           <Row className="carousel">
+              <Col lg={6} lgOffset={3}>
+                <PopularSuburbs />
+              </Col>
+          </Row>
+          <Row className="teamInfo">
             <Col lg={6} lgOffset={3}>
-              <PopularSuburbs />
+              <p>
+                Neil Baksi, Front End<br /> 
+                Jonathan Charles, Back End<br /> 
+                Siddhant Virmani, Front End<br /> 
+                Kanishk Purohit, Front End<br /> 
+                Md Mashiur Rahman, Back End<br />
+                Nathaniel Shead, Back End<br />
+              </p>
+              <p>All rights reserved under MIT License. Suburber 2017 </p>
             </Col>
           </Row>
         </Grid>
+        </div>
       )
     } else {
       var suburb = this.state.selectedSuburb.replace(/ */g, '').toLowerCase();

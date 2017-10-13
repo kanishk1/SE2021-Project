@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, } from 'react-bootstrap';
+import { Tab, Tabs,Tooltip } from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
@@ -106,6 +106,7 @@ class Results extends Component {
     return suburbs;
   }
 
+
   render () {
     if (this.state.isFetching === 0) {
       return (
@@ -150,7 +151,7 @@ class Results extends Component {
       )
     } else if (this.state.isFetching === 1) {
       return (
-        <img src={loading} alt="Wait" style={{align: 'center'}}/>
+        <img src={loading} alt="Wait" style={{align: 'center', height:'700px', paddingLeft:'30%'}}/>
       )
     }
   }

@@ -59,7 +59,7 @@ class App extends Component {
               pathname: '/',
               state: {isSubmitted: 0} 
             }}>
-              <img src={suburber} alt='logo' style={{height:'75px', width:'100px'}}/>
+              <img src={suburber} alt='logo' style={{height:'50px', width:'200px'}}/>
             </Link>
           </div>
           <Switch>

@@ -2,3 +2,19 @@
   align-self: center;
   padding-top:500px;  
 }
+.startPage{
+  padding-top: 10%;
+  padding-bottom: 30%;
+}
+.temp{
+  padding: 2%;
+  color: white;
+  background: rgba(0, 0, 0, .2);
+  opacity: 1;
+  box-shadow: 5px 5px 10px 5px black;
+}
+.teamInfo{
+  padding-top: 50px;
+  text-align: center;
+  font-size: medium
+}

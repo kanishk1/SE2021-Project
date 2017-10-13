@@ -1,0 +1,12 @@
+.social-news .row .col-lg-4{
+    width: 600px;
+    height: 1000px;
+    overflow: auto;
+    margin: 10px;
+}
+.social-news .row .col-lg-8{
+    width: 1200px;
+    height: 1000px;
+    overflow: auto;
+    margin: 10px;
+}

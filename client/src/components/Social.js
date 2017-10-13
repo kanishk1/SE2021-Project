@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Grid, Row, Col, Media} from 'react-bootstrap';
 import placeholder from '../img/placeholder.png';
 import TweetEmbed from 'react-tweet-embed';
-// import '../css/Social.css'
+import '../css/Social.css'
 
 class Social extends Component {
   constructor(props) {
@@ -62,11 +62,11 @@ render(){
 return (
   <Grid className='social-news' fluid={true}>
     <Row>
-      <Col xs={12} md={8}>
+      <Col lg={8}>
         <h1>News</h1>
         {this.renderNews()}
       </Col>
-      <Col xs={6} md={4}>
+      <Col lg={4}>
         <h1> Twitter </h1>
         {this.renderTweets()}
       </Col>

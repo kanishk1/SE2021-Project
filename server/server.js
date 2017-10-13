@@ -10,6 +10,8 @@ import weather from './openweather'
 import bing from './bing'
 import census from './census'
 import wiki from './wiki'
+import transport from './transport'
+
 const app = express()
 
 app.use(bodyParser.json())
@@ -25,7 +27,7 @@ router.get('/suburbs', (req, res) => {
   collection.find().toArray((err, docs) => {
     res.json({ docs });
   });
-})
+});
 
 app.use(router);
 app.use('/domain', domain);
@@ -35,6 +37,7 @@ app.use('/bing',bing);
 app.use('/places',places);
 app.use('/census',census);
 app.use('/wiki', wiki);
+app.use('/transport', transport);
 
 // any routes not picked up by the server api will be handled by the react router
 app.use('/*', staticFiles)

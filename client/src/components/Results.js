@@ -75,8 +75,9 @@ class Results extends Component {
       fetch('/places/search?keyword=religious+centres+' + this.state.selectedSuburb + "+NSW"),
       fetch('/twitter/search?suburb=' + this.state.selectedSuburb + '&num=25'),
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),    
-      fetch('/domain/listings?suburb=' + this.state.selectedSuburb)
+      fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),
+      fetch('/domain/listings?suburb=' + this.state.selectedSuburb),
+      fetch('/transport/facility?suburb=' + this.state.selectedSuburb)
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -119,6 +120,7 @@ class Results extends Component {
                 postcode={this.state.selectedPostcode}
                 location={this.state.data[11]}
                 weather={this.state.data[3]}
+                transfac={this.state.data[13]}
                 />
             </Tab>
             <Tab eventKey={2} title="Demographics">
@@ -133,7 +135,7 @@ class Results extends Component {
                 wiki={this.state.data[10]} />
             </Tab>
             <Tab eventKey={4} title="Housing">
-                <Housing 
+                <Housing
                   listings={this.state.data[12]}
                   stats={this.state.data[0]}
                 />

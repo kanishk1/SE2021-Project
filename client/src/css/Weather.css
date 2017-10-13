@@ -3,36 +3,36 @@
   box-sizing: border-box; }
 
 .weather-card {
-  margin: 1px 1px;
+  margin: 20px 5px;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  width: 180px;
-  height: 200px;
+  width: 270px;
+  height: 270px;
   background-color: white;
   box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
   animation: appear 500ms ease-out forwards; }
   .weather-card h1 {
     position: absolute;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 30px;
+    font-size: 80px;
     color: #B8B8B8;
     bottom: 0;
-    left: 20px;
+    left: 35px;
     opacity: 0;
     transform: translateX(150px);
     animation: title-appear 500ms ease-out 500ms forwards; }
   .weather-card h2 {
     position: absolute;
-    padding-bottom: 70px;
+    padding-bottom: 110px;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 30px;
+    font-size: 40px;
     color: #B8B8B8;
     bottom: 0;
-    left: 20px;
+    left: 35px;
     opacity: 0;
     transform: translateX(150px);
     animation: title-appear 500ms ease-out 500ms forwards; }
@@ -40,10 +40,10 @@
     position: absolute;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 30px;
+    font-size: 28px;
     color: #d2d2d2;
     bottom: 0;
-    left: 20px;
+    left: 35px;
     animation: title-appear 1s ease-out 500ms forwards; }
 
 .weather-icon {

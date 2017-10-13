@@ -224,8 +224,7 @@ class Introduction extends Component {
             src={maps}
             allowFullScreen>
           </iframe>
-          <Row>
-            <Col lgOffset={3}>
+          <Row> 
             <Col className="weatherName" lgOffset={3}> 
               <p><strong>Weather</strong></p>
               {this.renderWeather()}

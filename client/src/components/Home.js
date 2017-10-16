@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Home.jpeg';
+import background from '../img/Sydney.jpg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import '../css/Home.css';

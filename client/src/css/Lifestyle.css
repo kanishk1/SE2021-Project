@@ -23,6 +23,9 @@
 .row .col-lg-2 .thumbnail{
   height:200px;
 }
+.row .col-lg-2 .img{
+  height:200px;
+}
 .row .col-lg-2 h2{
   text-align: center;
 }

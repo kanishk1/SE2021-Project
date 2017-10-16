@@ -98,9 +98,8 @@ class Lifestyle extends Component {
           </Col>  
           <Col className="lifeCol2" lg={3}>
             <Row> 
-              <p> Photos here. Function is ready, have to pick an api </p>
               <Thumbnail src={placeholder} >
-                <p>img2</p>
+                
               </Thumbnail>
             </Row>  
           </Col>
@@ -124,8 +123,8 @@ class Lifestyle extends Component {
               <Thumbnail src={this.renderResultsPhotos('recreation')} >
               </Thumbnail>
           </Col>
-          <Col lg={2}>
-              <Thumbnail src={this.renderResultsPhotos('religios')} >
+          <Col lg={2}> 
+              <Thumbnail src={this.renderResultsPhotos('religious')} >
               </Thumbnail>
           </Col>
         </Row>

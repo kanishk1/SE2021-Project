@@ -106,6 +106,9 @@ class Demographics extends Component {
     return (
       <Grid fluid={true}>
         <Col className="demoCol1" lg={6}>
+        <Row className="title">
+            <p>Demographics</p>
+          </Row>
           <Row className="chartsOne">{/* Yellow Box*/} 
             <Col className="actualChart1" lg={12}>
               <p> Age group distribution </p>
@@ -122,15 +125,9 @@ class Demographics extends Component {
           </Row>
         </Col>  
         <Col className="demoCol2" lg={6}>
-          <Row className="title">
-            <p>Demographics</p>
-          </Row>
           <Row className="demoPhotos">{/* Blue Box*/} 
             
             <Col className="actualImg2" lg={12}>
-                <img 
-                width="400" height="400"
-                src="http://demographics.coopercenter.org/files/2016/12/HeaderImage_PopData_600X325.jpg" alt="nah" ></img>
             </Col>
           </Row>
           <Row className="chartsThree">{/* Orange Box*/} 

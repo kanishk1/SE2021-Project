@@ -19,7 +19,7 @@ function Weather({min, max, status, day }) {
 
 
 class Introduction extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -33,13 +33,13 @@ class Introduction extends Component {
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
-    var dLon = this.deg2rad(lon2-lon1); 
-    var a = 
+    var dLon = this.deg2rad(lon2-lon1);
+    var a =
       Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) *
       Math.sin(dLon/2) * Math.sin(dLon/2)
-      ; 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c; // Distance in km
     d = Math.round(d * 100) / 100
     return d;
@@ -104,7 +104,7 @@ class Introduction extends Component {
   renderWeather(){
     if (this.props.weather){
       var weather = this.props.weather;
-      
+
       return (
         <div className="weatherCol">
           <div className="weather-main">
@@ -134,13 +134,13 @@ class Introduction extends Component {
 
     if (cloudPattern.test(input)){
       return "cloud"
-    } 
+    }
     else if (rainPattern.test(input)){
       return "rain"
     }
     else if (sunPattern.test(input)){
       return "sun"
-    } 
+    }
     else {
       return "sun"
     }
@@ -148,12 +148,21 @@ class Introduction extends Component {
 
 
   render() {
-    if (this.props.wiki) { 
+    if (this.props.wiki) {
       var wikiSummary = this.props.wiki.summary
       var maps = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&q="+this.state.name+",NSW"
     }
+    if (this.props.transfac) {
+      const get_status = (mode) =>
+        this.props.transfac[mode] ? "done" : "close";
+
+      var bus_status = "done";
+      var train_status = get_status("train");
+      var ferry_status = get_status("ferry");
+      var lr_status = get_status("lightrail");
+    }
     return (
-     
+
       <Grid fluid={true}>
         <Col className="everything" lg={6}>
           <Row className="suburbName">
@@ -172,7 +181,7 @@ class Introduction extends Component {
                   <i className="material-icons">directions_bus</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
-                  <i className="material-icons done">done</i>
+                  <i className={"material-icons " + bus_status}>{bus_status}</i>
                 </Col>
               </Row>
               <Row>
@@ -180,7 +189,7 @@ class Introduction extends Component {
                   <i className="material-icons">train</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
-                  <i className="material-icons done">done</i>
+                  <i className={"material-icons " + train_status}>{train_status}</i>
                 </Col>
               </Row>
               <Row>
@@ -188,7 +197,7 @@ class Introduction extends Component {
                   <i className="material-icons">directions_boat</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
-                  <i className="material-icons close">close</i>
+                  <i className={"material-icons " + ferry_status}>{ferry_status}</i>
                 </Col>
               </Row>
               <Row>
@@ -196,7 +205,7 @@ class Introduction extends Component {
                   <i className="material-icons">tram</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
-                  <i className="material-icons close">close</i>
+                  <i className={"material-icons " + lr_status}>{lr_status}</i>
                 </Col>
               </Row>
             </Col>
@@ -212,7 +221,7 @@ class Introduction extends Component {
             width="500"
             height="500"
             frameBorder="0"
-            src={maps} 
+            src={maps}
             allowFullScreen>
           </iframe>
           <Row>

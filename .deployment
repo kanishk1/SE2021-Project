@@ -1,2 +1,2 @@
 [config]
-command = bash deploy.sh && yarn start:prod
+command = bash deploy.sh

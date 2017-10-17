@@ -75,9 +75,6 @@
   border-width:15px;
   text-align: center;
 }
-.carouselSlider div :hover {
-    border-color: #EDEDED;
-}
 .searchBox{
   margin-top: 20px;
 }

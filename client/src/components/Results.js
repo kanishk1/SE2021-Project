@@ -127,7 +127,10 @@ class Results extends Component {
               <Demographics data={this.state.data[1]}/>
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
-               <Lifestyle schools={this.state.data[4]}
+               <Lifestyle 
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
+                schools={this.state.data[4]}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}

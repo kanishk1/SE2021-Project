@@ -50,7 +50,6 @@ class Housing extends Component {
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
-    console.log(this.state.listings);
     var cards = this.state.listings.map(function(value) {
                     return(
                       <div>

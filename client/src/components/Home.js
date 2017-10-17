@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Sydney.jpg';
+import background from '../img/Home.jpeg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import '../css/Home.css';
 
 class Home extends Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +40,7 @@ class Home extends Component {
       })
       console.log("Selected Profile is: ", newValue)
     }
-  } 
+  }
 
   updateSubmission (newValue) {
       this.setState({
@@ -87,10 +87,10 @@ class Home extends Component {
           <Row className="teamInfo">
             <Col lg={6} lgOffset={3}>
               <p>
-                Neil Baksi, Front End<br /> 
-                Jonathan Charles, Back End<br /> 
-                Siddhant Virmani, Front End<br /> 
-                Kanishk Purohit, Front End<br /> 
+                Neil Baksi, Front End<br />
+                Jonathan Charles, Back End<br />
+                Siddhant Virmani, Front End<br />
+                Kanishk Purohit, Front End<br />
                 Md Mashiur Rahman, Back End<br />
                 Nathaniel Shead, Back End<br />
               </p>
@@ -104,7 +104,7 @@ class Home extends Component {
       var suburb = this.state.selectedSuburb.replace(/ */g, '').toLowerCase();
       return <Redirect push to={"/results/" + suburb} />
     }
-    
+
   }
 }
 

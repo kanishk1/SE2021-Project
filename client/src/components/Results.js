@@ -77,7 +77,10 @@ class Results extends Component {
       fetch('/wiki/search?suburb=' + this.state.selectedSuburb),
       fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),
       fetch('/domain/listings?suburb=' + this.state.selectedSuburb),
-      fetch('/transport/facility?suburb=' + this.state.selectedSuburb)
+      fetch('/transport/facility?suburb=' + this.state.selectedSuburb),
+      fetch('/places/search?keyword=council+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=police+station+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW")
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -127,10 +130,7 @@ class Results extends Component {
               <Demographics data={this.state.data[1]}/>
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
-               <Lifestyle 
-                name={this.state.selectedSuburb}
-                postcode={this.state.selectedPostcode}
-                schools={this.state.data[4]}
+               <Lifestyle schools={this.state.data[4]}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}
@@ -147,6 +147,9 @@ class Results extends Component {
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
+                council={this.state.data[14]}
+                police={this.state.data[15]}
+                hospital={this.state.data[16]}
               />
             </Tab>
         </Tabs>

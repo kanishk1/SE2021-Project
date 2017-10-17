@@ -1,6 +1,6 @@
 import express from 'express';
 import { Twitter } from 'twitter-node-client';
-import config from './data/twitter_config.json';
+import config from '../server/data/twitter_config.json';
 
 const router = express.Router();
 

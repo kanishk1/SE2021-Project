@@ -109,10 +109,15 @@ fi
 # 2. Select node version
 selectNodeVersion
 
-# 3. Install npm packages
+# 3. Installing Yarn
+echo Installing Yarn Globally
+eval $NPM_CMD install yarn -g
+
+# 3. Install Yarn Packages
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install
+  echo Installing Yarn Globally
+  eval yarn install --production
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi

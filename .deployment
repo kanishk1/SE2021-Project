@@ -1,2 +1,2 @@
 [config]
-command = bash deploy.sh
+command = bash export DBURL=mongodb://admin:password@ds121565.mlab.com:21565/suburber && deploy.sh && npm start

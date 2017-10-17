@@ -62,11 +62,11 @@ render(){
 return (
   <Grid className='social-news' fluid={true}>
     <Row>
-      <Col lg={8}>
+      <Col lg={7}>
         <h1>News</h1>
         {this.renderNews()}
       </Col>
-      <Col lg={4}>
+      <Col lg={5}>
         <h1> Twitter </h1>
         {this.renderTweets()}
       </Col>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail} from 'react-bootstrap';
+import { Grid, Row, Col, Thumbnail, Modal, Button, Panel, Well} from 'react-bootstrap';
 import '../css/Lifestyle.css';
 import placeholder from '../img/placeholder.png'
+import jobData from '../components/jobs.json'
 
 class Lifestyle extends Component {
   constructor(props) {
@@ -12,11 +13,50 @@ class Lifestyle extends Component {
       food: this.props.food,
       recreation: this.props.recreation,
       religious: this.props.religious,
-      wiki: this.props.wiki
+      wiki: this.props.wiki,
+      showModal: false,
+      modalPlaceName: "",
     };
     this.renderResults = this.renderResults.bind(this);
   }
 
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open(place) {
+    this.setState({ showModal: true, modalPlaceName: place});
+  }
+  
+  shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+  }
+
+  renderJobs(){
+    if (jobData){
+      this.shuffle(jobData.jobs)
+      return(
+        jobData.jobs.map(function(job){
+          const title = (
+            <h2 className="jobTitle">{job.title}</h2>
+          );
+          return (
+          <Panel header={title}>
+            <p className="company">{job.company}</p> 
+            <p className="postedDaysAgo">{job.daysAgo}</p>
+            <p className="salary"><strong>Salary</strong>: {job.salary}</p>
+            <br />
+            <p className="jobsummary">{job.summary}</p>
+          </Panel>
+          )
+        })
+      )
+    }
+  }
+  
   renderResults(place){
     if (this.props[place]){
       var places = this.props[place].results;
@@ -30,7 +70,10 @@ class Lifestyle extends Component {
       var items = [];
       for (var i = 0; i < count; i++) {
         if (this.props[place].results[i].name){
-          items.push(<li key={i}>{this.props[place].results[i].name}</li>);
+          items.push(
+            <li key={i} onClick={this.open.bind(this, this.props[place].results[i].name)}>
+              {this.props[place].results[i].name}
+            </li>);
         }
       }
       return (
@@ -46,12 +89,16 @@ class Lifestyle extends Component {
   renderResultsPhotos(place){
     if (this.props[place]) {
       if (this.props[place].hasOwnProperty('results')){
-        if (this.props[place].results[0].hasOwnProperty('photos')){
-          return "https://maps.googleapis.com/maps/api/place/photo?photoreference="+ this.props[place].results[0].photos[0].photo_reference +"&sensor=false&maxheight=196&maxwidth=196&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q"
+        var i = 0
+        var max = this.props[place].results.length
+        while (i < max) {
+          if (this.props[place].results[i].hasOwnProperty('photos')){
+            return "https://maps.googleapis.com/maps/api/place/photo?photoreference="+ this.props[place].results[i].photos[0].photo_reference +"&sensor=false&maxheight=196&maxwidth=196&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q"
+          }
+          i++
         }
-      } else {
-        return { placeholder }
       } 
+      return placeholder
     }
   }
 
@@ -60,23 +107,38 @@ class Lifestyle extends Component {
     if (this.props.wiki){
       var string = this.props.wiki.content
       
-      // Capture first section of commercial area
-      var commerceRegex = /== Commercial area ==\s(.*)/g; 
-      var match = commerceRegex.exec(string);
-      if (match != null) {
-        return match[1]
-      } 
-
       // Capture all of history
       var histroyRegex = /== History ==\n([\w\s,\.'-:]*)\n/g
-      match = histroyRegex.exec(string);
+      var match = histroyRegex.exec(string);
       if (match != null) {
-        return match[1]
+        return(
+          <div className="lifestyle-info">
+            <h3>Local History</h3>
+            <p>{match[1]}</p>
+          </div>
+          ) 
+      } 
+
+      // Capture first section of commercial area
+      var commerceRegex = /== Commercial area ==\s(.*)/g; 
+      match = commerceRegex.exec(string);
+      if (match != null) {
+        return(
+          <div className="lifestyle-info">
+            <h3>Local Commerce</h3>
+            <p>{match[1]}</p>
+          </div>
+          ) 
       } 
 
       else {
         console.log("Wiki parsing failed");
-        return "No local commerce or history information found"
+        return(
+          <div className="lifestyle-info">
+            <h3>Local History</h3>
+            <p>{this.props.name} was founded by english settlers in 1818. Notably, there are 3 main Aboriginal tribes that trace their roots back to this area of land. Although first contact with the Indigenous Australians led to a small altercation where a spear was thrown and a shot fired, later in the day when the party rowed up Lime Kiln Bay towards present day Mortdale they were greeted in a friendly manner by both men and women, and what could only be described as Australia's first picnic took place as food and drink were shared between the two peoples.</p>
+          </div>
+          )
       }
     }
   }
@@ -85,46 +147,59 @@ class Lifestyle extends Component {
     //{this.photos('Hurstville,_New_South_Wales')}S
     return (
       <Grid fluid={true}>
+      <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
+          <Modal.Header closeButton>
+            <Modal.Title>{this.state.modalPlaceName}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <p>Here is the best way to get there!</p>
+          <iframe
+            className="map"
+            width="500"
+            height="500"
+            frameBorder="0"
+            src={"https://www.google.com/maps/embed/v1/directions?key=AIzaSyC__Vt7Az9hTWwqOmWcsVaVQFEY1qV7LUo&origin="+this.props.name+"&destination="+this.state.modalPlaceName+","+this.props.name+"&mode=transit"}>
+          </iframe>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.close.bind(this)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
         <Row className="lifeRow1">
-          <Col className="lifeCol1" lg={4}>
+          <Col className="lifeCol1" lg={5}>
             <Row className="title">
               <p>Lifestyle</p>
             </Row>
             <Row className="">
-              <p>
                 {this.parseWiki()}
-              </p>
             </Row>
           </Col>  
-          <Col className="lifeCol2" lg={3}>
-            <Row> 
-              <Thumbnail src={placeholder} >
-                
-              </Thumbnail>
-            </Row>  
-          </Col>
-          <Col className="lifeCol3" lg={4}> 
+          <Col className="lifeCol3" lg={6}> 
+            <h3>Local Jobs</h3> 
+            <Well className="jobs">
+              {this.renderJobs()}
+            </Well>
           </Col>
         </Row>
         <Row>
           <Col lgOffset={1} lg={2}>
-              <Thumbnail src={this.renderResultsPhotos('schools')} >
+              <Thumbnail href="#" src={this.renderResultsPhotos('schools')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={this.renderResultsPhotos('shops')} >
+              <Thumbnail href="#" src={this.renderResultsPhotos('shops')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={this.renderResultsPhotos('restaurants')} >
+              <Thumbnail href="#" src={this.renderResultsPhotos('food')} >
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail src={this.renderResultsPhotos('recreation')} >
+              <Thumbnail href="#" src={this.renderResultsPhotos('recreation')} >
               </Thumbnail>
           </Col>
-          <Col lg={2}> 
-              <Thumbnail src={this.renderResultsPhotos('religious')} >
+          <Col lg={2}>
+              <Thumbnail href="#" src={this.renderResultsPhotos('religious')} >
               </Thumbnail>
           </Col>
         </Row>

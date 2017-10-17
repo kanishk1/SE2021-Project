@@ -8,6 +8,17 @@
 }
 .temp{
   padding: 2%;
+  width:1000px;
+  height:200px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  background: rgba(0, 0, 0, .7);
+  opacity: 1;
+  box-shadow: 5px 5px 10px 5px black;
+}
+.searchBox{
   color: white;
   background: rgba(0, 0, 0, .2);
   opacity: 1;

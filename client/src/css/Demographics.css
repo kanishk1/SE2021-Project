@@ -2,7 +2,11 @@
   margin-top: 30px;
 }
 .demoCol1{
-  padding: 50px;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+.demoCol1 .row{
+  padding-bottom: 20px;
 }
 .demoCol2{
   text-align: right;

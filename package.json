@@ -32,7 +32,7 @@
     "heroku-postbuild": "yarn build",
     "install": "(cd client && yarn) && (cd server && yarn)",
     "start": "concurrently \"npm run watch-css\" \"cd client && PORT=3000 yarn start\" \"cd server && PORT=3001 yarn start\"",
-    "start:prod": "cd server && yarn start:prod",
+    "start:prod": "concurrently \"cd client && yarn start\" \"cd server && yarn start:prod\"",
     "build-css": "node-sass-chokidar client/ -o client/",
     "watch-css": "npm run build-css && node-sass-chokidar client/ -o client/ --watch --recursive"
   }

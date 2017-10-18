@@ -22,11 +22,11 @@ renderNews() {
 
   if (this.props.news) {
     return (
-      newsData.map(function(value){
+      newsData.map(function(value, i){
         return (
-          <Media className='news'>
+          <Media className='news' key={i}>
             <Media.Left align="top">
-              <img width={100} height={150} src={placeholder} alt='Image'/>
+              <img width={100} height={150} src={placeholder} role="presentation"/>
             </Media.Left>
             <Media.Body>
               <Media.Heading>
@@ -51,9 +51,9 @@ renderTweets() {
   var tweets = this.props.twitter;
   if (this.props.twitter) {
     return (
-      tweets.map(function(id) {
+      tweets.map(function(id, i) {
         return (
-          <TweetEmbed id={id} />
+          <TweetEmbed id={id} key={i}/>
         )
       })
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Home.jpeg';
+import background from '../img/background_blur.jpg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import '../css/Home.css';
@@ -227,9 +227,8 @@ class Home extends Component {
       return (
         <div>
           <div id="idek" className="idek">
-            <img src={"https://i2.wp.com/getcoin.today/wp-content/uploads/2016/07/Cmm7TWPVMAA-cA7-1-1.jpg?fit=3901%2C2600"} className="image"
+            <img src={"https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg"} className="image"
                 ref={this.imageRef}
-                alt={background}
                 />
             <canvas ref={this.canvasRef}>
             </canvas>

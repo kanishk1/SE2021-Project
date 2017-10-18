@@ -66,7 +66,7 @@ class Results extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=10'),
+      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=5'),
       fetch('/weather/' + this.state.selectedPostcode),
       fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),
@@ -78,7 +78,7 @@ class Results extends Component {
       fetch('/places/search?keyword=' + this.state.selectedSuburb + "+NSW"),
       fetch('/domain/listings?suburb=' + this.state.selectedSuburb),
       fetch('/transport/facility?suburb=' + this.state.selectedSuburb),
-      fetch('/places/search?keyword=council+' + this.state.selectedSuburb + "+NSW"),
+      fetch('/places/search?keyword=fire+and+rescue' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=police+station+' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW")
     ]).then(responses =>
@@ -124,6 +124,9 @@ class Results extends Component {
                 location={this.state.data[11]}
                 weather={this.state.data[3]}
                 transfac={this.state.data[13]}
+                fire={this.state.data[14]}
+                police={this.state.data[15]}
+                hospital={this.state.data[16]}
                 />
             </Tab>
             <Tab eventKey={2} title="Demographics">
@@ -147,9 +150,7 @@ class Results extends Component {
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
-                council={this.state.data[14]}
-                police={this.state.data[15]}
-                hospital={this.state.data[16]}
+
               />
             </Tab>
         </Tabs>

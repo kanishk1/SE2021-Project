@@ -41,15 +41,15 @@ class Housing extends Component {
   }
 
   createCards () {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
-    };
+    // const settings = {
+    //   dots: true,
+    //   infinite: true,
+    //   speed: 500,
+    //   slidesToShow: 3,
+    //   slidesToScroll: 3,
+    //   nextArrow: <SampleNextArrow />,
+    //   prevArrow: <SamplePrevArrow />
+    // };
     var cards = this.state.listings.map(function(value) {
                     return(
                       <div>

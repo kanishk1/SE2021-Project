@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Sydney.jpg';
+import background from '../img/Home.jpeg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import '../css/Home.css';
@@ -89,8 +89,10 @@ class Home extends Component {
    * Resizes both canvases to fill the window.
    */
  resizeCanvases() {
-    this.imageCanvas.width = this.lineCanvas.width = document.body.clientWidth;
-    this.imageCanvas.height = this.lineCanvas.height = window.innerHeight;
+    if (this.imageCanvas) {
+      this.imageCanvas.width = this.lineCanvas.width = document.body.clientWidth;
+      this.imageCanvas.height = this.lineCanvas.height = window.innerHeight;
+    }
   }
   
   /**
@@ -227,6 +229,7 @@ class Home extends Component {
           <div id="idek" className="idek">
             <img src={"https://i2.wp.com/getcoin.today/wp-content/uploads/2016/07/Cmm7TWPVMAA-cA7-1-1.jpg?fit=3901%2C2600"} className="image"
                 ref={this.imageRef}
+                alt={background}
                 />
             <canvas ref={this.canvasRef}>
             </canvas>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs,Tooltip } from 'react-bootstrap';
+import { Tab, Tabs} from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Home from '../components/Home.js'
 import Results from '../components/Results.js'
-import suburber from '../img/suburber.png';
+import suburber from '../img/headerLogo.png';
 import {
   BrowserRouter as Router,
   Route,

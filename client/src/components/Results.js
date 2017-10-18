@@ -80,7 +80,11 @@ class Results extends Component {
       fetch('/transport/facility?suburb=' + this.state.selectedSuburb),
       fetch('/places/search?keyword=fire+and+rescue' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=police+station+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW")
+      fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW"),
+      // Details of a place for more photos
+      // Usage exactly like places search, be as specific as you can with query
+      // /places/details?keyword=chatswood+nsw
+      fetch('/places/details?keyword=' + this.state.selectedSuburb + 'NSW')
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {

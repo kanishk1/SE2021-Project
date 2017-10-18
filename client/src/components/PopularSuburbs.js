@@ -41,33 +41,33 @@ class PopularSuburbs extends Component {
     return (
       <Slider {...settings} className="carouselSlider">
         <div>
-          <Thumbnail src={placeholder} >
+          <Thumbnail href="#" src={placeholder} >
             <h2>Chatswood</h2>
           </Thumbnail>
         </div>
         <div>
-          <Thumbnail src={placeholder} >
+          <Thumbnail href="#" src={placeholder} >
             <h2>Kensington</h2>
           </Thumbnail>
         </div>
         <div>
-          <Thumbnail src={placeholder} >
+          <Thumbnail href="#" src={placeholder} >
             <h2>Hornsby</h2>
           </Thumbnail>
         </div>
         <div>
-          <Thumbnail src={placeholder} >
+          <Thumbnail href="#" src={placeholder} >
             <h2>DeeWhy</h2>
           </Thumbnail>
         </div>
         <div>
-          <Thumbnail src={placeholder} >
+          <Thumbnail href="#" src={placeholder} >
             <h2>Bondi</h2>
           </Thumbnail>
         </div>
         <div>
-          <Thumbnail src={placeholder} >
-            <h2>New York</h2>
+          <Thumbnail href="#" src={placeholder} >
+            <h2>Artarmon</h2>
           </Thumbnail>
         </div>
       </Slider>

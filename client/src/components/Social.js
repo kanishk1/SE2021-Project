@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Grid, Row, Col, Media} from 'react-bootstrap';
-import placeholder from '../img/placeholder.png';
-import TweetEmbed from 'react-tweet-embed';
+import placeholder from '../img/placeholder.png'
+
+import TweetEmbed from 'react-tweet-embed'
 import '../css/Social.css'
 
 class Social extends Component {
@@ -9,11 +10,12 @@ class Social extends Component {
     super(props);
     this.state = {
       news: this.props.news,
-      twitter: this.props.twitter
+      twitter: this.props.twitter,
     };
     this.renderNews = this.renderNews.bind(this);
     this.renderTweets = this.renderTweets.bind(this);
   }
+
 
 renderNews() {
   var newsData = this.props.news;
@@ -24,7 +26,7 @@ renderNews() {
         return (
           <Media className='news'>
             <Media.Left align="top">
-              <img width={180} height={180} src={placeholder} role="presentation"/>
+              <img width={100} height={150} src={placeholder} alt='Image'/>
             </Media.Left>
             <Media.Body>
               <Media.Heading>
@@ -58,15 +60,17 @@ renderTweets() {
   }
 }
 
+
+
 render(){
 return (
   <Grid className='social-news' fluid={true}>
     <Row>
-      <Col lg={8}>
+      <Col lg={7}>
         <h1>News</h1>
         {this.renderNews()}
       </Col>
-      <Col lg={4}>
+      <Col lg={5}>
         <h1> Twitter </h1>
         {this.renderTweets()}
       </Col>

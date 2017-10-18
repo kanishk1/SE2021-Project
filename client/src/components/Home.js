@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/Sydney.jpg';
+import background from '../img/Home.jpeg';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import '../css/Home.css';
 
 class Home extends Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class Home extends Component {
       selectedProfile: null,
       suburbs: this.props.suburbs,
       points: [],
-    }  
+    }
     this.updateSuburb = this.updateSuburb.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.updateSubmission = this.updateSubmission.bind(this);
@@ -227,6 +227,7 @@ class Home extends Component {
           <div id="idek" className="idek">
             <img src={"https://i2.wp.com/getcoin.today/wp-content/uploads/2016/07/Cmm7TWPVMAA-cA7-1-1.jpg?fit=3901%2C2600"} className="image"
                 ref={this.imageRef}
+                alt={background}
                 />
             <canvas ref={this.canvasRef}>
             </canvas>
@@ -241,7 +242,7 @@ class Home extends Component {
                         suburbs={this.state.suburbs}
                         getData={this.getData}
                         />
-              </div>  
+              </div>
             </div>
           </div>
           <Grid>
@@ -253,10 +254,10 @@ class Home extends Component {
             <Row className="teamInfo">
               <Col lg={6} lgOffset={3}>
                 <p>
-                  Neil Baksi, Front End<br /> 
-                  Jonathan Charles, Back End<br /> 
-                  Siddhant Virmani, Front End<br /> 
-                  Kanishk Purohit, Front End<br /> 
+                  Neil Baksi, Front End<br />
+                  Jonathan Charles, Back End<br />
+                  Siddhant Virmani, Front End<br />
+                  Kanishk Purohit, Front End<br />
                   Md Mashiur Rahman, Back End<br />
                   Nathaniel Shead, Back End<br />
                 </p>
@@ -270,7 +271,7 @@ class Home extends Component {
       var suburb = this.state.selectedSuburb.replace(/ */g, '').toLowerCase();
       return <Redirect push to={"/results/" + suburb} />
     }
-    
+
   }
 }
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
 import cx from 'classnames';
 import '../css/Introduction.css';
 import '../css/Weather.css';
 import moment from 'moment';
+import policePhoto from '../img/police.jpg'
+import firePhoto from '../img/fire.jpg'
+import hospoPhoto from '../img/hospo.jpg'
 
 function Weather({min, max, status, day }) {
   const cls = cx('weather-icon', status);
@@ -26,8 +29,13 @@ class Introduction extends Component {
       wiki: this.props.wiki,
       name: this.props.name,
       postcode: this.props.postcode,
-      weather: this.props.weather
+      weather: this.props.weather,
+      fire: this.props.fire,
+      police: this.props.police,
+      hospital: this.props.hospital,
     };
+    // this.renderPOI = this.renderPOI.bind(this);
+
   }
 
   getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -146,6 +154,59 @@ class Introduction extends Component {
     }
   }
 
+  renderPOI(place) {
+    if (this.props[place]) {
+      var places = this.props[place].results;
+      var count = 1;
+    }
+
+    var name = [];
+
+    var address = [];
+    for (var i = 0; i < count; i++) {
+      if (this.props[place].results[i]) {
+        name.push(this.props[place].results[i].name)
+        address.push(this.props[place].results[i].formatted_address)
+      }
+    }
+
+    if (place == 'police') {
+      return(
+        <Thumbnail src={policePhoto} >
+           <h3>{name}</h3>
+           <p>{address}</p>
+           <p>
+             <Button bsStyle="primary">Directions</Button>&nbsp;
+           </p>
+         </Thumbnail>)
+    } else if (place == 'hospital') {
+      return(
+        <Thumbnail src={hospoPhoto} >
+         <h3>{name}</h3>
+         <p>{address}</p>
+         <p>
+           <Button bsStyle="primary">Directions</Button>&nbsp;
+         </p>
+       </Thumbnail>
+      )
+    } else if (place == 'fire') {
+      return(
+        <Thumbnail src={firePhoto} >
+         <h3>{name}</h3>
+         <p>{address}</p>
+         <p>
+           <Button bsStyle="primary">Directions</Button>&nbsp;
+         </p>
+       </Thumbnail>
+      )
+
+   } else {
+     return (
+      <h1>Couldn\'t render details</h1>
+     )
+   }
+  }
+
 
   render() {
     if (this.props.wiki) {
@@ -208,10 +269,24 @@ class Introduction extends Component {
                   <i className={"material-icons " + lr_status}>{lr_status}</i>
                 </Col>
               </Row>
+
             </Col>
+
             <Col className="distancesCol" lgOffset={2} lg={6}>
               <p><strong>Distances to Popular Places</strong></p>
               {this.renderCalculatedDistances()}
+            </Col>
+          </Row>
+          <Row>
+            <h1> Local Points of Interest </h1>
+            <Col lg={4}>
+              {this.renderPOI('fire')}
+            </Col>
+            <Col lg={4}>
+              {this.renderPOI('police')}
+            </Col>
+            <Col lg={4}>
+              {this.renderPOI('hospital')}
             </Col>
           </Row>
         </Col>
@@ -225,7 +300,7 @@ class Introduction extends Component {
             allowFullScreen>
           </iframe>
           <Row>
-            <Col className="weatherName" lgOffset={3}> 
+            <Col className="weatherName" lgOffset={3}>
               <p><strong>Weather</strong></p>
               {this.renderWeather()}
             </Col>

@@ -43,9 +43,9 @@ function getResults(suburb, numResults) {
   });
 }
 
-function addImages(data) {
+async function addImages(data) {
   if (!data) {
-    return Promise.reject('Invalid parameters');
+    return await Promise.reject('Invalid parameters');
   }
   var newData;
   var pFunctionArray = data.map((v) => {
@@ -60,21 +60,22 @@ function addImages(data) {
     return (() => requestPromise(options));
   });
 
-  return Promise.all(pFunctionArray.map((pFn) => pFn()))
-      .then(function(logoData) {
-        return newData = logoData.map((l, i) => {
+  return await Promise.all(pFunctionArray.map((pFn) => pFn()))
+      .then(async function(logoData) {
+        return await Promise.all(logoData.map(async(l, i) => {
           if (l.length > 0) {
             data[i].logoUrl = l[0].logo;
           } else {
-            data[i].logoUrl = "http://catcountry105.com/wp-content/uploads/sites/205/news-3.jpg";
+            // var options = {
+            //   uri: "http://api.img4me.com/?text=" + data[i].provider + "&font=arial&fcolor=FFFFFF&size=35&bcolor=000000&type=png"
+            // }
+            // data[i].logoUrl = await requestPromise(options).then((res) => res);
+            data[i].logoUrl = "http://place-hold.it/200x100/000000/ffffff/?text=" + data[i].provider + "&bold&fontsize=16";
           }
           return data[i];
-        });
-      })
-      .then(function(newData) {
-        return Promise.resolve(newData);
+        }));
       });
-}
+};
 
 // Example Call... http://localhost:3001/bing/search?suburb=hurstville&num=10
 router.get('/search', (req, res) => {

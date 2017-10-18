@@ -166,19 +166,21 @@ class Home extends Component {
    */
   drawImageCanvas() {
     // Emulate background-size: cover
-    var width = this.imageCanvas.width;
-    var height = this.imageCanvas.width / this.image.naturalWidth * this.image.naturalHeight;
+    if (this.imageCanvas) {
+      var width = this.imageCanvas.width;
+      var height = this.imageCanvas.width / this.image.naturalWidth * this.image.naturalHeight;
+      
+      if (height < this.imageCanvas.height) {
+        width = this.imageCanvas.height / this.image.naturalHeight * this.image.naturalWidth;
+        height = this.imageCanvas.height;
+      }
     
-    if (height < this.imageCanvas.height) {
-      width = this.imageCanvas.height / this.image.naturalHeight * this.image.naturalWidth;
-      height = this.imageCanvas.height;
+      this.imageCanvasContext.clearRect(0, 0, this.imageCanvas.width, this.imageCanvas.height);
+      this.imageCanvasContext.globalCompositeOperation = 'source-over';
+      this.imageCanvasContext.drawImage(this.image, 0, 0, width, height);
+      this.imageCanvasContext.globalCompositeOperation = 'destination-in';
+      this.imageCanvasContext.drawImage(this.lineCanvas, 0, 0);
     }
-  
-    this.imageCanvasContext.clearRect(0, 0, this.imageCanvas.width, this.imageCanvas.height);
-    this.imageCanvasContext.globalCompositeOperation = 'source-over';
-    this.imageCanvasContext.drawImage(this.image, 0, 0, width, height);
-    this.imageCanvasContext.globalCompositeOperation = 'destination-in';
-    this.imageCanvasContext.drawImage(this.lineCanvas, 0, 0);
   }
   
   updateSuburb (newValue) {

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import '../css/Home.css';
 
 class Home extends Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +17,7 @@ class Home extends Component {
       selectedProfile: null,
       suburbs: this.props.suburbs,
       points: [],
-    }  
+    }
     this.updateSuburb = this.updateSuburb.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.updateSubmission = this.updateSubmission.bind(this);
@@ -67,7 +67,7 @@ class Home extends Component {
     this.resizeCanvases();
     this.tick();
   }
-  
+
   /**
    * Records the user's cursor position.
    *
@@ -84,7 +84,7 @@ class Home extends Component {
       points: newPoints
     })
   }
-  
+
   /**
    * Resizes both canvases to fill the window.
    */
@@ -94,7 +94,7 @@ class Home extends Component {
       this.imageCanvas.height = this.lineCanvas.height = window.innerHeight;
     }
   }
-  
+
   /**
    * The main loop, called at ~60hz.
    */
@@ -107,13 +107,13 @@ class Home extends Component {
     });
 
     this.setState({points: newPoints});
-  
+
     this.drawLineCanvas();
     this.drawImageCanvas();
     //console.log('in tick');
     requestAnimationFrame(this.tick);
   }
-  
+
   /**
    * Draws a line using the recorded cursor positions.
    *
@@ -124,34 +124,34 @@ class Home extends Component {
     var maximumLineWidth = 100;
     var lineWidthRange = maximumLineWidth - minimumLineWidth;
     var maximumSpeed = 50;
-  
+
     this.lineCanvasContext.clearRect(0, 0, this.lineCanvas.width, this.lineCanvas.height);
     this.lineCanvasContext.lineCap = 'round';
     this.lineCanvasContext.shadowBlur = 30;
     this.lineCanvasContext.shadowColor = '#FFF';
-    
+
     for (var i = 1; i < this.state.points.length; i++) {
       var point = this.state.points[i];
       var previousPoint = this.state.points[i - 1];
-  
+
       // Change line width based on speed
       var distance = this.getDistanceBetween(point, previousPoint);
       var speed = Math.max(0, Math.min(maximumSpeed, distance));
       var percentageLineWidth = (maximumSpeed - speed) / maximumSpeed;
       this.lineCanvasContext.lineWidth = minimumLineWidth + percentageLineWidth * lineWidthRange;
-  
+
       // Fade points as they age
       var age = Date.now() - point.time;
       var opacity = (this.pointLifetime - age) / this.pointLifetime;
       this.lineCanvasContext.strokeStyle = 'rgba(0, 0, 0, ' + opacity + ')';
-      
+
       this.lineCanvasContext.beginPath();
       this.lineCanvasContext.moveTo(previousPoint.x, previousPoint.y);
       this.lineCanvasContext.lineTo(point.x, point.y);
       this.lineCanvasContext.stroke();
     }
   }
-  
+
   /**
    * @param {{x: number, y: number}} a
    * @param {{x: number, y: number}} b
@@ -160,7 +160,7 @@ class Home extends Component {
   getDistanceBetween(a, b) {
     return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
   }
-  
+
   /**
    * Draws the original image, masked by the line drawn in drawLineToCanvas.
    */
@@ -168,19 +168,19 @@ class Home extends Component {
     // Emulate background-size: cover
     var width = this.imageCanvas.width;
     var height = this.imageCanvas.width / this.image.naturalWidth * this.image.naturalHeight;
-    
+
     if (height < this.imageCanvas.height) {
       width = this.imageCanvas.height / this.image.naturalHeight * this.image.naturalWidth;
       height = this.imageCanvas.height;
     }
-  
+
     this.imageCanvasContext.clearRect(0, 0, this.imageCanvas.width, this.imageCanvas.height);
     this.imageCanvasContext.globalCompositeOperation = 'source-over';
     this.imageCanvasContext.drawImage(this.image, 0, 0, width, height);
     this.imageCanvasContext.globalCompositeOperation = 'destination-in';
     this.imageCanvasContext.drawImage(this.lineCanvas, 0, 0);
   }
-  
+
   updateSuburb (newValue) {
     if (newValue != null) {
       this.setState({
@@ -191,7 +191,7 @@ class Home extends Component {
       this.props.sendUpdatedSuburb(newValue)
     }
   }
-  
+
   updateProfile (newValue) {
     if (newValue != null) {
       this.setState({
@@ -199,8 +199,8 @@ class Home extends Component {
       })
       console.log("Selected Profile is: ", newValue)
     }
-  } 
-  
+  }
+
   updateSubmission (newValue) {
       this.setState({
         isSubmitted: 1
@@ -220,7 +220,7 @@ class Home extends Component {
   imageRef(i) {
     this.image = i;
   }
-  
+
 
   render() {
     if (this.state.isSubmitted === 0) {
@@ -244,7 +244,7 @@ class Home extends Component {
                         suburbs={this.state.suburbs}
                         getData={this.getData}
                         />
-              </div>  
+              </div>
             </div>
           </div>
           <Grid>
@@ -256,10 +256,10 @@ class Home extends Component {
             <Row className="teamInfo">
               <Col lg={6} lgOffset={3}>
                 <p>
-                  Neil Baksi, Front End<br /> 
-                  Jonathan Charles, Back End<br /> 
-                  Siddhant Virmani, Front End<br /> 
-                  Kanishk Purohit, Front End<br /> 
+                  Neil Baksi, Front End<br />
+                  Jonathan Charles, Back End<br />
+                  Siddhant Virmani, Front End<br />
+                  Kanishk Purohit, Front End<br />
                   Md Mashiur Rahman, Back End<br />
                   Nathaniel Shead, Back End<br />
                 </p>
@@ -273,7 +273,7 @@ class Home extends Component {
       var suburb = this.state.selectedSuburb.replace(/ */g, '').toLowerCase();
       return <Redirect push to={"/results/" + suburb} />
     }
-    
+
   }
 }
 

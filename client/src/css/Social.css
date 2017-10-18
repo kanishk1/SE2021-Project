@@ -1,11 +1,12 @@
-.social-news .row .col-lg-4{
-    width: 600px;
+.social-news .row .col-lg-7{
+    width: 900px;
     height: 1000px;
     overflow: auto;
     margin: 10px;
+    border-right: 1px solid #eee;
 }
-.social-news .row .col-lg-8{
-    width: 1200px;
+.social-news .row .col-lg-5{
+    width: 500px;
     height: 1000px;
     overflow: auto;
     margin: 10px;

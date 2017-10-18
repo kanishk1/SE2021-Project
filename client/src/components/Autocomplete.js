@@ -42,7 +42,7 @@ class Autocomplete extends Component {
 
   render () {
     return (
-      <div className = "search">
+      <div className="search">
        <Select 
           autofocus={true} 
           options={this.state.options}

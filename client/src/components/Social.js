@@ -26,7 +26,7 @@ renderNews() {
         return (
           <Media className='news' key={i}>
             <Media.Left align="top">
-              <img width={100} height={150} src={placeholder} role="presentation"/>
+              <img width={100} height={150} src={value.logoUrl} role="presentation"/>
             </Media.Left>
             <Media.Body>
               <Media.Heading>

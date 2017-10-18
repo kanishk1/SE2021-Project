@@ -2,6 +2,7 @@ import Select from 'react-select';
 import React, { Component } from 'react';
 import 'react-select/dist/react-select.css';
 import { Button, Form, FormGroup, Radio } from 'react-bootstrap';
+import '../css/Autocomplete.css';
 
 class Autocomplete extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class Autocomplete extends Component {
 
   render () {
     return (
-      <div>
+      <div className = "search">
        <Select 
           autofocus={true} 
           options={this.state.options}

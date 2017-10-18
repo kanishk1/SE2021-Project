@@ -66,7 +66,7 @@ class Results extends Component {
     return Promise.all([
       fetch('/domain/housing?suburb=' + this.state.selectedSuburb),
       fetch('/domain/demographics?suburb=' + this.state.selectedSuburb),
-      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=5'),
+      fetch('/bing/search?suburb=' + this.state.selectedSuburb + '&num=10'),
       fetch('/weather/' + this.state.selectedPostcode),
       fetch('/places/search?keyword=schools+' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=shops+' + this.state.selectedSuburb + "+NSW"),

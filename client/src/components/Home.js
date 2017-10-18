@@ -89,8 +89,10 @@ class Home extends Component {
    * Resizes both canvases to fill the window.
    */
  resizeCanvases() {
-    this.imageCanvas.width = this.lineCanvas.width = document.body.clientWidth;
-    this.imageCanvas.height = this.lineCanvas.height = window.innerHeight;
+    if (this.imageCanvas) {
+      this.imageCanvas.width = this.lineCanvas.width = document.body.clientWidth;
+      this.imageCanvas.height = this.lineCanvas.height = window.innerHeight;
+    }
   }
   
   /**

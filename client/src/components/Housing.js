@@ -50,9 +50,9 @@ class Housing extends Component {
     //   nextArrow: <SampleNextArrow />,
     //   prevArrow: <SamplePrevArrow />
     // };
-    var cards = this.state.listings.map(function(value) {
+    var cards = this.state.listings.map(function(value, i) {
                     return(
-                      <div>
+                      <div key={i}>
                         <Thumbnail src={value.media.url} >
                           <h2>{value.address}</h2>
                           <h3>{value.price}</h3>
@@ -196,9 +196,9 @@ class Housing extends Component {
       prevArrow: <SamplePrevArrow />
     };
     
-    var photos = this.state.listings.map(function(value) {
+    var photos = this.state.listings.map(function(value, i) {
                     return(
-                      <div>
+                      <div key={i}>
                         <Thumbnail src={value.media.url} >
                         </Thumbnail>
                       </div>
@@ -236,12 +236,12 @@ class Housing extends Component {
             </Row>
             <Row className="housingStats">
               <Col className="housingGenStats" lg={3}>
-                <ul class="list-group">
-                  <li class="list-group-item"> Average Median Selling Price: ${this.getHousingStats()[0]}</li>
-                  <li class="list-group-item"> Average Median Renting Price: ${this.getHousingStats()[1]}</li>
-                  <li class="list-group-item"> Average Number Of Sales Per Year: {this.getHousingStats()[2]}</li>
-                  <li class="list-group-item"> Most Expensive Sale: ${this.getHousingStats()[3]}</li>
-                  <li class="list-group-item"> Least Expensive Sale: ${this.getHousingStats()[4]}</li>
+                <ul className="list-group">
+                  <li className="list-group-item"> Average Median Selling Price: ${this.getHousingStats()[0]}</li>
+                  <li className="list-group-item"> Average Median Renting Price: ${this.getHousingStats()[1]}</li>
+                  <li className="list-group-item"> Average Number Of Sales Per Year: {this.getHousingStats()[2]}</li>
+                  <li className="list-group-item"> Most Expensive Sale: ${this.getHousingStats()[3]}</li>
+                  <li className="list-group-item"> Least Expensive Sale: ${this.getHousingStats()[4]}</li>
                 </ul>
               </Col>
               <Col className="housingDetStats" lg={9}>

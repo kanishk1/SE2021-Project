@@ -156,7 +156,7 @@ class Introduction extends Component {
 
   renderPOI(place) {
     if (this.props[place]) {
-      var places = this.props[place].results;
+      //var places = this.props[place].results;
       var count = 1;
     }
 
@@ -170,7 +170,7 @@ class Introduction extends Component {
       }
     }
 
-    if (place == 'police') {
+    if (place === 'police') {
       return(
         <Thumbnail src={policePhoto} >
            <h3>{name}</h3>
@@ -179,7 +179,7 @@ class Introduction extends Component {
              <Button bsStyle="primary">Directions</Button>&nbsp;
            </p>
          </Thumbnail>)
-    } else if (place == 'hospital') {
+    } else if (place === 'hospital') {
       return(
         <Thumbnail src={hospoPhoto} >
          <h3>{name}</h3>
@@ -189,7 +189,7 @@ class Introduction extends Component {
          </p>
        </Thumbnail>
       )
-    } else if (place == 'fire') {
+    } else if (place === 'fire') {
       return(
         <Thumbnail src={firePhoto} >
          <h3>{name}</h3>
@@ -202,7 +202,7 @@ class Introduction extends Component {
 
    } else {
      return (
-      <h1>Couldn\'t render details</h1>
+      <h1>Couldn't render details</h1>
      )
    }
   }

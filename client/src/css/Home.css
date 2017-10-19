@@ -20,14 +20,19 @@
   height:100%;
   position: relative;
   /* border:  */
-  font-size: 20px;
+  font-size: 30px;
   color: white;
   opacity: 1;
 } 
+
+.searchBox button{
+  font-size: 20px;
+  align-self: center;
+}
 .teamInfo{
   padding-top: 50px;
   text-align: center;
-  font-size: medium
+  font-size: large;
 }
 
 .image {
@@ -52,3 +57,10 @@
 .center-content{
   color: white;
 }
+.carousel img{
+  height:150px;
+}
+.carousel .thumbnail{
+  margin-left: 5px;
+}
+

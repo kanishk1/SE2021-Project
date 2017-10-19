@@ -263,19 +263,19 @@ class Demographics extends Component {
           <Row className="chartsThree">{/* Orange Box*/}
             <Col className="actualChart3" lg={12}>
               <h3> Religion Distribution </h3>
-              <Bar data={chart4Data} width={5} height={5} options={{}}/>
+              <Bar data={chart4Data} width={5} height={4} options={{}}/>
             </Col>
           </Row>
           <Row className="chartsFour">
             <Col className="actualChart4" lg={12}>
               <h3> Education Distribution </h3>
-              <Line data={chart5Data} width={5} height={5} options={{}}/>
+              <Line data={chart5Data} width={5} height={4} options={{}}/>
             </Col>
           </Row>
           <Row className="chartsNine">
             <Col className="actualChart9" lg={12}>
               <h3> Household Income </h3>
-              <Bar data={chart9Data} width={5} height={5} options={{}}/>
+              <Bar data={chart9Data} width={5} height={4} options={{}}/>
             </Col>
           </Row>
         </Col>

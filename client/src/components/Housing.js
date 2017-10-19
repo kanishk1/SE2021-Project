@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Grid, Row, Col} from 'react-bootstrap';
 import { Thumbnail } from 'react-bootstrap';
 import Slider from 'react-slick';
-import bed from '../img/housingBedIcon.png';
-import car from '../img/housingCarIcon.png';
-import bath from '../img/housingBathIcon.png';
+import bed from '../img/bed.png';
+import car from '../img/transport.png';
+import bath from '../img/bathtub.png';
 import { Bar } from 'react-chartjs-2';
 import '../css/Housing.css';
 
@@ -46,6 +46,9 @@ class Housing extends Component {
   createCards () {
     var cards = this.state.listings.map(function(value, i) {
                     var link = "http://www.domain.com.au/"+value.id;
+                    if (value.carspaces){
+                        value.carspaces = 0;
+                    }
                     return(
                         <div key={i}>
                           <Thumbnail src={value.media.url}>
@@ -255,15 +258,19 @@ class Housing extends Component {
               <Col className="housingDetStats" lg={10}>
                 <Row className="housingGraphs">
                   <Col className="housingStats1" lg={3}>
+                    <h3>Median Property Prices</h3>
                     <Bar data={this.getHousingCharts()[0]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats2" lg={3}>
+                    <h3>Number of Houses Sold</h3>
                     <Bar data={this.getHousingCharts()[1]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats3" lg={3}>
+                    <h3>Maximum Sale Price</h3>
                     <Bar data={this.getHousingCharts()[2]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats4" lg={3}>
+                    <h3>Minimum Sale Prices</h3>
                     <Bar data={this.getHousingCharts()[3]} width={4} height={4} options={options}/>
                   </Col>
                 </Row>

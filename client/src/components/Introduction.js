@@ -65,7 +65,7 @@ class Introduction extends Component {
             Sydney Intl. Airport:
           </Col>
           <Col lg={4}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)}kms
+            {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)}km
           </Col>
         </Row>
         <Row>
@@ -73,7 +73,7 @@ class Introduction extends Component {
             Sydney CBD:
           </Col>
           <Col lg={4}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)}kms
+            {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)}km
           </Col>
         </Row>
         <Row>
@@ -81,7 +81,7 @@ class Introduction extends Component {
             Circular Quay:
           </Col>
           <Col lg={4}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)}kms
+            {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)}km
           </Col>
         </Row>
         <Row>
@@ -89,7 +89,7 @@ class Introduction extends Component {
             Darling Harbour:
           </Col>
           <Col lg={4}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)}kms
+            {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)}km
           </Col>
         </Row>
         <Row>
@@ -97,7 +97,7 @@ class Introduction extends Component {
             Bondi Beach:
           </Col>
           <Col lg={4}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)}kms
+            {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)}km
           </Col>
         </Row>
         </div>

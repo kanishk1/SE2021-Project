@@ -1,35 +1,49 @@
-.summary{
-  margin-top: 30px;
-}
-.demoCol1{
-  padding-left: 30px;
-  padding-top: 20px;
-}
-.demoCol1 .row{
-  padding-bottom: 20px;
-}
-.demoCol2{
-  text-align: right;
-}
 .title{
   font-size: 50px
 }
+.subtitle{
+  font-size: 20px
+}
 .chartsOne{
+  padding-top: 5%;
   background-color: white;
 }
 .chartsTwo{
+  padding-top: 5%;
   background-color: white;
 }
 .chartsThree{
-  margin-top:30px;
+  padding-top: 5%;
   background-color: white;
 }
-.demoPhotos{
+.chartsFour{
   background-color: white;
 }
-
+.chartsFive{
+  padding-top: 5%;
+  background-color: white;
+}
+.chartsSix{
+  padding-top: 5%;
+  background-color: white;
+}
+.chartsSeven{
+  padding-top: 5%;
+  background-color: white;
+}
+.chartsEight{
+  padding-top: 5%;
+  background-color: white;
+}
+.chartsNine{
+  padding-top: 5%;
+  background-color: white;
+}
+.chartsTen{
+  padding-top: 5%;
+  background-color: white;
+}
 .actualChart1{
-
   text-align: center;
   background-color: white;
 }
@@ -41,9 +55,32 @@
   text-align: center;
   background-color: white;
 }
-.actualImg1{
-  align-self: auto;
+.actualChart4{
+  text-align: center;
+  background-color: white;
 }
-.actualImg2{
-  align-self: auto;
+.actualChart5{
+  text-align: center;
+  background-color: white;
 }
+.actualChart6{
+  text-align: center;
+  background-color: white;
+}
+.actualChart7{
+  text-align: center;
+  background-color: white;
+}
+.actualChart8{
+  text-align: center;
+  background-color: white;
+}
+.actualChart9{
+  text-align: center;
+  background-color: white;
+}
+.actualChart10{
+  text-align: center;
+  background-color: white;
+}
+

@@ -6,6 +6,7 @@ import bed from '../img/housingBedIcon.png';
 import car from '../img/housingCarIcon.png';
 import bath from '../img/housingBathIcon.png';
 import { Bar } from 'react-chartjs-2';
+import '../css/Housing.css';
 
 const SampleNextArrow = (props) => {
   const {className, style, onClick} = props
@@ -34,22 +35,15 @@ class Housing extends Component {
     super(props);
     this.state = {
       listings: this.props.listings,
-      stats: this.props.stats
+      stats: this.props.stats,
+      name: this.props.name,
+      photos: this.props.photos,
     };
     
     this.createCards = this.createCards.bind(this);
   }
 
   createCards () {
-    // const settings = {
-    //   dots: true,
-    //   infinite: true,
-    //   speed: 500,
-    //   slidesToShow: 3,
-    //   slidesToScroll: 3,
-    //   nextArrow: <SampleNextArrow />,
-    //   prevArrow: <SamplePrevArrow />
-    // };
     var cards = this.state.listings.map(function(value, i) {
                     return(
                       <div key={i}>
@@ -103,6 +97,11 @@ class Housing extends Component {
     totalMedianSoldPrice /= arraySize;
     totalMedianRentPrice /= arraySize;
     var newStatsArray = [totalMedianSoldPrice, totalMedianRentPrice, totalNumSold, highestSold, lowestSold];
+
+    newStatsArray.forEach(function(part, index, arr) {
+      arr[index] = part.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    });
+    
     return newStatsArray;
   }
 
@@ -125,17 +124,11 @@ class Housing extends Component {
       'rgba(255, 99, 132, 0.2)',
       'rgba(54, 162, 235, 0.2)',
       'rgba(255, 206, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(255, 159, 64, 0.2)'
     ];
     var borderColor = [
       'rgba(255,99,132,1)',
       'rgba(54, 162, 235, 1)',
       'rgba(255, 206, 86, 1)',
-      'rgba(75, 192, 192, 1)',
-      'rgba(153, 102, 255, 1)',
-      'rgba(255, 159, 64, 1)'
     ]
     var medianSoldPriceChart = {
       labels: yearlabels,
@@ -187,19 +180,28 @@ class Housing extends Component {
   
   getHousingPhotoCarousel () {
     const settings = {
-      dots: true,
+      dots: false,
+      draggable: true,
+      swipeToSlide: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
+      autoplay:  true,
+      autoplaySpeed: 10000,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
     
-    var photos = this.state.listings.map(function(value, i) {
+    var photoarray = [];
+    var rawphotoarray = this.props.photos.result.photos;
+    rawphotoarray.forEach(function(element, index, arr) {
+        photoarray.push("https://maps.googleapis.com/maps/api/place/photo?photoreference="+element.photo_reference+"&sensor=false&maxheight=400&key=AIzaSyAu2xaFuNTQ0JQPUIXMILT1l29nuWYEO0Q");
+    });
+    var photos = photoarray.map(function(value, i) {
                     return(
                       <div key={i}>
-                        <Thumbnail src={value.media.url} >
+                        <Thumbnail src={value} >
                         </Thumbnail>
                       </div>
                     )
@@ -218,24 +220,24 @@ class Housing extends Component {
           <Grid fluid={true}>
             <Row className="housingTitleRow">
               <Col className="housingTitleCol" lg={12}>
-                <h1>
+                <p>
                   Housing
-                </h1>
+                </p>
               </Col>
             </Row>
             <Row className="housingStatsTitleRow">
-              <Col className="housingStatsTitleCol">
-                <h2>
-                  Housing Statistics [2015-Current]
-                </h2>
+              <Col className="housingStatsTitleCol" lg={12}>
+                <h3>
+                  Housing Statistics
+                </h3>
                 <p>
-                  Here are some general statistics regarding housing for this region
-                  and more detailed data from 2015 onwards graphed.
+                  Here are some general housing statistics for {this.props.name} and
+                  also more in-depth data from 2015 onwards.
                 </p>
               </Col>
             </Row>
             <Row className="housingStats">
-              <Col className="housingGenStats" lg={3}>
+              <Col className="housingGenStats" lg={2}>
                 <ul className="list-group">
                   <li className="list-group-item"> Average Median Selling Price: ${this.getHousingStats()[0]}</li>
                   <li className="list-group-item"> Average Median Renting Price: ${this.getHousingStats()[1]}</li>
@@ -244,45 +246,47 @@ class Housing extends Component {
                   <li className="list-group-item"> Least Expensive Sale: ${this.getHousingStats()[4]}</li>
                 </ul>
               </Col>
-              <Col className="housingDetStats" lg={9}>
+              <Col className="housingDetStats" lg={8}>
                 <Row className="housingGraphs">
-                  <Col className="housingStats1" lg={2}>
-                    <Bar data={this.getHousingCharts()[0]} width={2} height={3} options={{}}/>
+                  <Col className="housingStats1" lg={3}>
+                    <Bar data={this.getHousingCharts()[0]} width={2} height={2} options={{}}/>
                   </Col>
-                  <Col className="housingStats2" lg={2}>
-                    <Bar data={this.getHousingCharts()[1]} width={2} height={3} options={{}}/>
+                  <Col className="housingStats2" lg={3}>
+                    <Bar data={this.getHousingCharts()[1]} width={2} height={2} options={{}}/>
                   </Col>
-                  <Col className="housingStats3" lg={2}>
-                    <Bar data={this.getHousingCharts()[2]} width={2} height={3} options={{}}/>
+                  <Col className="housingStats3" lg={3}>
+                    <Bar data={this.getHousingCharts()[2]} width={2} height={2} options={{}}/>
                   </Col>
-                  <Col className="housingStats4" lg={2}>
-                    <Bar data={this.getHousingCharts()[3]} width={2} height={3} options={{}}/>
+                  <Col className="housingStats4" lg={3}>
+                    <Bar data={this.getHousingCharts()[3]} width={2} height={2} options={{}}/>
                   </Col>
                 </Row>
               </Col>
             </Row>
             <Row className="housingPhotoCarouselTitleRow">
               <Col className="housingPhotoCarouselTitleCol" lg={12}>
-                <h2>
+                <h3>
                   Suburb Snapshot
-                </h2>
+                </h3>
                 <p>
-                  What this region generally looks like up close and personal
+                  Take a look into what {this.props.name} looks like up close!
                 </p>
               </Col>
             </Row>
             <Row className="housingPhotoCarouselRow">
+              <Col lg={1}></Col>
               <Col className="housingPhotoCarouselCol" lg={10}>
                 {this.getHousingPhotoCarousel()}
               </Col>
+              <Col lg={1}></Col>
             </Row>
             <Row className="housingCardsTitleRow">
               <Col className="housingCardsTitleCol" lg={12}>
-                <h2>
+                <h3>
                   Property Listings
-                </h2>
+                </h3>
                 <p>
-                  Here are some properties in the area which are currently for sale!
+                  Here are some properties in {this.props.name} which are currently for sale!
                 </p>
               </Col>
             </Row>

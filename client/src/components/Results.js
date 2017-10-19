@@ -181,6 +181,8 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={4} title="Lifestyle">
                <Lifestyle schools={this.state.data[4]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}
@@ -220,6 +222,8 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
                <Lifestyle schools={this.state.data[4]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}

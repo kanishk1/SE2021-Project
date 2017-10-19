@@ -47,10 +47,9 @@ class Housing extends Component {
     var cards = this.state.listings.map(function(value, i) {
                     var link = "http://www.domain.com.au/"+value.id;
                     return(
-                      <a href={link} target="_">
                         <div key={i}>
                           <Thumbnail src={value.media.url}>
-                            <h2>{value.address}</h2>
+                            <h2><a href={link} target="_">{value.address}</a></h2>
                             <h3>{value.price}</h3>
                               <div>
                                 <img src={bath} alt=""></img> {value.bathrooms}
@@ -59,7 +58,6 @@ class Housing extends Component {
                               </div>
                           </Thumbnail>
                         </div>
-                      </a>
                     )
                 });
 

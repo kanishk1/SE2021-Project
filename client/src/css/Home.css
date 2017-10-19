@@ -1,4 +1,7 @@
 .loading{
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
   align-self: center;
   padding-top: 25%;  
 }
@@ -7,8 +10,12 @@
   border-radius: 4px;
   background: rgba(60,71,91,.55);
   opacity: 1;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
   align-self: center;
   padding: 2%;
+  margin-top: 5%;
   position: absolute; 
   top: 25%;
   left: 25%;
@@ -20,13 +27,19 @@
   height:100%;
   position: relative;
   /* border:  */
-  font-size: 30px;
+  font-size: 20px;
   color: white;
   opacity: 1;
+  text-align: center;
 } 
 
 .searchBox button{
-  font-size: 20px;
+  font-size: 26px;
+  align-self: center;
+  margin-top: 10px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
   align-self: center;
 }
 .teamInfo{
@@ -62,5 +75,17 @@
 }
 .carousel .thumbnail{
   margin-left: 5px;
+}
++.suburber-title{
+  padding-top: 3%;
+  color: black;
+  text-shadow: 2px 2px 5px white;
+  text-align: center;
+  font-size: 70px;}
+.byline{
+  color: white;
+  text-shadow: 2px 2px 5px black;
+  font-size: 36px;
+  text-align: center;
 }
 

@@ -85,17 +85,6 @@ class App extends Component {
             />
           </Switch>
         </div>
-        <Navbar fluid inverse style={{borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px'}}>
-          <Navbar.Header>
-            <Navbar.Text>
-              © 2017 Suburber All Rights Reserved
-            </Navbar.Text>
-          </Navbar.Header>
-          <Nav pullRight>
-            <NavItem href="#"> About Us </NavItem>
-            <NavItem href="#"> Contact Us </NavItem>
-          </Nav> 
-        </Navbar>
         </div>
         </Router>        
       </div>

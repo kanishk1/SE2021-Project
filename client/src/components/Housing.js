@@ -46,6 +46,9 @@ class Housing extends Component {
   createCards () {
     var cards = this.state.listings.map(function(value, i) {
                     var link = "http://www.domain.com.au/"+value.id;
+                    if (value.carspaces){
+                        value.carspaces = 0;
+                    }
                     return(
                         <div key={i}>
                           <Thumbnail src={value.media.url}>

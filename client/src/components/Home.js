@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import { Grid, Row, Col, Navbar } from 'react-bootstrap';
+import { Grid, Row, Col, Navbar, Nav, NavItem } from 'react-bootstrap';
 import { Redirect, Link } from 'react-router-dom';
 import '../css/Home.css';
 import suburber from '../img/headerLogo.png';
@@ -246,14 +246,9 @@ class Home extends Component {
             </Navbar.Header>
           </Navbar>
           <div id="idek" className="idek">
-            <img src={"https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg"} className="image"
-                ref={this.imageRef} role="presentation"
-                />
-            <canvas ref={this.canvasRef}>
-            </canvas>
               <div className="center-content">
-              <h2 className="suburber-title">Suburber</h2>
-              <h4 className="byline">Putting suburbs under the microscope</h4>
+              <p className="suburber-title">Suburber</p>
+              <p className="byline">Putting suburbs under the microscope</p>
               <div className="startPage" id='pls'>
                 <div className="searchBox">
                   <p>Which suburb would you like to know about?</p>
@@ -269,6 +264,11 @@ class Home extends Component {
                 </div>
               </div>
             </div>
+            <img src={"https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg"} className="image"
+                ref={this.imageRef} role="presentation"
+                />
+            <canvas ref={this.canvasRef}>
+            </canvas>
           </div>
           <Grid>
             <Row className="carousel">
@@ -289,6 +289,17 @@ class Home extends Component {
               </Col>
             </Row>
           </Grid>
+        <Navbar fluid inverse style={{borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px'}}>
+          <Navbar.Header>
+            <Navbar.Text>
+              © 2017 Suburber All Rights Reserved
+            </Navbar.Text>
+          </Navbar.Header>
+          <Nav pullRight>
+            <NavItem href="#"> About Us </NavItem>
+            <NavItem href="#"> Contact Us </NavItem>
+          </Nav> 
+        </Navbar>
         </div>
       )
     } else {

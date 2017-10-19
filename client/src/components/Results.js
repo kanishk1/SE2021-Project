@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tab, Tabs, Navbar, Button, FormGroup} from 'react-bootstrap';
+import { Tab, Tabs, Navbar, Button, FormGroup, Nav, NavItem} from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
@@ -330,7 +330,18 @@ class Results extends Component {
            {this.searchSuburbFunction()}
          </Navbar.Form>
          </Navbar>
-          {this.renderTabs()}
+        {this.renderTabs()}
+        <Navbar fluid inverse style={{borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px'}}>
+          <Navbar.Header>
+            <Navbar.Text>
+              © 2017 Suburber All Rights Reserved
+            </Navbar.Text>
+          </Navbar.Header>
+          <Nav pullRight>
+            <NavItem href="#"> About Us </NavItem>
+            <NavItem href="#"> Contact Us </NavItem>
+          </Nav> 
+        </Navbar>
         </div>
       )
     } else if (this.state.isFetching === 1) {

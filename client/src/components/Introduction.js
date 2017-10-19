@@ -66,42 +66,42 @@ class Introduction extends Component {
         <div>
         <Row>
           <Col lg={6}>
-            Sydney Intl. Airport
+            Sydney Intl. Airport:
           </Col>
           <Col lg={6}>
-            -  {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)} km's
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={6}>
-            Sydney CBD
-          </Col>
-          <Col lg={6}>
-            -  {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)} km's
+            {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)} km
           </Col>
         </Row>
         <Row>
           <Col lg={6}>
-            Circular Quay
+            Sydney CBD:
           </Col>
           <Col lg={6}>
-            -  {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)} km's
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={6}>
-            Darling Harbour
-          </Col>
-          <Col lg={6}>
-            -  {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)} km's
+            {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)} km
           </Col>
         </Row>
         <Row>
           <Col lg={6}>
-            Bondi Beach
+            Circular Quay:
           </Col>
           <Col lg={6}>
-            -  {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)} km's
+            {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)} km
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6}>
+            Darling Harbour:
+          </Col>
+          <Col lg={6}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)} km
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6}>
+            Bondi Beach:
+          </Col>
+          <Col lg={6}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)} km
           </Col>
         </Row>
         </div>

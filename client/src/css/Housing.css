@@ -1,0 +1,32 @@
+.housingTitleCol{
+  font-size: 50px
+}
+.housingStatsTitleCol{
+  font-size: 20px
+}
+.housingPhotoCarouselTitleCol{
+  font-size: 20px
+}
+.housingCardsTitleCol{
+  font-size: 20px
+}
+.list-group{
+  padding-top: 10%;
+  text-align: left;
+}
+.housingStats1{
+  text-align: center;
+  background-color: white;
+}
+.housingStats2{
+  text-align: center;
+  background-color: white;
+}
+.housingStats3{
+  text-align: center;
+  background-color: white;
+}
+.housingStats4{
+  text-align: center;
+  background-color: white;
+}

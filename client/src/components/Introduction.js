@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
+import { Grid, Row, Col,} from 'react-bootstrap';
 import cx from 'classnames';
 import '../css/Introduction.css';
 import '../css/Weather.css';
 import moment from 'moment';
-import policePhoto from '../img/police.jpg'
-import firePhoto from '../img/fire.jpg'
-import hospoPhoto from '../img/hospo.jpg'
 
 function Weather({min, max, status, day }) {
   const cls = cx('weather-icon', status);

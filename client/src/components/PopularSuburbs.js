@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Thumbnail } from 'react-bootstrap';
 import Slider from 'react-slick';
-import placeholder from '../img/placeholder.png'
 const SampleNextArrow = (props) => {
     const {className, style, onClick} = props
     return (

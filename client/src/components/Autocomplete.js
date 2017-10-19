@@ -1,15 +1,22 @@
 import Select from 'react-select';
 import React, { Component } from 'react';
 import 'react-select/dist/react-select.css';
-import { Button, Form, FormGroup, Radio } from 'react-bootstrap';
+import { Button, ButtonToolbar, ToggleButton, ToggleButtonGroup, Popover, OverlayTrigger } from 'react-bootstrap';
 import '../css/Autocomplete.css';
+
+const investorPopover = (
+  <Popover id="popover-trigger-hover-focus" title="Profiles">
+    Pick your profile to see the most relevant information for you!
+  </Popover>
+);
+
 
 class Autocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
         selectedSuburb: null,
-        selectedProfile: null,
+        selectedProfile: this.props.selectedProfile,
         selectedPostcode: null,
         options: this.props.suburbs
     };
@@ -17,10 +24,17 @@ class Autocomplete extends Component {
   }
  
   handleSubmit (event) {
-    event.preventDefault();
     if ((this.state.selectedSuburb != null) && (this.state.selectedProfile != null)){
       console.log("Ready to submit")
       this.props.updateSubmission();
+    }
+  }
+
+  updateProfile(newValue){
+    if(newValue != null){
+      this.setState({
+        selectedProfile: newValue
+      }, this.props.updateProfile(newValue))
     }
   }
 
@@ -53,24 +67,17 @@ class Autocomplete extends Component {
           noResultsText="No suburbs found..." 
           placeholder="Select a suburb..."
           />
+        <Button onClick={this.handleSubmit}>Submit!</Button>
         <p>What kind of a user are you?</p>
-        <Form onSubmit={this.handleSubmit}>
-          <FormGroup role="form">
-            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Investor")}>
-              Investor
-            </Radio>
-            {' '}
-            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"General User")}>
-              General User
-            </Radio>
-            {' '}
-            <Radio name="radioGroup" inline onChange={this.props.updateProfile.bind(this,"Researcher")}>
-              Researcher
-            </Radio>
-            {' '}
-            <Button type="submit">Submit</Button>
-          </FormGroup>
-        </Form>
+        <ButtonToolbar>
+          <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={investorPopover}>
+          <ToggleButtonGroup type="radio" name="options">
+            <ToggleButton onChange={this.updateProfile.bind(this,"Investor")} value={1}>Investor</ToggleButton> 
+            <ToggleButton onChange={this.updateProfile.bind(this,"General")} value={2}>General User</ToggleButton>
+            <ToggleButton onChange={this.updateProfile.bind(this,"Researcher")} value={3}>Researcher</ToggleButton>
+          </ToggleButtonGroup>
+           </OverlayTrigger>
+        </ButtonToolbar>
       </div>
     )
   }

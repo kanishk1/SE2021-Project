@@ -113,14 +113,13 @@ class Results extends Component {
     return suburbs;
   }
 
-
-  render () {
-    if (this.state.isFetching === 0) {
-      return (
-        <div>
-        <Tabs id="Introduction Tab" activeKey={this.state.key}
-            onSelect={this.handleSelect}>
-            <Tab eventKey={1} title="Introduction">
+  renderTabs(){
+    if (this.props.profile){
+      var user = this.props.profile
+      if (user == "Investor"){
+        return (
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
+          <Tab eventKey={1} title="Introduction">
               <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
@@ -133,10 +132,58 @@ class Results extends Component {
                 hospital={this.state.data[16]}
                 />
             </Tab>
-            <Tab eventKey={2} title="Demographics">
+            <Tab eventKey={2} title="Housing">
+                <Housing
+                  listings={this.state.data[12]}
+                  stats={this.state.data[0]}
+                  name={this.state.selectedSuburb}
+                  photos={this.state.data[17]}
+                />
+            </Tab>
+            <Tab eventKey={3} title="Demographics">
               <Demographics 
                 data={this.state.data[1]}
                 name={this.state.selectedSuburb}
+              />
+            </Tab>
+            <Tab eventKey={4} title="Lifestyle">
+               <Lifestyle schools={this.state.data[4]}
+                shops={this.state.data[5]}
+                food={this.state.data[6]}
+                recreation={this.state.data[7]}
+                religious={this.state.data[8]}
+                wiki={this.state.data[10]} />
+            </Tab>
+            
+            <Tab eventKey={5} title="Social & News">
+              <Social
+                news={this.state.data[2]}
+                twitter={this.state.data[9]}
+
+              />
+            </Tab>
+          </Tabs>
+          )
+      } else if (user == "General"){
+        return (
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
+          <Tab eventKey={1} title="Introduction">
+              <Introduction
+                wiki={this.state.data[10]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
+                location={this.state.data[11]}
+                weather={this.state.data[3]}
+                transfac={this.state.data[13]}
+                fire={this.state.data[14]}
+                police={this.state.data[15]}
+                hospital={this.state.data[16]}
+                />
+            </Tab>
+            <Tab eventKey={2} title="Social & News">
+              <Social
+                news={this.state.data[2]}
+                twitter={this.state.data[9]}
               />
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
@@ -155,14 +202,72 @@ class Results extends Component {
                   photos={this.state.data[17]}
                 />
             </Tab>
-            <Tab eventKey={5} title="Social">
+            <Tab eventKey={5} title="Demographics">
+              <Demographics 
+                data={this.state.data[1]}
+                name={this.state.selectedSuburb}
+              />
+            </Tab>
+          </Tabs>
+          )
+      } else if (user == "Researcher"){
+        return (
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
+          <Tab eventKey={1} title="Introduction">
+              <Introduction
+                wiki={this.state.data[10]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
+                location={this.state.data[11]}
+                weather={this.state.data[3]}
+                transfac={this.state.data[13]}
+                fire={this.state.data[14]}
+                police={this.state.data[15]}
+                hospital={this.state.data[16]}
+                />
+            </Tab>
+            <Tab eventKey={2} title="Demographics">
+              <Demographics 
+                data={this.state.data[1]}
+                name={this.state.selectedSuburb}
+              />
+            </Tab>
+            <Tab eventKey={3} title="Housing">
+                <Housing
+                  listings={this.state.data[12]}
+                  stats={this.state.data[0]}
+                  name={this.state.selectedSuburb}
+                  photos={this.state.data[17]}
+                />
+            </Tab>
+            <Tab eventKey={4} title="Lifestyle">
+               <Lifestyle 
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
+                schools={this.state.data[4]}
+                shops={this.state.data[5]}
+                food={this.state.data[6]}
+                recreation={this.state.data[7]}
+                religious={this.state.data[8]}
+                wiki={this.state.data[10]} />
+            </Tab>
+            <Tab eventKey={5} title="Social & News">
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
-
               />
             </Tab>
-        </Tabs>
+          </Tabs>
+          )
+      }
+    }
+  }
+
+  render () {
+    if (this.state.isFetching === 0) {
+      return (
+        <div>
+            {this.renderTabs()}
         </div>
       )
     } else if (this.state.isFetching === 1) {

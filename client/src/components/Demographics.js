@@ -179,7 +179,7 @@ class Demographics extends Component {
       };
       
     }
-
+    
     return (
       <Grid fluid={true}>
         <Col className="titleCol" lg={12}>

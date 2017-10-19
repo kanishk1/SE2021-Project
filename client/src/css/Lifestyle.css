@@ -42,6 +42,11 @@ ul{
   overflow-y: scroll; 
   height:300px;
 }
+
+.lifestyle-info p{
+  font-size: 20px;
+}
+
 .jobTitle{
   font-weight: bold;
 }

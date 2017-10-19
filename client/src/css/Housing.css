@@ -1,14 +1,18 @@
 .housingTitleCol{
-  font-size: 50px
+  font-size: 50px;
+  margin-left: 20px;
 }
 .housingStatsTitleCol{
-  font-size: 20px
+  font-size: 20px;
+  margin-left: 20px;
 }
 .housingPhotoCarouselTitleCol{
-  font-size: 20px
+  font-size: 20px;
+  
+  margin-left: 20px;
 }
 .housingCardsTitleCol{
-  font-size: 20px
+  font-size: 20px;
 }
 .list-group{
   padding-top: 10%;
@@ -29,4 +33,16 @@
 .housingStats4{
   text-align: center;
   background-color: white;
+}
+.housingPhotoCarouselCol img{
+  height:300px;
+  width: 490px;
+}
+.housingCardsRow .thumbnail div img{
+  height: 60px;
+  width: 60px;
+  position: relative;
+}
+.housingCardsRow .thumbnail{
+  font-size: 30px;
 }

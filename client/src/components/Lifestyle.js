@@ -166,7 +166,7 @@ class Lifestyle extends Component {
           </Modal.Footer>
         </Modal>
         <Row className="lifeRow1">
-          <Col className="lifeCol1" lg={5}>
+          <Col className="lifeCol1" lg={6}>
             <Row className="title">
               <p>Lifestyle</p>
             </Row>
@@ -174,7 +174,7 @@ class Lifestyle extends Component {
                 {this.parseWiki()}
             </Row>
           </Col>  
-          <Col className="lifeCol3" lg={6}> 
+          <Col className="lifeCol3" lg={5}> 
             <h3>Local Jobs</h3> 
             <Well className="jobs">
               {this.renderJobs()}
@@ -183,24 +183,34 @@ class Lifestyle extends Component {
         </Row>
         <Row>
           <Col lgOffset={1} lg={2}>
-              <Thumbnail href="#" src={this.renderResultsPhotos('schools')} >
+          <Thumbnail>
+              <img className="lifeImg" href="#" src={this.renderResultsPhotos('schools')} >
+              </img>
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail href="#" src={this.renderResultsPhotos('shops')} >
+          <Thumbnail>
+              <img className="lifeImg" href="#" src={this.renderResultsPhotos('shops')} >
+              </img>
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail href="#" src={this.renderResultsPhotos('food')} >
+          <Thumbnail>
+              <img className="lifeImg"  href="#" src={this.renderResultsPhotos('food')} >
+              </img>
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail href="#" src={this.renderResultsPhotos('recreation')} >
+              <Thumbnail>
+              <img className="lifeImg" href="#" src={this.renderResultsPhotos('recreation')} >
+              </img>
               </Thumbnail>
           </Col>
           <Col lg={2}>
-              <Thumbnail href="#" src={this.renderResultsPhotos('religious')} >
-              </Thumbnail>
+            <Thumbnail>
+              <img className="lifeImg" href="#" src={this.renderResultsPhotos('religious')} >
+              </img>
+             </Thumbnail> 
           </Col>
         </Row>
         <Row>

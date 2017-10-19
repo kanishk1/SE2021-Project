@@ -67,9 +67,8 @@ class Autocomplete extends Component {
           noResultsText="No suburbs found..." 
           placeholder="Select a suburb..."
           />
-        <Button onClick={this.handleSubmit}>Submit!</Button>
         <p>What kind of a user are you?</p>
-        <ButtonToolbar>
+        <ButtonToolbar className="btnGroup">
           <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={investorPopover}>
           <ToggleButtonGroup type="radio" name="options">
             <ToggleButton onChange={this.updateProfile.bind(this,"Investor")} value={1}>Investor</ToggleButton> 
@@ -78,6 +77,7 @@ class Autocomplete extends Component {
           </ToggleButtonGroup>
            </OverlayTrigger>
         </ButtonToolbar>
+        <Button onClick={this.handleSubmit}>Submit!</Button>
       </div>
     )
   }

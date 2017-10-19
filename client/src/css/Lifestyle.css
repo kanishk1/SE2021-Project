@@ -21,10 +21,8 @@
   font-size: 50px
 }
 .row .col-lg-2 .thumbnail{
-  height:200px;
-}
-.row .col-lg-2 .img{
-  height:200px;
+  height:230px;
+  
 }
 .row .col-lg-2 h2{
   text-align: center;
@@ -55,4 +53,8 @@ ul{
 }
 .salary{
   clear: both;
+}
+.lifeImg{
+  height:200px;
+  width: 250px;
 }

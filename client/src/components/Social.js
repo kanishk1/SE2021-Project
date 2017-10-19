@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Grid, Row, Col, Media, Well} from 'react-bootstrap';
 import TweetEmbed from 'react-tweet-embed'
 import '../css/Social.css'
+import twitterLogo from '../img/twitterLogo.png'
 
 class Social extends Component {
   constructor(props) {
@@ -72,7 +73,7 @@ return (
       </Col>
       <Col lg={4}>
         <div className="twitter">
-          <h1> Twitter </h1>
+          <h1> Twitter </h1><img src="twitterLogo"></img>
           <Well className="well-news">
             {this.renderTweets()}
           </Well>

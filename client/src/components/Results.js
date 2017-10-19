@@ -149,8 +149,8 @@ class Results extends Component {
       var user = this.state.selectedProfile;
       if (user === "Investor") {
         return (
-        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
-            <Tab eventKey={1} title="Introduction">
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs" animation="true">
+            <Tab eventKey={1} title="Introduction" tabClassName="tab-normal">
               <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
@@ -163,7 +163,7 @@ class Results extends Component {
                 hospital={this.state.data[16]}
                 />
             </Tab>
-            <Tab eventKey={2} title="Housing">
+            <Tab eventKey={2} title="Housing" tabClassName="tab-normal">
                 <Housing
                   listings={this.state.data[12]}
                   stats={this.state.data[0]}
@@ -171,13 +171,13 @@ class Results extends Component {
                   photos={this.state.data[17]}
                 />
             </Tab>
-            <Tab eventKey={3} title="Demographics">
+            <Tab eventKey={3} title="Demographics" tabClassName="tab-normal">
               <Demographics 
                 data={this.state.data[1]}
                 name={this.state.selectedSuburb}
               />
             </Tab>
-            <Tab eventKey={4} title="Lifestyle">
+            <Tab eventKey={4} title="Lifestyle" tabClassName="tab-normal">
                <Lifestyle schools={this.state.data[4]}
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
@@ -188,7 +188,7 @@ class Results extends Component {
                 wiki={this.state.data[10]} />
             </Tab>
             
-            <Tab eventKey={5} title="Social & News">
+            <Tab eventKey={5} title="Social & News" tabClassName="tab-normal">
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
@@ -199,7 +199,7 @@ class Results extends Component {
       } else if (user === "General"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
-          <Tab eventKey={1} title="Introduction">
+          <Tab eventKey={1} title="Introduction" tabClassName="tab-normal">
               <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
@@ -212,13 +212,13 @@ class Results extends Component {
                 hospital={this.state.data[16]}
                 />
             </Tab>
-            <Tab eventKey={2} title="Social & News">
+            <Tab eventKey={2} title="Social & News" tabClassName="tab-normal">
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
               />
             </Tab>
-            <Tab eventKey={3} title="Lifestyle">
+            <Tab eventKey={3} title="Lifestyle" tabClassName="tab-normal">
                <Lifestyle schools={this.state.data[4]}
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
@@ -228,7 +228,7 @@ class Results extends Component {
                 religious={this.state.data[8]}
                 wiki={this.state.data[10]} />
             </Tab>
-            <Tab eventKey={4} title="Housing">
+            <Tab eventKey={4} title="Housing" tabClassName="tab-normal">
                 <Housing
                   listings={this.state.data[12]}
                   stats={this.state.data[0]}
@@ -236,7 +236,7 @@ class Results extends Component {
                   photos={this.state.data[17]}
                 />
             </Tab>
-            <Tab eventKey={5} title="Demographics">
+            <Tab eventKey={5} title="Demographics" tabClassName="tab-normal">
               <Demographics 
                 data={this.state.data[1]}
                 name={this.state.selectedSuburb}
@@ -247,7 +247,7 @@ class Results extends Component {
       } else if (user === "Researcher"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
-          <Tab eventKey={1} title="Introduction">
+          <Tab eventKey={1} title="Introduction" tabClassName="tab-normal">
               <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
@@ -260,13 +260,13 @@ class Results extends Component {
                 hospital={this.state.data[16]}
                 />
             </Tab>
-            <Tab eventKey={2} title="Demographics">
+            <Tab eventKey={2} title="Demographics" tabClassName="tab-normal">
               <Demographics 
                 data={this.state.data[1]}
                 name={this.state.selectedSuburb}
               />
             </Tab>
-            <Tab eventKey={3} title="Housing">
+            <Tab eventKey={3} title="Housing" tabClassName="tab-normal">
                 <Housing
                   listings={this.state.data[12]}
                   stats={this.state.data[0]}
@@ -274,7 +274,7 @@ class Results extends Component {
                   photos={this.state.data[17]}
                 />
             </Tab>
-            <Tab eventKey={4} title="Lifestyle">
+            <Tab eventKey={4} title="Lifestyle" tabClassName="tab-normal">
                <Lifestyle 
                 name={this.state.selectedSuburb}
                 postcode={this.state.selectedPostcode}
@@ -285,7 +285,7 @@ class Results extends Component {
                 religious={this.state.data[8]}
                 wiki={this.state.data[10]} />
             </Tab>
-            <Tab eventKey={5} title="Social & News">
+            <Tab eventKey={5} title="Social & News" tabClassName="tab-normal">
               <Social
                   news={this.state.data[2]}
                   twitter={this.state.data[9]}

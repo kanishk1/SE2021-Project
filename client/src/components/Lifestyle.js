@@ -39,12 +39,12 @@ class Lifestyle extends Component {
     if (jobData){
       this.shuffle(jobData.jobs)
       return(
-        jobData.jobs.map(function(job){
+        jobData.jobs.map(function(job, i){
           const title = (
             <h2 className="jobTitle">{job.title}</h2>
           );
           return (
-          <Panel header={title}>
+          <Panel header={title} key={i}>
             <p className="company">{job.company}</p> 
             <p className="postedDaysAgo">{job.daysAgo}</p>
             <p className="salary"><strong>Salary</strong>: {job.salary}</p>

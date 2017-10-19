@@ -26,7 +26,7 @@ $color5: #2092A9;
     h1 {
         position: absolute;
         padding-bottom: 30px;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Lato';
         font-weight:300;
         font-size:80px;
         color: $color3;
@@ -40,7 +40,7 @@ $color5: #2092A9;
     h2 {
         position: absolute;
         padding-bottom: 110px;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Lato';
         font-weight:300;
         font-size:40px;
         color: $color3;
@@ -53,7 +53,7 @@ $color5: #2092A9;
 
     p {
         position: absolute;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Lato';
         font-weight:300;
         font-size:28px;
         color: lighten($color3, 10%);

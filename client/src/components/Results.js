@@ -80,7 +80,11 @@ class Results extends Component {
       fetch('/transport/facility?suburb=' + this.state.selectedSuburb),
       fetch('/places/search?keyword=fire+and+rescue' + this.state.selectedSuburb + "+NSW"),
       fetch('/places/search?keyword=police+station+' + this.state.selectedSuburb + "+NSW"),
-      fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW")
+      fetch('/places/search?keyword=hospital+' + this.state.selectedSuburb + "+NSW"),
+      // Details of a place for more photos
+      // Usage exactly like places search, be as specific as you can with query
+      // /places/details?keyword=chatswood+nsw
+      fetch('/places/details?keyword=' + this.state.selectedSuburb + 'NSW')
     ]).then(responses =>
       Promise.all(responses.map(res => res.json())))
     .then(function(response) {
@@ -130,7 +134,10 @@ class Results extends Component {
                 />
             </Tab>
             <Tab eventKey={2} title="Demographics">
-              <Demographics data={this.state.data[1]}/>
+              <Demographics 
+                data={this.state.data[1]}
+                name={this.state.selectedSuburb}
+              />
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
                <Lifestyle schools={this.state.data[4]}
@@ -144,6 +151,8 @@ class Results extends Component {
                 <Housing
                   listings={this.state.data[12]}
                   stats={this.state.data[0]}
+                  name={this.state.selectedSuburb}
+                  photos={this.state.data[17]}
                 />
             </Tab>
             <Tab eventKey={5} title="Social">

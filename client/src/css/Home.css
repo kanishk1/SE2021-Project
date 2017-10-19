@@ -3,14 +3,16 @@
   padding-top: 25%;  
 }
 .startPage{
-  background: rgba(0, 0, 0, .7);
+  border: 1px solid hsla(0,0%,100%,.3);
+  border-radius: 4px;
+  background: rgba(60,71,91,.55);
   opacity: 1;
-  box-shadow: 5px 5px 10px 5px black;
   align-self: center;
   padding: 2%;
   position: absolute; 
   top: 25%;
   left: 25%;
+  right: 25%;
 }
 .searchBox{
   /* padding: 2%; */
@@ -18,13 +20,9 @@
   height:100%;
   position: relative;
   /* border:  */
-  line-height: 50px;
-  text-align: center;
-  font-size: 30px;
+  font-size: 20px;
   color: white;
-  background: rgba(0, 0, 0, .7);
   opacity: 1;
-  box-shadow: 5px 5px 10px 5px black;
 } 
 .teamInfo{
   padding-top: 50px;
@@ -42,7 +40,7 @@
 }
 
 .idek {
-  background: url('https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg') 0 0 / cover; 
+  background: url('../img/background_blur.jpg') 0 0 / cover; 
   background-size: 100%;
   font-size: 0;
   height: 100%;

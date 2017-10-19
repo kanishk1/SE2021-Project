@@ -14,7 +14,7 @@ class Home extends Component {
       isSubmitted: 0,
       selectedSuburb: null,
       selectedPostcode: null,
-      selectedProfile: null,
+      selectedProfile: this.props.profile,
       suburbs: this.props.suburbs,
       points: [],
     }
@@ -35,6 +35,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.begin();
+    console.log(this.state.selectedProfile)
   }
 
 
@@ -100,18 +101,20 @@ class Home extends Component {
    */
   tick() {
     // Remove old points
-    var self = this;
-    var newPoints = this.state.points.filter(function(point) {
-      var age = Date.now() - point.time;
-      return age < self.pointLifetime;
-    });
+    if (this.imageCanvas){
+      var self = this;
+      var newPoints = this.state.points.filter(function(point) {
+        var age = Date.now() - point.time;
+        return age < self.pointLifetime;
+      });
 
-    this.setState({points: newPoints});
-  
-    this.drawLineCanvas();
-    this.drawImageCanvas();
-    //console.log('in tick');
-    requestAnimationFrame(this.tick);
+      this.setState({points: newPoints});
+    
+      this.drawLineCanvas();
+      this.drawImageCanvas();
+      //console.log('in tick');
+      requestAnimationFrame(this.tick);
+    }
   }
   
   /**
@@ -193,15 +196,14 @@ class Home extends Component {
       this.props.sendUpdatedSuburb(newValue)
     }
   }
-  
-  updateProfile (newValue) {
-    if (newValue != null) {
+
+  updateProfile(newValue){
+    if(newValue != null){
       this.setState({
         selectedProfile: newValue
-      })
-      console.log("Selected Profile is: ", newValue)
+      }, this.props.updateProfile(newValue))
     }
-  } 
+  }
   
   updateSubmission (newValue) {
       this.setState({

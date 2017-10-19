@@ -17,10 +17,12 @@ class App extends Component {
     this.state = {
       suburbName: "",
       suburbPostcode: "",
+      profile: null,
       suburbs: []
     }
     this.getSuburbs = this.getSuburbs.bind(this)
     this.setUpdatedSuburbs = this.setUpdatedSuburbs.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
     this.getSuburbs();
     console.log(this.state.suburbs);
   }
@@ -48,6 +50,14 @@ class App extends Component {
     })
   }
 
+  updateProfile(newProfile){
+    if (newProfile != null) {
+      this.setState({
+        profile: newProfile
+      })
+      console.log("New Profile is: ", newProfile)
+    }
+  }
 
   render() {   
     return (
@@ -67,6 +77,8 @@ class App extends Component {
               () => 
               <Home sendUpdatedSuburb={this.setUpdatedSuburbs}
                     suburbs={this.state.suburbs}
+                    updateProfile={this.updateProfile}
+                    profile={this.profile}
               />}
             />
             <Route path="/results/:suburb" render={ ({match}) =>
@@ -74,6 +86,7 @@ class App extends Component {
                        suburbPostcode={this.state.suburbPostcode}
                        match={match}
                        suburbs={this.state.suburbs}
+                       profile={this.state.profile}
                        />
               }
             />

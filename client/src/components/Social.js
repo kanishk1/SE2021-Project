@@ -71,8 +71,10 @@ return (
         {this.renderNews()}
       </Col>
       <Col lg={5}>
-        <h1> Twitter </h1>
-        {this.renderTweets()}
+        <div className="twitter">
+          <h1> Twitter </h1>
+          {this.renderTweets()}
+        </div>
       </Col>
     </Row>
   </Grid>

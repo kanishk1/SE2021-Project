@@ -1,8 +1,14 @@
 import express from 'express';
 import { Twitter } from 'twitter-node-client';
-import config from './data/twitter_config.json';
 
 const router = express.Router();
+const config = {
+"consumerKey": "af4o4Swyctg17u00r2Zbz5L19",
+"consumerSecret": "Kw14FflguqeN30NqJaNpFx2cAwJuijbRDGGsT1JzKhr1ihm5po",
+"accessToken": "836055204583747584-jY0LOOKJHllIXLGBeWvEjno6ICtsRn9",
+"accessTokenSecret": "HYq3alw3NUeEMDaeV5NMz1XQaKWyhtCLmlaKNg5tKgrt3",
+"callBackUrl": "localhost:3001/test"
+}
 
 function doAPI(suburb, numtweets) {
     if (!suburb || !numtweets)

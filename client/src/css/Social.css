@@ -1,14 +1,18 @@
-.social-news .row .col-lg-7{
-    width: 900px;
-    height: 1000px;
-    overflow: auto;
+.social-news .row .col-lg-7{    
     margin: 10px;
+    margin-right: 0px;
     border-right: 1px solid #eee;
 }
-.social-news .row .col-lg-5{
-    width: 500px;
-    height: 1000px;
-    overflow: auto;
+.social-news .row .col-lg-4{
     margin: 10px;
     padding-left: 5px;
+}
+
+.well {
+    overflow-y: scroll; 
+    height: 900px;
+}
+
+.media{
+    border-bottom: 1px solid #cecece;
 }

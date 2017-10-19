@@ -9,8 +9,7 @@ import loading from '../img/loading.gif';
 import suburber from '../img/headerLogo.png';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-
-
+import '../css/Results.css';
 
 class Results extends Component {
 
@@ -150,8 +149,12 @@ class Results extends Component {
       var user = this.state.selectedProfile;
       if (user === "Investor") {
         return (
+<<<<<<< HEAD
         <Tabs id="Introduction Tab" activeKey={this.state.key}
             onSelect={this.handleSelect}>
+=======
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
+>>>>>>> develop
             <Tab eventKey={1} title="Introduction">
               <Introduction
                 wiki={this.state.data[10]}
@@ -181,6 +184,8 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={4} title="Lifestyle">
                <Lifestyle schools={this.state.data[4]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}
@@ -198,7 +203,7 @@ class Results extends Component {
           )
       } else if (user === "General"){
         return (
-        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
           <Tab eventKey={1} title="Introduction">
               <Introduction
                 wiki={this.state.data[10]}
@@ -220,6 +225,8 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={3} title="Lifestyle">
                <Lifestyle schools={this.state.data[4]}
+                name={this.state.selectedSuburb}
+                postcode={this.state.selectedPostcode}
                 shops={this.state.data[5]}
                 food={this.state.data[6]}
                 recreation={this.state.data[7]}
@@ -244,7 +251,7 @@ class Results extends Component {
           )
       } else if (user === "Researcher"){
         return (
-        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
           <Tab eventKey={1} title="Introduction">
               <Introduction
                 wiki={this.state.data[10]}

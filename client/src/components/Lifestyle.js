@@ -154,7 +154,7 @@ class Lifestyle extends Component {
           <Modal.Body>
           <p>Here is the best way to get there!</p>
           <iframe
-            className="map"
+            className="modal-map"
             width="500"
             height="500"
             frameBorder="0"

@@ -30,10 +30,14 @@ class PopularSuburbs extends Component {
   render () {
     const settings = {
       dots: true,
+      draggable: true,
+      swipeToSlide: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
+      autoplay:  true,
+      autoplaySpeed: 10000,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };

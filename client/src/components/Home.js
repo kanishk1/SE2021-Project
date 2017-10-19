@@ -251,8 +251,12 @@ class Home extends Component {
                 />
             <canvas ref={this.canvasRef}>
             </canvas>
-            <div className="startPage" id='pls'>
-              <div className="searchBox">
+              <div className="center-content">
+              <h2 className="suburber-title">Suburber</h2>
+              <h4 className="byline">Putting suburbs under the microscope</h4>
+              <div className="startPage" id='pls'>
+                <div className="searchBox">
+                  <p>Which suburb would you like to know about?</p>
                   <Autocomplete updateSuburb={this.updateSuburb}
                         updateProfile={this.updateProfile}
                         updateSubmission={this.updateSubmission}
@@ -262,6 +266,7 @@ class Home extends Component {
                         suburbs={this.state.suburbs}
                         getData={this.getData}
                         />
+                </div>
               </div>
             </div>
           </div>

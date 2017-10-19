@@ -66,14 +66,14 @@ return (
     <Row>
       <Col lg={7}>
         <h1>News</h1>
-        <Well className="News">
+        <Well className="well-news">
           {this.renderNews()}
         </Well>
       </Col>
       <Col lg={4}>
         <div className="twitter">
           <h1> Twitter </h1>
-          <Well className="News">
+          <Well className="well-news">
             {this.renderTweets()}
           </Well>
         </div>

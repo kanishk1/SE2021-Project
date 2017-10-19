@@ -189,7 +189,7 @@ class Demographics extends Component {
           <Row className="subtitle">
             <p> 
               This page contains graphed demographical data 
-              pertaining to {this.props.name}
+              pertaining to {this.props.name}.
             </p>
           </Row>
         </Col>

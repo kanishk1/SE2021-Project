@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { Tab, Tabs} from 'react-bootstrap';
+import { Tab, Tabs, Navbar, Button, FormGroup} from 'react-bootstrap';
 import Introduction from './Introduction.js'
 import Demographics from '../components/Demographics.js'
 import Lifestyle from '../components/Lifestyle.js'
 import Social from '../components/Social.js'
 import Housing from '../components/Housing.js'
 import loading from '../img/loading.gif';
+import suburber from '../img/headerLogo.png';
+import { Link } from 'react-router-dom';
+import Select from 'react-select';
+
+
 
 class Results extends Component {
 
@@ -16,14 +21,16 @@ class Results extends Component {
       isFetching: 1,
       selectedSuburb: this.props.suburbName,
       selectedPostcode: this.props.suburbPostcode,
-      // i'll set this up later, if needed
-      selectedProfile: null,
+      selectedProfile: this.props.profile,
+      searchSuburb: null,
       data: [],
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.getData = this.getData.bind(this);
     this.checkSuburb = this.checkSuburb.bind(this);
     this.getSuburbs = this.getSuburbs.bind(this);
+    this.updateSearchSuburb = this.updateSearchSuburb.bind(this);
+    this.searchSuburbFunction = this.searchSuburbFunction.bind(this);
   }
 
   componentWillMount() {
@@ -36,10 +43,13 @@ class Results extends Component {
             checkSuburb = res.find(this.checkSuburb, this);
           }).then(function() {
             console.log(checkSuburb)
+            console.log(self.props);
             self.setState({
               selectedSuburb: checkSuburb.value.slice(0, -5),
-              selectedPostcode: checkSuburb.value.slice(-4)
+              selectedPostcode: checkSuburb.value.slice(-4),
+              selectedProfile: 'General',
             })
+            console.log(self.state.selectedProfile);
             self.getData();
           });
     } else {
@@ -113,13 +123,36 @@ class Results extends Component {
     return suburbs;
   }
 
+  updateSearchSuburb (newVal) {
+    if (newVal !== null) {
+      console.log(newVal);
+      this.setState({searchSuburb: newVal.value});
+    }
+  }
+
+  searchSuburbFunction () {
+    if (this.state.searchSuburb && this.state.searchSuburb !== null) {
+    var suburb = this.state.searchSuburb.slice(0,-5).replace(/ */g, '').toLowerCase();
+      return (
+        <Link to={{pathname: '/results/' + suburb, state: {profile: this.state.selectedProfile}}}>
+          <Button onClick={() => window.location.reload()}> Search </Button>
+        </Link>
+      )
+    } else {
+      return (
+          <Button disabled> Search </Button>
+      )
+    }
+  }
+
   renderTabs(){
-    if (this.props.profile){
-      var user = this.props.profile
-      if (user == "Investor"){
+    if (this.state.selectedProfile){
+      var user = this.state.selectedProfile;
+      if (user === "Investor") {
         return (
-        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
-          <Tab eventKey={1} title="Introduction">
+        <Tabs id="Introduction Tab" activeKey={this.state.key}
+            onSelect={this.handleSelect}>
+            <Tab eventKey={1} title="Introduction">
               <Introduction
                 wiki={this.state.data[10]}
                 name={this.state.selectedSuburb}
@@ -159,12 +192,11 @@ class Results extends Component {
               <Social
                 news={this.state.data[2]}
                 twitter={this.state.data[9]}
-
               />
             </Tab>
           </Tabs>
           )
-      } else if (user == "General"){
+      } else if (user === "General"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction">
@@ -210,7 +242,7 @@ class Results extends Component {
             </Tab>
           </Tabs>
           )
-      } else if (user == "Researcher"){
+      } else if (user === "Researcher"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction">
@@ -267,12 +299,51 @@ class Results extends Component {
     if (this.state.isFetching === 0) {
       return (
         <div>
-            {this.renderTabs()}
+        <Navbar inverse fluid staticTop className="navbar">
+           <Navbar.Header>
+               <Link to={{
+                 pathname: '/',
+                 state: {isSubmitted: 0} 
+               }}>
+                 <img src={suburber} alt='logo' style={{height:'50px', width:'200px'}}/>
+               </Link>
+           </Navbar.Header>
+           <Navbar.Form pullRight>
+             <FormGroup>
+             <Select 
+               className="select"
+               autofocus={true} 
+               options={this.props.suburbs}
+               clearable={false} 
+               value={this.state.searchSuburb}
+               onChange={this.updateSearchSuburb} 
+               searchable={this.state.searchable}
+               noResultsText="No suburbs found..." 
+               placeholder="Search for a different suburb..."
+               /> 
+           </FormGroup>
+           {' '}
+           {this.searchSuburbFunction()}
+         </Navbar.Form>
+         </Navbar>
+          {this.renderTabs()}
         </div>
       )
     } else if (this.state.isFetching === 1) {
       return (
-        <img src={loading} alt="Wait" style={{align: 'center', height:'700px', paddingLeft:'30%'}}/>
+        <div>
+          <Navbar inverse fluid staticTop className="navbar">
+          <Navbar.Header>
+              <Link to={{
+                pathname: '/',
+                state: {isSubmitted: 0} 
+              }}>
+                <img src={suburber} alt='logo' style={{height:'50px', width:'200px'}}/>
+              </Link>
+          </Navbar.Header>
+          </Navbar>
+          <img src={loading} alt="Wait" style={{align: 'center', height:'700px', paddingLeft:'30%'}}/>
+          </div>
       )
     }
   }

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Home from '../components/Home.js'
 import Results from '../components/Results.js'
-import suburber from '../img/headerLogo.png';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
 } from 'react-router-dom';
+import {Navbar, Nav, NavItem} from 'react-bootstrap';
+
 
 class App extends Component {
 
@@ -64,14 +64,7 @@ class App extends Component {
       <div>  
         <Router>
         <div>
-          <div className="topnav">
-            <Link to={{
-              pathname: '/',
-              state: {isSubmitted: 0} 
-            }}>
-              <img src={suburber} alt='logo' style={{height:'50px', width:'200px'}}/>
-            </Link>
-          </div>
+        <div>
           <Switch>
             <Route exact path="/" render={
               () => 
@@ -91,6 +84,18 @@ class App extends Component {
               }
             />
           </Switch>
+        </div>
+        <Navbar fluid inverse style={{borderTopLeftRadius: '0px', borderBottomLeftRadius: '0px', borderTopRightRadius: '0px', borderBottomRightRadius: '0px'}}>
+          <Navbar.Header>
+            <Navbar.Text>
+              © 2017 Suburber All Rights Reserved
+            </Navbar.Text>
+          </Navbar.Header>
+          <Nav pullRight>
+            <NavItem href="#"> About Us </NavItem>
+            <NavItem href="#"> Contact Us </NavItem>
+          </Nav> 
+        </Navbar>
         </div>
         </Router>        
       </div>

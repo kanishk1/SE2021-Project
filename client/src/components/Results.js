@@ -116,7 +116,7 @@ class Results extends Component {
   renderTabs(){
     if (this.props.profile){
       var user = this.props.profile
-      if (user == "Investor"){
+      if (user === "Investor"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction">
@@ -164,7 +164,7 @@ class Results extends Component {
             </Tab>
           </Tabs>
           )
-      } else if (user == "General"){
+      } else if (user === "General"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction">
@@ -210,7 +210,7 @@ class Results extends Component {
             </Tab>
           </Tabs>
           )
-      } else if (user == "Researcher"){
+      } else if (user === "Researcher"){
         return (
         <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect}>
           <Tab eventKey={1} title="Introduction">
@@ -253,13 +253,13 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={5} title="Social & News">
               <Social
-                news={this.state.data[2]}
-                twitter={this.state.data[9]}
-              />
+                  news={this.state.data[2]}
+                  twitter={this.state.data[9]}
+                />
             </Tab>
           </Tabs>
           )
-      }
+      } 
     }
   }
 

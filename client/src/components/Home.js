@@ -64,8 +64,10 @@ class Home extends Component {
     //var idekDiv = document.getElementById('idek');
     //idekDiv.insertBefore(this.imageCanvas, currentDiv);
     // document.body.appendChild(this.imageCanvas);
-    this.resizeCanvases();
-    this.tick();
+    if (this.imageCanvas) {
+      this.resizeCanvases();
+      this.tick();
+    }
   }
   
   /**
@@ -80,9 +82,11 @@ class Home extends Component {
       x: event.offsetX,
       y: event.offsetY
     });
-    this.setState({
-      points: newPoints
-    })
+    if (this.imageCanvas) {
+      this.setState({
+        points: newPoints
+      });
+    }
   }
   
   /**
@@ -100,18 +104,20 @@ class Home extends Component {
    */
   tick() {
     // Remove old points
-    var self = this;
-    var newPoints = this.state.points.filter(function(point) {
-      var age = Date.now() - point.time;
-      return age < self.pointLifetime;
-    });
-
-    this.setState({points: newPoints});
+    if (this.imageCanvas) {
+      var self = this;
+      var newPoints = this.state.points.filter(function(point) {
+        var age = Date.now() - point.time;
+        return age < self.pointLifetime;
+      });
   
-    this.drawLineCanvas();
-    this.drawImageCanvas();
-    //console.log('in tick');
-    requestAnimationFrame(this.tick);
+      this.setState({points: newPoints});
+    
+      this.drawLineCanvas();
+      this.drawImageCanvas();
+      //console.log('in tick');
+      requestAnimationFrame(this.tick);
+    }
   }
   
   /**

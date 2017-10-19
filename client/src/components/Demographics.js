@@ -193,7 +193,7 @@ class Demographics extends Component {
             </p>
           </Row>
         </Col>
-        <Col classname="demoCol1" lg={4}>  
+        <Col className="demoCol1" lg={4}>  
           <Row className="chartsOne">{/* Yellow Box*/} 
             <Col className="actualChart1" lg={12}>
               <h3> Age group Distribution </h3>

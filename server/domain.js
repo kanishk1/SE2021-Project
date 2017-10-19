@@ -209,6 +209,7 @@ router.get('/listings', (req, res) => {
             "bathrooms": data[i]["listing"]["propertyDetails"]["bathrooms"],
             "bedrooms": data[i]["listing"]["propertyDetails"]["bedrooms"],
             "carspaces": data[i]["listing"]["propertyDetails"]["carspaces"],
+            "id": data[i]["listing"]["id"]
           };
           newdata.push(houseEntry);
         }

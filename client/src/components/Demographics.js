@@ -20,8 +20,12 @@ class Demographics extends Component {
       'rgba(75, 192, 192, 0.2)',
       'rgba(153, 102, 255, 0.2)',
       'rgba(255, 159, 64, 0.2)',
-      'rgba(124, 252, 0, 0.2)'
+      'rgba(124, 252, 0, 0.2)',
+      'rgba(255, 51, 255, 0.2)'
     ];
+    backgroundColor.push.apply(backgroundColor, backgroundColor);
+    backgroundColor.push.apply(backgroundColor, backgroundColor);
+    
     var borderColor = [
       'rgba(255,99,132,1)',
       'rgba(54, 162, 235, 1)',
@@ -29,8 +33,12 @@ class Demographics extends Component {
       'rgba(75, 192, 192, 1)',
       'rgba(153, 102, 255, 1)',
       'rgba(255, 159, 64, 1)',
-      'rgba(124, 252, 0, 1)'
-    ]
+      'rgba(124, 252, 0, 1)',
+      'rgba(255, 51, 255, 1)'
+    ];
+    borderColor.push.apply(borderColor, borderColor);
+    borderColor.push.apply(borderColor, borderColor);
+    
     if (this.props.data) {
       var labels = [];
       var values = [];
@@ -180,6 +188,12 @@ class Demographics extends Component {
       
     }
     
+    var options = {
+        legend: {
+            display: false,
+        },
+    };
+    
     return (
       <Grid fluid={true}>
         <Col className="titleCol" lg={12}>
@@ -203,7 +217,7 @@ class Demographics extends Component {
           <Row className="chartsTwo">{/* Green Box*/} 
             <Col className="actualChart2" lg={12}>
               <h3> Occupancy Distribution </h3>
-              <Doughnut data={chart3Data} width={6} height={4} options={{}}/>
+              <Pie data={chart3Data} width={6} height={4} options={{}}/>
             </Col>
           </Row>
           <Row className="chartsFive">
@@ -243,19 +257,19 @@ class Demographics extends Component {
           <Row className="chartsThree">{/* Orange Box*/}
             <Col className="actualChart3" lg={12}>
               <h3> Religion Distribution </h3>
-              <Bar data={chart4Data} width={5} height={5} options={{}}/>
+              <Bar data={chart4Data} width={5} height={5} options={options}/>
             </Col>
           </Row>
           <Row className="chartsFour">
             <Col className="actualChart4" lg={12}>
               <h3> Education Distribution </h3>
-              <Line data={chart5Data} width={5} height={5} options={{}}/>
+              <Line data={chart5Data} width={5} height={5} options={options}/>
             </Col>
           </Row>
           <Row className="chartsNine">
             <Col className="actualChart9" lg={12}>
               <h3> Household Income </h3>
-              <Bar data={chart9Data} width={5} height={5} options={{}}/>
+              <Bar data={chart9Data} width={5} height={5} options={options}/>
             </Col>
           </Row>
         </Col>  

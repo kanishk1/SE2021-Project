@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {Grid, Row, Col, Media, Well} from 'react-bootstrap';
-import placeholder from '../img/placeholder.png'
-
 import TweetEmbed from 'react-tweet-embed'
 import '../css/Social.css'
 

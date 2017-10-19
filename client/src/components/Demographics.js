@@ -207,13 +207,13 @@ class Demographics extends Component {
             <p>Demographics</p>
           </Row>
           <Row className="subtitle">
-            <p>
-              This page contains graphed demographical data
-              pertaining to {this.props.name}
+            <p> 
+              This page contains graphed demographical data 
+              pertaining to {this.props.name}.
             </p>
           </Row>
         </Col>
-        <Col classname="demoCol1" lg={4}>
+        <Col className="demoCol1" lg={4}>
           <Row className="chartsOne">{/* Yellow Box*/}
             <Col className="actualChart1" lg={12}>
               <h3> Age group Distribution </h3>

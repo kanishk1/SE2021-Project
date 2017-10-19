@@ -1,10 +1,11 @@
 .App {
   text-align: center;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 .App-logo {
-  height: 300px;
+  height: 375px;
 }
 
 .App-meme {
@@ -16,6 +17,10 @@
   background-color: #FFFFFF;
   height: 150px;
   padding: 10px;
+}
+
+.navbar {
+  margin-bottom: 0;
 }
 
 .App-intro {
@@ -40,6 +45,11 @@
 .topnav {
     background-color: #000;
     overflow: hidden;
+}
+
+.select {
+  /* doesn't work with % :( */
+  width: 400px;
 }
 
 /* Style the links inside the navigation bar */

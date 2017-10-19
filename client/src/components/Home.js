@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PopularSuburbs from './PopularSuburbs.js'
 import Autocomplete from './Autocomplete.js'
-import background from '../img/background_blur.jpg';
-import { Grid, Row, Col } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import { Grid, Row, Col, Navbar } from 'react-bootstrap';
+import { Redirect, Link } from 'react-router-dom';
 import '../css/Home.css';
+import suburber from '../img/headerLogo.png';
+
 
 class Home extends Component {
 
@@ -14,7 +15,7 @@ class Home extends Component {
       isSubmitted: 0,
       selectedSuburb: null,
       selectedPostcode: null,
-      selectedProfile: this.props.profile,
+      selectedProfile: null,
       suburbs: this.props.suburbs,
       points: [],
     }
@@ -65,8 +66,10 @@ class Home extends Component {
     //var idekDiv = document.getElementById('idek');
     //idekDiv.insertBefore(this.imageCanvas, currentDiv);
     // document.body.appendChild(this.imageCanvas);
-    this.resizeCanvases();
-    this.tick();
+    if (this.imageCanvas) {
+      this.resizeCanvases();
+      this.tick();
+    }
   }
   
   /**
@@ -81,9 +84,11 @@ class Home extends Component {
       x: event.offsetX,
       y: event.offsetY
     });
-    this.setState({
-      points: newPoints
-    })
+    if (this.imageCanvas) {
+      this.setState({
+        points: newPoints
+      });
+    }
   }
   
   /**
@@ -101,13 +106,13 @@ class Home extends Component {
    */
   tick() {
     // Remove old points
-    if (this.imageCanvas){
+    if (this.imageCanvas) {
       var self = this;
       var newPoints = this.state.points.filter(function(point) {
         var age = Date.now() - point.time;
         return age < self.pointLifetime;
       });
-
+  
       this.setState({points: newPoints});
     
       this.drawLineCanvas();
@@ -230,9 +235,19 @@ class Home extends Component {
     if (this.state.isSubmitted === 0) {
       return (
         <div>
+          <Navbar inverse fluid staticTop className="navbar">
+            <Navbar.Header>
+                <Link to={{
+                  pathname: '/',
+                  state: {isSubmitted: 0} 
+                }}>
+                  <img src={suburber} alt='logo' style={{height:'50px', width:'200px'}}/>
+                </Link>
+            </Navbar.Header>
+          </Navbar>
           <div id="idek" className="idek">
             <img src={"https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg"} className="image"
-                ref={this.imageRef}
+                ref={this.imageRef} role="presentation"
                 />
             <canvas ref={this.canvasRef}>
             </canvas>
@@ -261,12 +276,11 @@ class Home extends Component {
                 <p>
                   Neil Baksi, Front End<br />
                   Jonathan Charles, Back End<br />
-                  Siddhant Virmani, Front End<br />
                   Kanishk Purohit, Front End<br />
                   Md Mashiur Rahman, Back End<br />
                   Nathaniel Shead, Back End<br />
+                  Siddhant Virmani, Front End<br />
                 </p>
-                <p>All rights reserved under MIT License. Suburber 2017 </p>
               </Col>
             </Row>
           </Grid>

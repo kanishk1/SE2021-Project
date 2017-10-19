@@ -285,13 +285,13 @@ class Results extends Component {
             </Tab>
             <Tab eventKey={5} title="Social & News">
               <Social
-                news={this.state.data[2]}
-                twitter={this.state.data[9]}
-              />
+                  news={this.state.data[2]}
+                  twitter={this.state.data[9]}
+                />
             </Tab>
           </Tabs>
           )
-      }
+      } 
     }
   }
 

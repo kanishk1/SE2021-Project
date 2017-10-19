@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Grid, Row, Col, Media} from 'react-bootstrap';
-
+import {Grid, Row, Col, Media, Well} from 'react-bootstrap';
 import TweetEmbed from 'react-tweet-embed'
 import '../css/Social.css'
 
@@ -67,12 +66,16 @@ return (
     <Row>
       <Col lg={7}>
         <h1>News</h1>
-        {this.renderNews()}
+        <Well className="News">
+          {this.renderNews()}
+        </Well>
       </Col>
-      <Col lg={5}>
+      <Col lg={4}>
         <div className="twitter">
           <h1> Twitter </h1>
-          {this.renderTweets()}
+          <Well className="News">
+            {this.renderTweets()}
+          </Well>
         </div>
       </Col>
     </Row>

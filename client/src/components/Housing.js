@@ -45,18 +45,21 @@ class Housing extends Component {
 
   createCards () {
     var cards = this.state.listings.map(function(value, i) {
+                    var link = "http://www.domain.com.au/"+value.id;
                     return(
-                      <div key={i}>
-                        <Thumbnail src={value.media.url} >
-                          <h2>{value.address}</h2>
-                          <h3>{value.price}</h3>
-                            <p>
-                              <img src={bath} alt=""></img> {value.bathrooms}
-                              <img src={car} alt=""></img> {value.carspaces}
-                              <img src={bed} alt=""></img> {value.bedrooms}
-                            </p>
-                        </Thumbnail>
-                      </div>
+                      <a href={link} target="_">
+                        <div key={i}>
+                          <Thumbnail src={value.media.url}>
+                            <h2>{value.address}</h2>
+                            <h3>{value.price}</h3>
+                              <div>
+                                <img src={bath} alt=""></img> {value.bathrooms}
+                                <img src={car} alt=""></img> {value.carspaces}
+                                <img src={bed} alt=""></img> {value.bedrooms}
+                              </div>
+                          </Thumbnail>
+                        </div>
+                      </a>
                     )
                 });
 
@@ -215,6 +218,11 @@ class Housing extends Component {
   }
   
   render () {
+    var options = {
+        legend: {
+            display: false,
+        },
+    };
     if (this.state.listings) {
         return (
           <Grid fluid={true}>
@@ -246,19 +254,19 @@ class Housing extends Component {
                   <li className="list-group-item"> Least Expensive Sale: ${this.getHousingStats()[4]}</li>
                 </ul>
               </Col>
-              <Col className="housingDetStats" lg={8}>
+              <Col className="housingDetStats" lg={10}>
                 <Row className="housingGraphs">
                   <Col className="housingStats1" lg={3}>
-                    <Bar data={this.getHousingCharts()[0]} width={2} height={2} options={{}}/>
+                    <Bar data={this.getHousingCharts()[0]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats2" lg={3}>
-                    <Bar data={this.getHousingCharts()[1]} width={2} height={2} options={{}}/>
+                    <Bar data={this.getHousingCharts()[1]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats3" lg={3}>
-                    <Bar data={this.getHousingCharts()[2]} width={2} height={2} options={{}}/>
+                    <Bar data={this.getHousingCharts()[2]} width={4} height={4} options={options}/>
                   </Col>
                   <Col className="housingStats4" lg={3}>
-                    <Bar data={this.getHousingCharts()[3]} width={2} height={2} options={{}}/>
+                    <Bar data={this.getHousingCharts()[3]} width={4} height={4} options={options}/>
                   </Col>
                 </Row>
               </Col>

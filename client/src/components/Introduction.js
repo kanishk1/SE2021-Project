@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
 import cx from 'classnames';
 import '../css/Introduction.css';
 import '../css/Weather.css';
@@ -19,7 +19,6 @@ function Weather({min, max, status, day }) {
     </div>
   );
 }
-
 
 class Introduction extends Component {
 
@@ -49,7 +48,7 @@ class Introduction extends Component {
       ;
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c; // Distance in km
-    d = Math.round(d * 100) / 100
+    d = Math.round(d)
     return d;
   }
 
@@ -65,43 +64,43 @@ class Introduction extends Component {
       return (
         <div>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             Sydney Intl. Airport:
           </Col>
-          <Col lg={6}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)} km
+          <Col lg={4}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.93992280000001, 151.1752764)}kms
           </Col>
         </Row>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             Sydney CBD:
           </Col>
-          <Col lg={6}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)} km
+          <Col lg={4}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.865143, 151.209900)}kms
           </Col>
         </Row>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             Circular Quay:
           </Col>
-          <Col lg={6}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)} km
+          <Col lg={4}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.861756, 151.2108839)}kms
           </Col>
         </Row>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             Darling Harbour:
           </Col>
-          <Col lg={6}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)} km
+          <Col lg={4}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.87488, 151.2009)}kms
           </Col>
         </Row>
         <Row>
-          <Col lg={6}>
+          <Col lg={8}>
             Bondi Beach:
           </Col>
-          <Col lg={6}>
-            {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)} km
+          <Col lg={4}>
+            {this.getDistanceFromLatLonInKm(lat, long, 33.8914755, 151.2766845)}kms
           </Col>
         </Row>
         </div>
@@ -118,16 +117,16 @@ class Introduction extends Component {
           <div className="weather-main">
             <Weather min={Math.round(weather[0].min)} max={Math.round(weather[0].max)} status={this.getWeatherStatus(weather[0].conditions)} day={moment().format('dddd')} />
           </div>
-          <div className="weather-one">
+          <div>
             <Weather min={Math.round(weather[1].min)} max={Math.round(weather[1].max)} status={this.getWeatherStatus(weather[1].conditions)} day={moment().add(1, 'days').format('dddd')} />
           </div>
-          <div className="weather-two">
+          <div>
             <Weather min={Math.round(weather[2].min)} max={Math.round(weather[2].max)} status={this.getWeatherStatus(weather[2].conditions)} day={moment().add(2, 'days').format('dddd')} />
           </div>
-          <div className="weather-three">
+          <div>
             <Weather min={Math.round(weather[3].min)} max={Math.round(weather[3].max)} status={this.getWeatherStatus(weather[3].conditions)} day={moment().add(3, 'days').format('dddd')} />
           </div>
-          <div className="weather-four">
+          <div>
             <Weather min={Math.round(weather[4].min)} max={Math.round(weather[4].max)} status={this.getWeatherStatus(weather[4].conditions)} day={moment().add(4, 'days').format('dddd')} />
           </div>
         </div>
@@ -153,60 +152,6 @@ class Introduction extends Component {
       return "sun"
     }
   }
-
-  renderPOI(place) {
-    if (this.props[place]) {
-      //var places = this.props[place].results;
-      var count = 1;
-    }
-
-    var name = [];
-
-    var address = [];
-    for (var i = 0; i < count; i++) {
-      if (this.props[place].results[i]) {
-        name.push(this.props[place].results[i].name)
-        address.push(this.props[place].results[i].formatted_address)
-      }
-    }
-
-    if (place === 'police') {
-      return(
-        <Thumbnail src={policePhoto} >
-           <h3>{name}</h3>
-           <p>{address}</p>
-           <p>
-             <Button bsStyle="primary">Directions</Button>&nbsp;
-           </p>
-         </Thumbnail>)
-    } else if (place === 'hospital') {
-      return(
-        <Thumbnail src={hospoPhoto} >
-         <h3>{name}</h3>
-         <p>{address}</p>
-         <p>
-           <Button bsStyle="primary">Directions</Button>&nbsp;
-         </p>
-       </Thumbnail>
-      )
-    } else if (place === 'fire') {
-      return(
-        <Thumbnail src={firePhoto} >
-         <h3>{name}</h3>
-         <p>{address}</p>
-         <p>
-           <Button bsStyle="primary">Directions</Button>&nbsp;
-         </p>
-       </Thumbnail>
-      )
-
-   } else {
-     return (
-      <h1>Couldn't render details</h1>
-     )
-   }
-  }
-
 
   render() {
     if (this.props.wiki) {
@@ -238,7 +183,7 @@ class Introduction extends Component {
             <Col className="transportCol" lg={4}>
               <p><strong>Transport Access</strong></p>
               <Row>
-                <Col className="bus" lgOffset={3} lg={3}>
+                <Col className="bus" lgOffset={2} lg={3}>
                   <i className="material-icons">directions_bus</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
@@ -246,7 +191,7 @@ class Introduction extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="train" lgOffset={3} lg={3}>
+                <Col className="train" lgOffset={2} lg={3}>
                   <i className="material-icons">train</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
@@ -254,7 +199,7 @@ class Introduction extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="ferry" lgOffset={3} lg={3}>
+                <Col className="ferry" lgOffset={2} lg={3}>
                   <i className="material-icons">directions_boat</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
@@ -262,13 +207,16 @@ class Introduction extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col className="lightrail"lgOffset={3} lg={3}>
+                <Col className="lightrail" lgOffset={2} lg={3}>
                   <i className="material-icons">tram</i>
                 </Col>
                 <Col lgOffset={1} lg={3}>
                   <i className={"material-icons " + lr_status}>{lr_status}</i>
                 </Col>
               </Row>
+              <div className="trip">
+                <a href="https://transportnsw.info/new-trip#/" className="btn btn-info" target="_blank">Make a Trip!</a>
+              </div>
 
             </Col>
 
@@ -277,33 +225,23 @@ class Introduction extends Component {
               {this.renderCalculatedDistances()}
             </Col>
           </Row>
-          <Row>
-            <h1> Local Points of Interest </h1>
-            <Col lg={4}>
-              {this.renderPOI('fire')}
-            </Col>
-            <Col lg={4}>
-              {this.renderPOI('police')}
-            </Col>
-            <Col lg={4}>
-              {this.renderPOI('hospital')}
-            </Col>
-          </Row>
         </Col>
-        <Col lgOffset={0} lg={4}>
-          <iframe
-            className="map"
-            width="500"
-            height="500"
-            frameBorder="0"
-            src={maps}
-            allowFullScreen>
-          </iframe>
+        <Col lgOffset={0} lg={5}>
           <Row>
             <Col className="weatherName" lgOffset={3}>
               <p><strong>Weather</strong></p>
               {this.renderWeather()}
             </Col>
+          </Row>
+          <Row>
+            <iframe
+              className="map"
+              width="500"
+              height="500"
+              frameBorder="0"
+              src={maps}
+              allowFullScreen>
+            </iframe>
           </Row>
         </Col>
       </Grid>

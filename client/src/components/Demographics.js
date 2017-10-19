@@ -11,7 +11,7 @@ class Demographics extends Component {
       data: this.props.data
     };
   }
-  
+
   render() {
     var backgroundColor = [
       'rgba(255, 99, 132, 0.2)',
@@ -57,28 +57,21 @@ class Demographics extends Component {
         }]
       };
 
-      // We shove the data for anything not in top 6 into other category
-      var otherTotal = 0;
-      var otherTotal2 = 0;
-      values[1].forEach(function(element, index, arr) {
-          if (index > 5) {
-            otherTotal += element
-          }
-      });
-      values[16].forEach(function(element, index, arr) {
-          if (index > 5) {
-              otherTotal2 += element
-          }
-      });
+      var a2 = 0;
+      var b2 = 0; // domain's other
+      labels[1].forEach((element, index, array) => {
+        if (element === 'Born Elsewhere') b2 = values[1][index];
+        labels[1].splice(labels[1].indexOf('Born Elsewhere'), 1)
+
+      })
+      values[1].forEach((element, index, array) => {
+        if (index > 6) a2 += element;
+
+      })
       labels[1] = labels[1].slice(0,6);
       labels[1][6] = "Other";
       values[1] = values[1].slice(0,6);
-      values[1][6] = otherTotal;
-      
-      labels[16] = labels[16].slice(0,6);
-      labels[16][6] = "Other";
-      values[16] = values[16].slice(0,6);
-      values[16][6] = otherTotal2;
+      values[1][6] = a2 + b2;
       var chart2Data = {
         labels: labels[1],
         datasets: [{
@@ -101,6 +94,14 @@ class Demographics extends Component {
         }]
       };
 
+      var a4 = 0;
+      values[7].forEach((element, index, array) => {
+        if (index > 5) a4 += element;
+      })
+      labels[7] = labels[7].slice(0,6);
+      labels[7][6] = "Other";
+      values[7] = values[7].slice(0,6);
+      values[7][6] = a4;
       var chart4Data = {
         labels: labels[7],
         datasets: [{
@@ -122,7 +123,7 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+
       var chart6Data = {
         labels: labels[4],
         datasets: [{
@@ -133,7 +134,7 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+
       var chart7Data = {
         labels: labels[6],
         datasets: [{
@@ -144,7 +145,7 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+
       var chart8Data = {
         labels: labels[14],
         datasets: [{
@@ -155,7 +156,16 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+
+      var a9 = 0;
+      values[12].forEach((element, index, array) => {
+        if (index > 12) a9 += element;
+      })
+      labels[12] = labels[12].slice(0,7);
+      labels[12][6] = "Other";
+      values[12] = values[12].slice(0,7);
+      values[12][6] = a9;
+
       var chart9Data = {
         labels: labels[12],
         datasets: [{
@@ -166,7 +176,17 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+      var otherTotal2 = 0;
+      values[16].forEach(function(element, index, arr) {
+          if (index > 5) {
+              otherTotal2 += element
+          }
+      });
+      labels[16] = labels[16].slice(0,6);
+      labels[16][6] = "Other";
+      values[16] = values[16].slice(0,6);
+      values[16][6] = otherTotal2;
+
       var chart10Data = {
         labels: labels[16],
         datasets: [{
@@ -177,9 +197,9 @@ class Demographics extends Component {
             borderWidth: 1
         }]
       };
-      
+
     }
-    
+
     return (
       <Grid fluid={true}>
         <Col className="titleCol" lg={12}>
@@ -193,14 +213,14 @@ class Demographics extends Component {
             </p>
           </Row>
         </Col>
-        <Col className="demoCol1" lg={4}>  
-          <Row className="chartsOne">{/* Yellow Box*/} 
+        <Col classname="demoCol1" lg={4}>
+          <Row className="chartsOne">{/* Yellow Box*/}
             <Col className="actualChart1" lg={12}>
               <h3> Age group Distribution </h3>
               <Pie data={chart1Data} width={6} height={4} options={{}}/>
-            </Col>  
+            </Col>
           </Row>
-          <Row className="chartsTwo">{/* Green Box*/} 
+          <Row className="chartsTwo">{/* Green Box*/}
             <Col className="actualChart2" lg={12}>
               <h3> Occupancy Distribution </h3>
               <Doughnut data={chart3Data} width={6} height={4} options={{}}/>
@@ -218,7 +238,7 @@ class Demographics extends Component {
               <Pie data={chart6Data} width={6} height={4} options={{}}/>
             </Col>
           </Row>
-        </Col>  
+        </Col>
         <Col className="demoCol2" lg={4}>
           <Row className="chartsTen">
             <Col className="actualChart10" lg={12}>
@@ -258,11 +278,11 @@ class Demographics extends Component {
               <Bar data={chart9Data} width={5} height={5} options={{}}/>
             </Col>
           </Row>
-        </Col>  
+        </Col>
       </Grid>
     )
   }
 
-} 
+}
 
 export default Demographics;

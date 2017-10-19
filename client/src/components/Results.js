@@ -149,7 +149,7 @@ class Results extends Component {
       var user = this.state.selectedProfile;
       if (user === "Investor") {
         return (
-        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs" animation="true">
+        <Tabs id="Introduction Tab" activeKey={this.state.key} onSelect={this.handleSelect} className="main-tabs">
             <Tab eventKey={1} title="Introduction" tabClassName="tab-normal">
               <Introduction
                 wiki={this.state.data[10]}

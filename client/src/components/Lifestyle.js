@@ -71,7 +71,7 @@ class Lifestyle extends Component {
       for (var i = 0; i < count; i++) {
         if (this.props[place].results[i].name){
           items.push(
-            <li key={i} onClick={this.open.bind(this, this.props[place].results[i].name)}>
+            <li key={i} onClick={this.open.bind(this, this.props[place].results[i].name)} style={{cursor: 'pointer'}}>
               {this.props[place].results[i].name}
             </li>);
         }
